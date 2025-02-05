@@ -1,0 +1,89 @@
+<app-navbar [links]="navLinks"></app-navbar>
+
+<!-- PLAY CONTAINER: Drop zone for cards -->
+<div class="play-container mt-5"
+     (dragover)="onDragOver($event)"
+     (drop)="onDrop($event)"
+     style="position: relative; min-height: 400px; border: 2px dashed #ccc;">
+  <!-- Display played (dropped) cards -->
+  <div *ngFor="let played of playCards"
+       class="played-card"
+       draggable="true"
+       (dragstart)="onDragStart($event, played, 'play')"
+       (contextmenu)="onPlayRightClick($event, played)"
+       [ngStyle]="{
+         'position': 'absolute',
+         'left.px': played.x,
+         'top.px': played.y
+       }"
+       [class.tapped]="played.tapped">
+    <img [src]="played.card.image_uris.normal" alt="card image">
+    <!-- If the card is tapped, show the tap icon overlay -->
+    <span *ngIf="played.tapped" class="tap-icon material-symbols-outlined">
+      refresh
+    </span>
+  </div>
+</div>
+
+<!-- PLAY OPTIONS -->
+<div class="play-options">
+  <a class="purch-btn" href="#" (click)="shuffleDeck(); $event.preventDefault()">SHUFFLE</a>
+  <a class="purch-btn" href="#" (click)="drawCard(); $event.preventDefault()">DRAW</a>
+  <a class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
+  <a class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
+  <a class="purch-btn" href="#" (click)="openHandWindow(); $event.preventDefault()">HAND</a>
+</div>
+
+<!-- HAND: Cards available to be dragged -->
+<div class="hand">
+  <div class="d-flex flex-wrap cards justify-content-center">
+    <div *ngFor="let card of hand" class="card"
+         draggable="true"
+         (dragstart)="onDragStart($event, card, 'hand')"
+         (contextmenu)="onRightClick($event, card)">
+      <img [src]="card.image_uris.normal" alt="card image">
+    </div>
+  </div>
+</div>
+
+<div class="graveyard" *ngIf="showGrave">
+    <div class="d-flex flex-wrap cards justify-content-center">
+      <div *ngFor="let card of graveyard" class="card" (contextmenu)="onGraveRightClick($event, card)">
+        <img [src]="card.image_uris.normal" alt="card image">
+      </div>
+    </div>
+</div>
+  
+
+<!-- Custom Context Menu for Hand Cards -->
+<div class="context-menu" *ngIf="contextMenuVisible" 
+     [ngStyle]="{'top.px': contextMenuY, 'left.px': contextMenuX}">
+  <ul>
+    <li (click)="discardSelectedCard()">Discard</li>
+  </ul>
+</div>
+
+<!-- Custom Context Menu for Play Area Cards -->
+<div class="context-menu play-context-menu" *ngIf="playContextMenuVisible" 
+     [ngStyle]="{'top.px': playContextMenuY, 'left.px': playContextMenuX}">
+  <ul>
+    <!-- Tap/Untap option -->
+    <li (click)="selectedPlayCard?.tapped ? untapSelectedCard() : tapSelectedCard()">
+      {{ selectedPlayCard?.tapped ? 'Untap' : 'Tap' }}
+    </li>
+    <!-- Graveyard option -->
+    <li (click)="sendToGraveyardSelectedCard()">Graveyard</li>
+    <!-- Exile option -->
+    <li (click)="exileSelectedCard()">Exile</li>
+  </ul>
+</div>
+
+<!-- Custom Context Menu for Graveyard Cards -->
+<div class="context-menu grave-context-menu" *ngIf="graveContextMenuVisible" 
+     [ngStyle]="{'top.px': graveContextMenuY, 'left.px': graveContextMenuX}">
+  <ul>
+    <li (click)="returnToHandSelectedCard()">Return to hand</li>
+  </ul>
+</div>
+
+

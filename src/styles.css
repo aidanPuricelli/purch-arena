@@ -1,1 +1,299 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Exo 2", serif;
+}
+
+html, body {
+    background: rgb(27, 27, 27) !important;
+}
+
+
+#dots {
+    background-color: #eeeeee00;
+    background-repeat: repeat;
+    background-image: radial-gradient(circle, rgb(24, 24, 24) 30%, rgb(0, 0, 0) 31%);
+    background-size: 0.5em 0.5em;
+    background-position: 50% 50%;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 5;
+}
+
+/* search */
+.search-container {
+    margin: auto;
+    z-index: 10;
+    margin-top: 90px;
+    background: rgb(0, 0, 0);
+    padding: 20px;
+    border-left: solid 2px rgb(168, 227, 255);
+    border-right: solid 2px rgb(168, 227, 255);
+    border-bottom: solid 2px rgb(168, 227, 255);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 5px rgb(39, 77, 83);
+}
+
+.search-container .form-control {
+    box-shadow: 0 5px rgb(39, 77, 83);
+    border: solid 2px rgb(168, 227, 255);
+}
+
+.search-container .form-control:focus {
+    box-shadow: 0 5px rgb(68, 124, 133);
+}
+
+.card-results {
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.card-img {
+    width: 200px !important;
+    height: auto;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    z-index: 10;
+    border: solid 2px rgb(255, 255, 255);
+}
+
+.card-wrapper {
+    z-index: 10;
+}
+
+.deck-card-wrapper {
+    z-index: 11;
+    position: relative;
+}
+
+.card-img:hover {
+    transform: scale(1.05);
+}
+
+.banner {
+    color: white;
+    z-index: 10;
+    position: relative;
+    width: 100%;
+    background: black;
+    margin: 30px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 2px rgb(175, 230, 255);
+    box-shadow: 0 5px rgb(51, 102, 122);
+}
+
+/* context menu */
+
+.custom-menu {
+    position: absolute;
+    background: #222;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 5px 0;
+    z-index: 1000;
+}
+
+.custom-menu li {
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.custom-menu li:hover {
+    background: #444;
+}
+
+
+
+
+/* utility */
+
+.home-container {
+    height: 100vh;
+    /*background: red;*/
+    position: relative;
+    z-index: 10;
+}
+
+.deck-container {
+    z-index: 10;
+    position: relative;
+    padding-bottom: 100px;
+}
+
+.left, .right {
+    width: 50%;
+    display: flex;
+    align-items: center; /* Centers text/content vertically */
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+/* nav stylings */
+
+.purch-nav {
+    width: 100vw;
+    background: rgb(0, 0, 0);
+    padding: 20px 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    font-family: "Exo 2", serif;
+    border-bottom: solid 2px rgb(227, 249, 255);
+    top : 0;
+    z-index: 100;
+}
+
+/* button stylings */
+
+.purch-btn {
+    margin: 0 20px;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: solid 2px rgb(171, 231, 255);
+    border-radius: 10px;
+    box-shadow: 0 5px rgb(47, 102, 112);
+    color: rgb(185, 233, 255);
+    background: black;
+}
+
+.purch-btn:hover {
+    background: rgb(32, 84, 104);
+}
+
+/* header stylings */
+
+.purch-header {
+    color: rgb(231, 231, 231);
+}
+
+#purch-add-color {
+    color: rgb(171, 238, 255);
+}
+
+.no-cards {
+    color: white;
+    position: relative;
+    z-index: 10;
+    background: rgb(223, 169, 169);
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: solid 2px rgb(255, 127, 127);
+    color: rgb(110, 74, 74);
+    box-shadow: 0 3px rgb(180, 47, 47);
+}
+
+.save-btn {
+    top: 5px;
+    right: 0px;
+    position: absolute;
+}
+
+
+/* play */
+
+.play-container {
+    z-index: 10;
+    height: calc(100vh - 50px);
+    position: relative;
+}
+
+.play-options {
+    position: fixed;
+    top: 120px;
+    z-index: 10;
+    right: 20px;
+    padding: 20px 5px;
+    background: rgb(0, 0, 0);
+    border: solid 2px rgb(37, 77, 75);
+    border-radius: 10px;
+    box-shadow: 0 5px rgb(38, 67, 83);
+}
+
+.play-options a {
+    margin: 0 5px;
+}
+
+.life-total {
+    font-size: 32px;
+}
+
+.hand {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px; /* Ensures the hand container does not exceed the viewport width */
+    padding: 20px;
+    background: rgb(0, 0, 0);
+    border-radius: 10px;
+    border: 2px solid rgb(54, 81, 97);
+    z-index: 10;
+    box-shadow: 3px 3px 7px rgb(29, 52, 71);
+    overflow-x: auto; /* Enable horizontal scrolling within this container */
+    /* Optional: Prevent vertical scrollbar if not needed */
+    overflow-y: hidden;
+}
+  
+
+.hand img {
+    width: 200px;
+}
+
+.hand .card {
+    z-index: 11;
+}
+
+.played-card {
+    position: absolute;
+}
+
+.played-card img {
+    width: 200px;
+}
+
+.graveyard {
+    position: fixed;           /* Fixed position so it stays in one place */
+    top: 50%;                  /* Center vertically */
+    left: 50%;                 /* Center horizontally */
+    transform: translate(-50%, -50%);  /* Adjust centering */
+    width: 1200px;
+    height: 800px;
+    background: #000000;          /* White background (or choose a color) */
+    border: 2px solid #bffdff;    /* Light border */
+    padding: 20px;
+    overflow: auto;            /* Scroll if content overflows */
+    z-index: 1000;             /* Ensure it appears above other content */
+    border-radius: 10px;
+    box-shadow: 0 5px rgb(23, 46, 59);
+  }
+  
+  /* Override any existing flex styles on the .cards container */
+  .graveyard .cards {
+    display: grid !important;  /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  
+    /* Creates as many columns as will fit, with each card at least 150px wide */
+    gap: 10px;                 /* Gap between cards */
+    justify-items: center;     /* Center cards in their grid cell */
+  }
+  
+  /* Optional: Style individual cards if needed */
+  .graveyard .card {
+    width: 100%;
+    /* You can set a fixed height or allow it to scale naturally */
+    /* Optionally add a border or box-shadow for a card look */
+  }
