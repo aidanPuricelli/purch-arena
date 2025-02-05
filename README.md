@@ -138,6 +138,3 @@ This will generate all necessary files in a folder called `dist/`.
 
 ---
 
-## License
-This project is licensed under [MIT License](LICENSE).
-
