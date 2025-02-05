@@ -60,6 +60,7 @@
      [ngStyle]="{'top.px': contextMenuY, 'left.px': contextMenuX}">
   <ul>
     <li (click)="discardSelectedCard()">Discard</li>
+    <li (click)="onTop()">Top Of Library</li>
   </ul>
 </div>
 
@@ -75,6 +76,8 @@
     <li (click)="sendToGraveyardSelectedCard()">Graveyard</li>
     <!-- Exile option -->
     <li (click)="exileSelectedCard()">Exile</li>
+
+    <li (click)="backToHand()">Back to Hand</li>
   </ul>
 </div>
 

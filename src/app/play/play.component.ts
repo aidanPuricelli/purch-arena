@@ -367,5 +367,47 @@ export class PlayComponent implements OnInit {
       `);
       handWindow.document.close();
     }
-  }  
+  } 
+  
+  onTop(): void {
+    // First, try to find the card in the deck
+    let index = this.deck.indexOf(this.selectedCard);
+    if (index !== -1) {
+      // If found in deck, remove it and put it on top
+      const card = this.deck.splice(index, 1)[0];
+      this.deck.unshift(card);
+      console.log('Card moved to top of deck:', card);
+    } else {
+      // If not in the deck, check if it's in the hand
+      index = this.hand.indexOf(this.selectedCard);
+      if (index !== -1) {
+        const card = this.hand.splice(index, 1)[0];
+        this.deck.unshift(card);
+        console.log('Card moved from hand to top of deck:', card);
+      } else {
+        console.log('Card not found in deck or hand.');
+      }
+    }
+    // Hide the context menu and clear the selected card
+    this.contextMenuVisible = false;
+    this.selectedCard = null;
+  }
+
+  backToHand(): void {
+    if (this.selectedPlayCard) {
+      const index = this.playCards.indexOf(this.selectedPlayCard);
+      if (index !== -1) {
+        const removed = this.playCards.splice(index, 1)[0];
+        this.hand.push(removed.card);
+        console.log('Card returned to hand:', removed.card);
+      } else {
+        console.log('Selected play card not found.');
+      }
+      this.hidePlayContextMenu();
+    }
+  }
+  
+  
+  
+  
 }
