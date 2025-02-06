@@ -121,27 +121,38 @@ export class PlayComponent implements OnInit {
     this.http.get<{ deckNames: string[] }>('/api/decks').subscribe(
       (response) => {
         this.deckNames = response.deckNames;
-        console.log('📜 Available Decks:', this.deckNames);
+        console.log('Available Decks:', this.deckNames);
       },
-      (error) => console.error('❌ Error loading deck names', error)
+      (error) => console.error('Error loading deck names', error)
     );
   }
 
   // Increase counter
   increaseCounter(playedCard: PlayedCard): void {
     playedCard.counters = (playedCard.counters || 0) + 1;
-    console.log(`⬆Increased counter: ${playedCard.counters}`);
+    console.log(`Increased counter: ${playedCard.counters}`);
   }
 
   // Decrease counter
   decreaseCounter(played: PlayedCard, event: MouseEvent): void {
     event.stopPropagation();
-    event.preventDefault()
+    event.preventDefault();
   
     if (!played || !played.counters) return;
     
     played.counters = Math.max(0, played.counters - 1);
-    console.log(`➖ Counter removed: ${played.counters}`, played);
+    console.log(`Counter removed: ${played.counters}`, played);
+  }
+  
+  // Increase life
+  increaseLife() {
+    this.life++;
+  }
+
+  // Decrease life
+  decreaseLife(event: MouseEvent) {
+    event.preventDefault();
+    this.life--;
   }
   
 

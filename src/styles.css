@@ -364,6 +364,20 @@ html, body {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     user-select: none;
 }
+
+.life-container {
+    position: absolute;
+    top: 180px;
+    left: 50px;
+    background: rgb(0, 0, 0);
+    z-index: 10;
+    padding: 20px;
+    font-size: 30px;
+    border-radius: 10px;
+    border: solid 2px rgb(210, 245, 255);
+    box-shadow: 0 5px rgb(29, 68, 80);
+    color: rgb(156, 224, 255);
+}
   
 
 

@@ -103,4 +103,11 @@
   </ul>
 </div>
 
+<!-- LIFE COUNTER -->
+<div class="life-container" 
+(click)="increaseLife()"
+(contextmenu)="decreaseLife($event)">
+  <div class="life-counter">{{ life }}</div>
+</div>
+
 
