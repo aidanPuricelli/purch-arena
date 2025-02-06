@@ -1,7 +1,5 @@
 <app-navbar [links]="navLinks"></app-navbar>
 <div class="build-container container mt-5">
-    <!-- Pass selectedDeck to SearchComponent -->
     <app-search [selectedDeck]="selectedDeck"></app-search>
-    <!-- Pass selectedDeck to DeckComponent and handle emitted event -->
     <app-deck [selectedDeck]="selectedDeck" (deckSelected)="onDeckSelected($event)"></app-deck>
 </div>

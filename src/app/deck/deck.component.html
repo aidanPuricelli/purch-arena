@@ -1,24 +1,18 @@
 <div class="deck-container">
-  <!-- Deck Selection & Management -->
   <div class="banner-container">
     <div class="banner">
       <h3>Manage Your Decks</h3>
       
-      <!-- Deck Selection Dropdown -->
       <select [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
         <option *ngFor="let deck of deckNames" [value]="deck">{{ deck }}</option>
       </select>
 
-      <!-- Create New Deck -->
       <input type="text" [(ngModel)]="newDeckName" placeholder="New Deck Name">
       <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
-
-      <!-- Save & Delete Deck Buttons -->
       <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
     </div>
   </div>
 
-  <!-- Display Cards in Deck -->
   <ul *ngIf="deck.length > 0">
     <div class="d-flex flex-wrap cards justify-content-center">
       <li *ngFor="let card of deck" class="deck-card-wrapper"
@@ -30,7 +24,6 @@
 
   <p *ngIf="deck.length === 0" class="no-cards">No cards in deck.</p>
 
-  <!-- Custom Context Menu -->
   <div class="context-menu" *ngIf="contextMenuVisible" 
        [ngStyle]="{'top.px': contextMenuY, 'left.px': contextMenuX}">
     <ul>

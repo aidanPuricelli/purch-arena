@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-search',
@@ -17,7 +16,7 @@ export class SearchComponent {
 
   @Input() selectedDeck: string = ''; // Receive selectedDeck from BuildComponent
 
-  constructor(private http: HttpClient, private searchService: SearchService) {}
+  constructor( private http: HttpClient ) {}
 
   onSearch() {
     if (!this.searchQuery.trim()) return;
@@ -55,15 +54,15 @@ export class SearchComponent {
     }
 
     if (this.selectedCard) {
-      console.log(`📌 Saving card to deck '${this.selectedDeck}':`, this.selectedCard);
+      console.log(`Saving card to deck '${this.selectedDeck}':`, this.selectedCard);
 
       window.dispatchEvent(new CustomEvent('addCardToDeck', { detail: this.selectedCard }));
 
       this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [this.selectedCard], removedCards: [] }).subscribe(
         (response) => {
-          console.log(`✅ Card added to deck '${this.selectedDeck}':`, response);
+          console.log(`Card added to deck '${this.selectedDeck}':`, response);
         },
-        (error) => console.error('❌ Error adding card to deck', error)
+        (error) => console.error('Error adding card to deck', error)
       );
     }
     this.hideContextMenu();

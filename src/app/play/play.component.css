@@ -5,7 +5,6 @@
     flex: 0 0 auto;
 }
 
-/* Custom CSS to override Bootstrap's flex-wrap behavior on the cards container */
 .cards {
     flex-wrap: nowrap !important;
     overflow-x: auto;
@@ -13,7 +12,7 @@
   
 
 .context-menu {
-    position: fixed;  /* Change from absolute to fixed */
+    position: fixed;
     background-color: #fff;
     border: 1px solid #ccc;
     z-index: 1000;
@@ -42,8 +41,7 @@
 }
 
 .played-card.tapped {
-  filter: brightness(0.3);  /* Dark filter for tapped cards */
-  /* Optionally, add a border or other indication */
+  filter: brightness(0.3); 
 }
 
 .tap-icon {
@@ -52,5 +50,5 @@
   right: 60px;
   font-size: 80px;
   color: white;
-  pointer-events: none; /* so that clicks pass through to the card */
+  pointer-events: none;
 }

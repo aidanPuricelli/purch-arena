@@ -15,7 +15,7 @@ const loadDecks = () => {
     const data = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(data);
   } catch (err) {
-    return {}; // Return an empty object if file doesn't exist or is corrupted
+    return {};
   }
 };
 
@@ -30,7 +30,7 @@ const loadCommanders = () => {
     const data = fs.readFileSync(commandersFilePath, 'utf8');
     return JSON.parse(data);
   } catch (err) {
-    return {}; // Return empty if file is missing
+    return {};
   }
 };
 
@@ -82,13 +82,13 @@ app.post('/api/deck/:deckName/commander', (req, res) => {
   }
 
   const commanders = loadCommanders();
-  commanders[deckName] = commander; // Set commander for this deck
+  commanders[deckName] = commander;
   saveCommanders(commanders);
 
   res.json({ message: `Commander set for deck "${deckName}" successfully` });
 });
 
-// POST - Create a new deck
+// Create a new deck
 app.post('/api/deck', (req, res) => {
   const { deckName } = req.body;
   if (!deckName) return res.status(400).json({ message: 'Deck name required' });
@@ -101,7 +101,7 @@ app.post('/api/deck', (req, res) => {
   res.json({ message: `Deck "${deckName}" created successfully` });
 });
 
-// POST - Update a deck (add/remove cards)
+// Update a deck (add/remove cards)
 app.post('/api/deck/:deckName', (req, res) => {
   const { deckName } = req.params;
   const { newCards = [], removedCards = [] } = req.body;
@@ -111,13 +111,11 @@ app.post('/api/deck/:deckName', (req, res) => {
 
   let deck = decks[deckName];
 
-  // Remove cards (remove one instance per card in removedCards)
   removedCards.forEach(removed => {
     const index = deck.findIndex(card => card.id === removed.id);
     if (index !== -1) deck.splice(index, 1);
   });
 
-  // Add new cards
   deck = deck.concat(newCards);
 
   decks[deckName] = deck;
@@ -125,7 +123,7 @@ app.post('/api/deck/:deckName', (req, res) => {
   res.json({ message: `Deck "${deckName}" updated successfully` });
 });
 
-// DELETE - Remove a deck
+// DELETE 
 app.delete('/api/deck/:deckName', (req, res) => {
   const { deckName } = req.params;
   const decks = loadDecks();
@@ -133,8 +131,8 @@ app.delete('/api/deck/:deckName', (req, res) => {
 
   if (!decks[deckName]) return res.status(404).json({ message: 'Deck not found' });
 
-  delete decks[deckName]; // Delete deck
-  delete commanders[deckName]; // Also delete the commander
+  delete decks[deckName];
+  delete commanders[deckName];
   saveDecks(decks);
   saveCommanders(commanders);
 

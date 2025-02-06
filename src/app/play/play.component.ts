@@ -31,9 +31,14 @@ export class PlayComponent implements OnInit {
   draggedSource: 'hand' | 'play' | null = null;
 
   contextMenuVisible: boolean = false;
+  showGrave: boolean = false;
   contextMenuX: number = 0;
   contextMenuY: number = 0;
   selectedCard: any = null;
+  graveContextMenuVisible: boolean = false;
+  graveContextMenuX: number = 0;
+  graveContextMenuY: number = 0;
+  selectedGraveCard: any = null;
 
   playContextMenuVisible: boolean = false;
   playContextMenuX: number = 0;
@@ -110,7 +115,7 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  // Shuffle the deck using the Fisher-Yates algorithm.
+  // Shuffle the deck 
   shuffleDeck(): void {
     for (let i = this.deck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -151,7 +156,7 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  // --- Context Menu for Hand Cards ---
+  // Context menu for hand cards
   onRightClick(event: MouseEvent, card: any): void {
     event.preventDefault();
     this.selectedCard = card;
@@ -160,6 +165,7 @@ export class PlayComponent implements OnInit {
     this.contextMenuVisible = true;
   }
 
+  // Discard a card
   discardSelectedCard(): void {
     if (this.selectedCard) {
       this.discardCard(this.selectedCard);
@@ -167,12 +173,13 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  // Hide context menu
   hideContextMenu(): void {
     this.contextMenuVisible = false;
     this.selectedCard = null;
   }
 
-  // --- Context Menu for Play Area Cards ---
+  // Context menu for play area cards
   onPlayRightClick(event: MouseEvent, played: PlayedCard): void {
     event.preventDefault();
     this.selectedPlayCard = played;
@@ -181,7 +188,7 @@ export class PlayComponent implements OnInit {
     this.playContextMenuVisible = true;
   }
 
-  // Tap/Untap functionality.
+  // Tap/Untap functionality
   tapSelectedCard(): void {
     if (this.selectedPlayCard) {
       this.selectedPlayCard.tapped = true;
@@ -190,6 +197,7 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  // upntap, could probably combine this and tap
   untapSelectedCard(): void {
     if (this.selectedPlayCard) {
       this.selectedPlayCard.tapped = false;
@@ -198,13 +206,12 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  // New: Move the selected played card to the graveyard.
+  // Send to graveyard
   sendToGraveyardSelectedCard(): void {
     if (this.selectedPlayCard) {
       const index = this.playCards.indexOf(this.selectedPlayCard);
       if (index !== -1) {
         const removed = this.playCards.splice(index, 1)[0];
-        // Push only the card object (similar to discarding from hand)
         this.graveyard.push(removed.card);
         console.log('Card sent to graveyard:', removed.card);
       }
@@ -212,11 +219,10 @@ export class PlayComponent implements OnInit {
     this.hidePlayContextMenu();
   }
 
-  // New: Exile functionality (for now, log the action; optionally remove the card).
+  // Exile functionality (for now, log the action)
   exileSelectedCard(): void {
     if (this.selectedPlayCard) {
       console.log('Exile selected. Functionality not fully implemented.', this.selectedPlayCard);
-      // Optionally, remove the card from play and add it to the exile array.
       const index = this.playCards.indexOf(this.selectedPlayCard);
       if (index !== -1) {
         const removed = this.playCards.splice(index, 1)[0];
@@ -227,18 +233,20 @@ export class PlayComponent implements OnInit {
     this.hidePlayContextMenu();
   }
 
+  // Hide play context menu
   hidePlayContextMenu(): void {
     this.playContextMenuVisible = false;
     this.selectedPlayCard = null;
   }
 
+  // Listen
   @HostListener('document:click')
   onDocumentClick(): void {
     this.hideContextMenu();
     this.hidePlayContextMenu();
     this.hideGraveContextMenu();
   }
-  // --- Drag & Drop Methods ---
+  // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
     this.draggedSource = source;
     this.draggedCard = item;
@@ -259,10 +267,9 @@ export class PlayComponent implements OnInit {
     event.preventDefault();
     const playContainer = event.currentTarget as HTMLElement;
     const containerRect = playContainer.getBoundingClientRect();
-    const dropX = event.clientX - containerRect.left - 50; // adjust as needed
-    const dropY = event.clientY - containerRect.top - 100;  // adjust as needed
+    const dropX = event.clientX - containerRect.left - 50; // change later maybe
+    const dropY = event.clientY - containerRect.top - 100;  // change later maybe
   
-    // Check if the drag event has data from dataTransfer.
     let cardData: any = null;
     if (event.dataTransfer) {
       const data = event.dataTransfer.getData('text/plain');
@@ -276,22 +283,22 @@ export class PlayComponent implements OnInit {
     }
   
     if (cardData && cardData.source === 'hand') {
-      // Card is coming from the hand (possibly from the second window)
       const card = cardData.card;
-      // Remove the card from the hand array if it exists.
       const index = this.hand.indexOf(card);
+
       if (index !== -1) {
         this.hand.splice(index, 1);
       }
-      // Add the card to the play area.
+
       this.playCards.push({ card: card, x: dropX, y: dropY });
     } else if (this.draggedCard) {
-      // Existing behavior for drag events initiated in the main window.
       if (this.draggedSource === 'hand') {
         const index = this.hand.indexOf(this.draggedCard);
+
         if (index !== -1) {
           this.hand.splice(index, 1);
         }
+
         this.playCards.push({ card: this.draggedCard, x: dropX, y: dropY });
       } else if (this.draggedSource === 'play') {
         const playedCard = this.draggedCard as PlayedCard;
@@ -303,21 +310,12 @@ export class PlayComponent implements OnInit {
     this.draggedCard = null;
     this.draggedSource = null;
   }
-  
-
-  showGrave = false;
 
   showGraveyard() {
     this.showGrave = !this.showGrave;
   }
 
-    // New: Context menu for graveyard cards.
-  graveContextMenuVisible: boolean = false;
-  graveContextMenuX: number = 0;
-  graveContextMenuY: number = 0;
-  selectedGraveCard: any = null;
-
-  // Handler for right-click on a graveyard card.
+  // Right click open context menu (graveyard)
   onGraveRightClick(event: MouseEvent, card: any): void {
     event.preventDefault();
     this.selectedGraveCard = card;
@@ -326,7 +324,7 @@ export class PlayComponent implements OnInit {
     this.graveContextMenuVisible = true;
   }
 
-  // Moves the selected graveyard card back to hand.
+  // Move back to hand
   returnToHandSelectedCard(): void {
     if (this.selectedGraveCard) {
       const index = this.graveyard.indexOf(this.selectedGraveCard);
@@ -339,17 +337,18 @@ export class PlayComponent implements OnInit {
     this.hideGraveContextMenu();
   }
 
-  // Hides the graveyard context menu.
+  // Hides the graveyard context menu
   hideGraveContextMenu(): void {
     this.graveContextMenuVisible = false;
     this.selectedGraveCard = null;
   }
 
+  // Mill
   mill(): void {
     if (this.deck.length > 0) {
-      // Remove the top card from the deck.
+
       const milledCard = this.deck.shift();
-      // Add the removed card to the graveyard.
+
       this.graveyard.push(milledCard);
       console.log('Milled card:', milledCard);
     } else {
@@ -357,17 +356,17 @@ export class PlayComponent implements OnInit {
     }
   }  
   
+  // Put card from hand on top of deck
   onTop(): void {
-    // First, try to find the card in the deck
     let index = this.deck.indexOf(this.selectedCard);
+
     if (index !== -1) {
-      // If found in deck, remove it and put it on top
       const card = this.deck.splice(index, 1)[0];
       this.deck.unshift(card);
       console.log('Card moved to top of deck:', card);
     } else {
-      // If not in the deck, check if it's in the hand
       index = this.hand.indexOf(this.selectedCard);
+
       if (index !== -1) {
         const card = this.hand.splice(index, 1)[0];
         this.deck.unshift(card);
@@ -376,11 +375,12 @@ export class PlayComponent implements OnInit {
         console.log('Card not found in deck or hand.');
       }
     }
-    // Hide the context menu and clear the selected card
+
     this.contextMenuVisible = false;
     this.selectedCard = null;
   }
 
+  // Move card from board back to hand
   backToHand(): void {
     if (this.selectedPlayCard) {
       const index = this.playCards.indexOf(this.selectedPlayCard);
@@ -394,8 +394,5 @@ export class PlayComponent implements OnInit {
       this.hidePlayContextMenu();
     }
   }
-  
-  
-  
-  
+
 }

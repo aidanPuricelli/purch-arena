@@ -13,9 +13,8 @@ export class DeckComponent implements OnInit {
   deckNames: string[] = [];
   deck: any[] = [];
   savedDeck: any[] = [];
-  newDeckName: string = ''; // Property for new deck creation
+  newDeckName: string = '';
 
-  // Context Menu Properties
   contextMenuVisible: boolean = false;
   contextMenuX: number = 0;
   contextMenuY: number = 0;
@@ -26,7 +25,7 @@ export class DeckComponent implements OnInit {
   ngOnInit() {
     this.loadDeckNames();
 
-    // Listen for external events to add cards
+    // Listen for adding cards
     window.addEventListener('addCardToDeck', (event: any) => {
       this.addToDeck(event.detail);
     });
@@ -37,29 +36,28 @@ export class DeckComponent implements OnInit {
     this.http.get<{ deckNames: string[] }>('/api/decks').subscribe(
       (response) => {
         this.deckNames = response.deckNames;
-        console.log('📜 Available Decks:', this.deckNames);
+        console.log('Available Decks:', this.deckNames);
       },
-      (error) => console.error('❌ Error loading deck names', error)
+      (error) => console.error('Error loading deck names', error)
     );
   }
 
-  // Load the selected deck and notify BuildComponent
+  // Load the selected deck 
   loadDeck(deckName: string): void {
     if (!deckName) {
-      console.warn('⚠️ No deck name provided.');
       return;
     }
 
     this.selectedDeck = deckName;
     this.deckSelected.emit(deckName);
-    console.log(`📌 Selected deck set to: '${this.selectedDeck}'`);
+    console.log(`Selected deck set to: '${this.selectedDeck}'`);
 
     this.http.get<{ deck: any[] }>(`/api/deck/${deckName}`).subscribe(
       (response) => {
-        console.log(`📥 Loaded deck '${deckName}':`, response.deck);
+        console.log(`Loaded deck '${deckName}':`, response.deck);
         this.deck = response.deck || [];
       },
-      (error) => console.error('❌ Error loading deck', error)
+      (error) => console.error('Error loading deck', error)
     );
   }
 
@@ -71,10 +69,10 @@ export class DeckComponent implements OnInit {
       () => {
         this.loadDeckNames();
         this.loadDeck(this.newDeckName);
-        console.log(`✅ Deck "${this.newDeckName}" created`);
-        this.newDeckName = ''; // Clear input field after creation
+        console.log(`Deck "${this.newDeckName}" created`);
+        this.newDeckName = '';
       },
-      (error) => console.error('❌ Error creating deck', error)
+      (error) => console.error('Error creating deck', error)
     );
   }
 
@@ -84,22 +82,21 @@ export class DeckComponent implements OnInit {
 
   
 
-  // Remove a card from the selected deck and immediately update the backend
+  // Remove a card 
   removeCard(): void {
     if (!this.selectedCard) return;
 
-    console.log(`🗑️ Removing card from '${this.selectedDeck}':`, this.selectedCard);
+    console.log(`Removing card from '${this.selectedDeck}':`, this.selectedCard);
     
     const index = this.deck.findIndex(card => card.id === this.selectedCard.id);
     if (index !== -1) {
       this.deck.splice(index, 1);
       
-      // Send updated deck to backend
       this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [], removedCards: [this.selectedCard] }).subscribe(
         (response) => {
-          console.log(`✅ Card removed from deck '${this.selectedDeck}':`, response);
+          console.log(`Card removed from deck '${this.selectedDeck}':`, response);
         },
-        (error) => console.error('❌ Error removing card from deck', error)
+        (error) => console.error('Error removing card from deck', error)
       );
     }
 
@@ -116,7 +113,7 @@ export class DeckComponent implements OnInit {
     this.contextMenuVisible = true;
   }
 
-    // Delete a deck
+  // Delete a deck
   deleteDeck(): void {
     if (!this.selectedDeck) return;
 
@@ -132,26 +129,27 @@ export class DeckComponent implements OnInit {
     );
   }
 
+  // Set Commander
   setCommander(): void {
     if (!this.selectedCard) {
-      console.warn('⚠️ No card selected to set as commander.');
+      console.warn('No card selected to set as commander.');
       return;
     }
   
     if (!this.selectedDeck) {
-      console.warn('⚠️ No deck selected. Cannot set commander.');
+      console.warn('No deck selected. Cannot set commander.');
       return;
     }
   
-    console.log(`👑 Setting commander for '${this.selectedDeck}':`, this.selectedCard);
+    console.log(`Setting commander for '${this.selectedDeck}':`, this.selectedCard);
   
     this.http.post(`/api/deck/${this.selectedDeck}/commander`, { commander: this.selectedCard }).subscribe(
       (response) => {
-        console.log(`✅ Commander set for '${this.selectedDeck}':`, response);
+        console.log(`Commander set for '${this.selectedDeck}':`, response);
         alert(`Commander set to ${this.selectedCard.name}`);
       },
       (error) => {
-        console.error('❌ Error setting commander', error);
+        console.error('Error setting commander', error);
         alert('Failed to set commander. Please try again.');
       }
     );
@@ -161,7 +159,6 @@ export class DeckComponent implements OnInit {
   }
   
   
-
   @HostListener('document:click')
   onDocumentClick(): void {
     this.contextMenuVisible = false;

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +8,5 @@ import { SearchService } from '../services/search.service';
 export class NavbarComponent {
   @Input() links: { text: string, href?: string, action?: () => void }[] = [];
 
-  constructor(private searchService: SearchService) {}
-
-  toggleSearch() {
-    this.searchService.toggleSearch();
-  }
+  constructor() {}
 }
