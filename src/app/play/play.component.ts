@@ -5,7 +5,8 @@ interface PlayedCard {
   card: any;
   x: number;
   y: number;
-  tapped?: boolean;  // Indicates tapped state.
+  tapped?: boolean;
+  counters?: number;
 }
 
 @Component({
@@ -14,6 +15,9 @@ interface PlayedCard {
   styleUrls: ['./play.component.css']
 })
 export class PlayComponent implements OnInit {
+
+  tokenTypes: { name: string; imageUrl: string }[] = [];
+  selectedToken: string = '';
 
   deckNames: string[] = []; // List of available decks
   selectedDeck: string = ''; // Store selected deck
@@ -55,6 +59,61 @@ export class PlayComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDeckNames();
+    this.fetchTokens();
+  }
+
+  // Fetch all tokens
+  fetchTokens(url: string = 'https://api.scryfall.com/cards/search?q=game:paper+t:token+is:unique'): void {
+    this.http.get<{ data: any[], has_more: boolean, next_page: string }>(url).subscribe(
+      (response) => {
+        this.tokenTypes = [
+          ...this.tokenTypes,
+          ...response.data.map(token => ({
+            name: token.name,
+            imageUrl: token.image_uris?.normal || 'https://example.com/default-token.jpg'
+          }))
+        ];
+  
+        console.log('Tokens fetched so far:', this.tokenTypes.length);
+  
+        if (response.has_more && response.next_page) {
+          this.fetchTokens(response.next_page);
+        } else {
+          this.addExtraTokens();
+        }
+      },
+      (error) => console.error('Error fetching tokens:', error)
+    );
+  }
+
+  // Get some extra tokens
+  addExtraTokens(): void {
+    const extraTokens = [
+      { name: 'Treasure', imageUrl: 'https://cards.scryfall.io/normal/front/b/b/bbe8bced-9524-47f6-a600-bf4ddc072698.jpg?1562539795' },
+      { name: 'Food', imageUrl: 'https://cards.scryfall.io/normal/front/b/f/bf36408d-ed85-497f-8e68-d3a922c388a0.jpg?1572489210' },
+      { name: 'Clue', imageUrl: 'https://cards.scryfall.io/normal/front/2/9/291e6490-6727-45ae-90ba-de2ff8f63162.jpg?1562086863' },
+    ];
+  
+    this.tokenTypes = [...this.tokenTypes, ...extraTokens];
+  
+    console.log('Extra tokens added:', extraTokens.map(t => t.name));
+  }
+  
+  // Add token to play area
+  placeTokenInPlay(): void {
+    const token = this.tokenTypes.find(t => t.name === this.selectedToken);
+    if (token) {
+      const tokenCard = {
+        id: `token-${token.name}`,
+        name: token.name,
+        image_uris: { normal: token.imageUrl }
+      };
+
+      this.playCards.push({ card: tokenCard, x: 150, y: 150, counters: 0 });
+      console.log(`Token placed in play area:`, tokenCard);
+    } else {
+      console.warn('No token selected!');
+    }
   }
 
   // Load all available deck names
@@ -67,6 +126,24 @@ export class PlayComponent implements OnInit {
       (error) => console.error('❌ Error loading deck names', error)
     );
   }
+
+  // Increase counter
+  increaseCounter(playedCard: PlayedCard): void {
+    playedCard.counters = (playedCard.counters || 0) + 1;
+    console.log(`⬆Increased counter: ${playedCard.counters}`);
+  }
+
+  // Decrease counter
+  decreaseCounter(played: PlayedCard, event: MouseEvent): void {
+    event.stopPropagation();
+    event.preventDefault()
+  
+    if (!played || !played.counters) return;
+    
+    played.counters = Math.max(0, played.counters - 1);
+    console.log(`➖ Counter removed: ${played.counters}`, played);
+  }
+  
 
   // Load deck after user selects it
   onDeckSelected(): void {

@@ -337,5 +337,34 @@ html, body {
     color: white;
 }
 
+.token-selection {
+    margin: 30px 0 0 0;
+}
+
+.token-selection label {
+    color: white;
+    margin-right: 10px;
+}
+
+.counter-circle {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    background: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    user-select: none;
+}
+  
+
 
 

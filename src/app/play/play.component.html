@@ -25,6 +25,11 @@
        }"
        [class.tapped]="played.tapped">
     <img [src]="played.card.image_uris.normal" alt="card image">
+
+    <div class="counter-circle"
+       (click)="increaseCounter(played)"
+       (contextmenu)="decreaseCounter(played, $event)"
+       *ngIf="played.counters !== undefined && played.counters > 0">{{ played.counters }}</div>
     <span *ngIf="played.tapped" class="tap-icon material-symbols-outlined">
       refresh
     </span>
@@ -37,6 +42,13 @@
   <a class="purch-btn" href="#" (click)="drawCard(); $event.preventDefault()">DRAW</a>
   <a class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
   <a class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
+  <div class="token-selection">
+    <label for="tokenSelect">Select a Token:</label>
+    <select id="tokenSelect" [(ngModel)]="selectedToken">
+      <option *ngFor="let token of tokenTypes" [value]="token.name">{{ token.name }}</option>
+    </select>
+    <button class="purch-btn" (click)="placeTokenInPlay()">Place Token</button>
+  </div>
 </div>
 
 <!-- HAND -->
@@ -79,6 +91,7 @@
     <li (click)="sendToGraveyardSelectedCard()">Graveyard</li>
     <li (click)="exileSelectedCard()">Exile</li>
     <li (click)="backToHand()">Back to Hand</li>
+    <li (click)="selectedPlayCard ? increaseCounter(selectedPlayCard) : null">Add Counter</li>
   </ul>
 </div>
 
