@@ -1,5 +1,14 @@
 <app-navbar [links]="navLinks"></app-navbar>
 
+<!-- DECK SELECTION -->
+<!-- DECK SELECTION -->
+<div class="deck-selection">
+  <label for="deckSelect">Select a Deck:</label>
+  <select id="deckSelect" [(ngModel)]="selectedDeck" (change)="onDeckSelected()">
+    <option *ngFor="let deck of deckNames" class="deck-opt" [value]="deck">{{ deck }}</option>
+  </select>
+</div>
+
 <!-- PLAY CONTAINER: Drop zone for cards -->
 <div class="play-container mt-5"
      (dragover)="onDragOver($event)"
@@ -31,7 +40,10 @@
   <a class="purch-btn" href="#" (click)="drawCard(); $event.preventDefault()">DRAW</a>
   <a class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
   <a class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
-  <a class="purch-btn" href="#" (click)="openHandWindow(); $event.preventDefault()">HAND</a>
+</div>
+
+<div class="deck-options">
+  
 </div>
 
 <!-- HAND: Cards available to be dragged -->

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SearchService } from '../../services/search.service';
 
@@ -9,11 +9,13 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchComponent {
   searchQuery: string = '';
-  cardImages: any[] = []; // Store full card data
+  cardImages: any[] = [];
   contextMenuVisible: boolean = false;
   menuX: number = 0;
   menuY: number = 0;
   selectedCard: any | null = null;
+
+  @Input() selectedDeck: string = ''; // Receive selectedDeck from BuildComponent
 
   constructor(private http: HttpClient, private searchService: SearchService) {}
 
@@ -26,19 +28,16 @@ export class SearchComponent {
         console.log('API Response:', response);
         if (response.data) {
             this.cardImages = response.data.filter((card: any) => card.image_uris && card.image_uris.normal);
-            console.log('Filtered Images:', this.cardImages); // Debugging
+            console.log('Filtered Images:', this.cardImages);
         }
     }, error => {
         console.error('Error fetching cards:', error);
         this.cardImages = [];
     });
-}
-
-
+  }
 
   onRightClick(event: MouseEvent, card?: any) {
-    event.preventDefault(); // Prevent default context menu
-
+    event.preventDefault();
     this.contextMenuVisible = true;
     this.menuX = event.clientX;
     this.menuY = event.clientY;
@@ -50,9 +49,22 @@ export class SearchComponent {
   }
 
   saveImage() {
+    if (!this.selectedDeck) {
+      console.warn('⚠️ No deck selected. Cannot add card.');
+      return;
+    }
+
     if (this.selectedCard) {
-      console.log('Adding to deck:', this.selectedCard);
+      console.log(`📌 Saving card to deck '${this.selectedDeck}':`, this.selectedCard);
+
       window.dispatchEvent(new CustomEvent('addCardToDeck', { detail: this.selectedCard }));
+
+      this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [this.selectedCard], removedCards: [] }).subscribe(
+        (response) => {
+          console.log(`✅ Card added to deck '${this.selectedDeck}':`, response);
+        },
+        (error) => console.error('❌ Error adding card to deck', error)
+      );
     }
     this.hideContextMenu();
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SearchService } from '../services/search.service'; // Import SearchService
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-build',
@@ -7,6 +7,8 @@ import { SearchService } from '../services/search.service'; // Import SearchServ
   styleUrls: ['./build.component.css']
 })
 export class BuildComponent {
+  selectedDeck: string = ''; // Store selected deck
+
   constructor(private searchService: SearchService) {}
 
   navLinks = [
@@ -15,5 +17,11 @@ export class BuildComponent {
 
   toggleSearch() {
     this.searchService.toggleSearch();
+  }
+
+  // Ensure we receive a string from deckSelected
+  onDeckSelected(deckName: string) {
+    this.selectedDeck = deckName;
+    console.log(`🎯 Updated selectedDeck in BuildComponent: '${this.selectedDeck}'`);
   }
 }

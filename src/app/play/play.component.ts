@@ -15,6 +15,9 @@ interface PlayedCard {
 })
 export class PlayComponent implements OnInit {
 
+  deckNames: string[] = []; // List of available decks
+  selectedDeck: string = ''; // Store selected deck
+
   deck: any[] = [];
   hand: any[] = [];
   graveyard: any[] = [];
@@ -22,18 +25,16 @@ export class PlayComponent implements OnInit {
 
   // Cards placed in the play area.
   playCards: PlayedCard[] = [];
+  commander: any | null = null;
 
-  // Temporary storage for the card being dragged.
   draggedCard: any = null;
   draggedSource: 'hand' | 'play' | null = null;
 
-  // Context menu for hand cards.
   contextMenuVisible: boolean = false;
   contextMenuX: number = 0;
   contextMenuY: number = 0;
   selectedCard: any = null;
 
-  // Context menu for play area cards.
   playContextMenuVisible: boolean = false;
   playContextMenuX: number = 0;
   playContextMenuY: number = 0;
@@ -48,24 +49,65 @@ export class PlayComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadDeckFromServer();
-    // Expose a getter so the hand window can access the hand data.
-    (window as any).getHandData = () => this.hand;
+    this.loadDeckNames();
   }
-  
 
-  loadDeckFromServer(): void {
-    this.http.get<{ deck: any[] }>('/api/deck').subscribe(
+  // Load all available deck names
+  loadDeckNames(): void {
+    this.http.get<{ deckNames: string[] }>('/api/decks').subscribe(
+      (response) => {
+        this.deckNames = response.deckNames;
+        console.log('📜 Available Decks:', this.deckNames);
+      },
+      (error) => console.error('❌ Error loading deck names', error)
+    );
+  }
+
+  // Load deck after user selects it
+  onDeckSelected(): void {
+    if (!this.selectedDeck) return;
+    
+    console.log(`🎯 Loading deck: '${this.selectedDeck}'`);
+
+    this.http.get<{ deck: any[] }>(`/api/deck/${this.selectedDeck}`).subscribe(
       (response) => {
         this.deck = response.deck;
-        console.log('Deck loaded from server:', this.deck);
+        console.log(`📥 Loaded deck '${this.selectedDeck}':`, this.deck);
+        
+        this.shuffleDeck();
+        this.drawHand();
+        this.loadCommander();
+      },
+      (error) => console.error('❌ Error loading deck', error)
+    );
+  }
+
+  // Load commander for the selected deck
+  loadCommander(): void {
+    this.http.get<{ commander: any }>(`/api/deck/${this.selectedDeck}/commander`).subscribe(
+      (response) => {
+        if (response.commander) {
+          this.commander = response.commander;
+          console.log(`👑 Commander loaded:`, this.commander);
+          this.placeCommanderInPlay();
+        } else {
+          console.log('⚠️ No commander found for this deck.');
+        }
+        
+        // Shuffle and draw after loading the commander
         this.shuffleDeck();
         this.drawHand();
       },
-      (error) => {
-        console.error('Error loading deck from server', error);
-      }
+      (error) => console.error('❌ Error loading commander', error)
     );
+  }
+
+  // Place commander in play area
+  placeCommanderInPlay(): void {
+    if (this.commander) {
+      this.playCards.push({ card: this.commander, x: 100, y: 100 });
+      console.log(`🚀 Commander placed in play area:`, this.commander);
+    }
   }
 
   // Shuffle the deck using the Fisher-Yates algorithm.
@@ -314,60 +356,6 @@ export class PlayComponent implements OnInit {
       console.log('No cards left in the deck to mill.');
     }
   }  
-
-  openHandWindow(): void {
-    // Open a new window.
-    const handWindow = window.open('', 'HandWindow', 'width=400,height=600');
-    if (handWindow) {
-      // Write HTML for the new window.
-      handWindow.document.write(`
-        <html>
-          <head>
-            <title>Your Hand</title>
-            <style>
-              body { background: black; }
-              .card {
-                display: inline-block;
-                margin: 5px;
-                border: 1px solid #ccc;
-                cursor: grab;
-              }
-              .card img { width: 200px; }
-            </style>
-          </head>
-          <body>
-            <div id="hand-container"></div>
-            <script>
-              // When the window loads, fill in the hand.
-              window.onload = function() {
-                // Retrieve hand data from the opener (main window).
-                const hand = window.opener.getHandData();
-                const container = document.getElementById('hand-container');
-                hand.forEach((card, index) => {
-                  const cardDiv = document.createElement('div');
-                  cardDiv.classList.add('card');
-                  cardDiv.setAttribute('draggable', 'true');
-                  // When dragging starts, store card data into the dataTransfer object.
-                  cardDiv.addEventListener('dragstart', function(event) {
-                    event.dataTransfer.setData('text/plain', JSON.stringify({
-                      source: 'hand',
-                      card: card
-                    }));
-                    // Optionally, you might visually indicate that the card is being dragged.
-                  });
-                  const img = document.createElement('img');
-                  img.src = card.image_uris.normal;
-                  cardDiv.appendChild(img);
-                  container.appendChild(cardDiv);
-                });
-              }
-            <\/script>
-          </body>
-        </html>
-      `);
-      handWindow.document.close();
-    }
-  } 
   
   onTop(): void {
     // First, try to find the card in the deck

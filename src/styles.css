@@ -297,3 +297,45 @@ html, body {
     /* You can set a fixed height or allow it to scale naturally */
     /* Optionally add a border or box-shadow for a card look */
   }
+
+  .deck-selection {
+    position: absolute;
+    z-index: 9999 !important; /* Force it to be on top */
+    background: rgb(0, 0, 0) !important; /* Ensure it’s visible */
+    padding: 10px;
+    top: 100px;
+    left: 20px;
+    color: rgb(182, 228, 255);
+    border: solid 2px rgb(153, 235, 255);
+    border-radius: 10px;
+    box-shadow: 0 5px rgb(42, 79, 114);
+}
+
+.deck-selection label {
+    margin-right: 10px;
+}
+
+#deckSelect {
+    padding: 5px;
+    border: solid 2px rgb(146, 242, 255);
+    color: white !important;
+    background: black;
+    border-radius: 5px;
+    box-shadow: 0 5px rgb(51, 76, 129);
+}
+
+.deck-opt {
+    background: black;
+    border-radius: 0px;
+    border: solid 2px rgb(174, 246, 255);
+}
+
+.banner select {
+    background: black;
+    border: solid 2px rgb(172, 255, 255);
+    margin-right: 10px;
+    color: white;
+}
+
+
+

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,22 +7,24 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./deck.component.css']
 })
 export class DeckComponent implements OnInit {
-  // Current deck cards (includes both saved and newly added)
-  deck: any[] = [];
-  // Deck as originally loaded from deck.json
-  savedDeck: any[] = [];
+  @Input() selectedDeck: string = ''; // Receive selectedDeck from BuildComponent
+  @Output() deckSelected: EventEmitter<string> = new EventEmitter<string>(); // Emit deck selection
 
-  // For the custom context menu
+  deckNames: string[] = [];
+  deck: any[] = [];
+  savedDeck: any[] = [];
+  newDeckName: string = ''; // Property for new deck creation
+
+  // Context Menu Properties
   contextMenuVisible: boolean = false;
   contextMenuX: number = 0;
   contextMenuY: number = 0;
   selectedCard: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    // Load the deck from the server (deck.json) on component init
-    this.loadDeckFromServer();
+    this.loadDeckNames();
 
     // Listen for external events to add cards
     window.addEventListener('addCardToDeck', (event: any) => {
@@ -30,132 +32,136 @@ export class DeckComponent implements OnInit {
     });
   }
 
-  addToDeck(card: any) {
-    this.deck.push(card);
-    console.log('Deck updated:', this.deck);
+  // Load all deck names
+  loadDeckNames(): void {
+    this.http.get<{ deckNames: string[] }>('/api/decks').subscribe(
+      (response) => {
+        this.deckNames = response.deckNames;
+        console.log('📜 Available Decks:', this.deckNames);
+      },
+      (error) => console.error('❌ Error loading deck names', error)
+    );
   }
 
-  /**
-   * Save deck method sends only new cards (not already in deck.json)
-   * and removed cards based on the differences between the current deck and the saved deck.
-   * This version supports multiple copies of the same card.
-   */
-  saveDeck(): void {
-    // Build count objects for the current deck and saved deck.
-    const currentCounts: { [id: string]: number } = {};
-    const savedCounts: { [id: string]: number } = {};
-
-    this.deck.forEach(card => {
-      currentCounts[card.id] = (currentCounts[card.id] || 0) + 1;
-    });
-    this.savedDeck.forEach(card => {
-      savedCounts[card.id] = (savedCounts[card.id] || 0) + 1;
-    });
-
-    // Determine newCards: extra copies in the current deck beyond what is in savedDeck.
-    const newCards: any[] = [];
-    const countsUsed: { [id: string]: number } = {};
-    for (const card of this.deck) {
-      countsUsed[card.id] = (countsUsed[card.id] || 0) + 1;
-      const savedCount = savedCounts[card.id] || 0;
-      // If this copy exceeds what was originally saved, consider it new.
-      if (countsUsed[card.id] > savedCount) {
-        newCards.push(card);
-      }
-    }
-
-    // Determine removedCards: copies that existed in savedDeck but are no longer in the current deck.
-    const removedCards: any[] = [];
-    const removedCountsUsed: { [id: string]: number } = {};
-    for (const card of this.savedDeck) {
-      removedCountsUsed[card.id] = (removedCountsUsed[card.id] || 0) + 1;
-      const currentCount = currentCounts[card.id] || 0;
-      // If more copies were saved than currently exist, mark one as removed.
-      if (removedCountsUsed[card.id] > currentCount) {
-        removedCards.push(card);
-      }
-    }
-
-    // If there are no changes, nothing needs to be sent.
-    if (newCards.length === 0 && removedCards.length === 0) {
-      console.log('No changes to save.');
+  // Load the selected deck and notify BuildComponent
+  loadDeck(deckName: string): void {
+    if (!deckName) {
+      console.warn('⚠️ No deck name provided.');
       return;
     }
 
-    this.http.post('/api/deck', { newCards, removedCards }).subscribe(
+    this.selectedDeck = deckName;
+    this.deckSelected.emit(deckName);
+    console.log(`📌 Selected deck set to: '${this.selectedDeck}'`);
+
+    this.http.get<{ deck: any[] }>(`/api/deck/${deckName}`).subscribe(
       (response) => {
-        console.log('Deck saved successfully', response);
-        // After a successful save, update savedDeck to match the current deck.
-        this.savedDeck = this.deck.slice(); // Make a shallow copy
+        console.log(`📥 Loaded deck '${deckName}':`, response.deck);
+        this.deck = response.deck || [];
       },
-      (error) => {
-        console.error('Error saving deck', error);
-      }
+      (error) => console.error('❌ Error loading deck', error)
     );
   }
 
-  // Load the deck from the server (deck.json)
-  loadDeckFromServer(): void {
-    this.http.get<{ deck: any[] }>('/api/deck').subscribe(
-      (response) => {
-        this.deck = response.deck;
-        // Save a copy of the originally loaded deck
-        this.savedDeck = response.deck.slice();
-        console.log('Deck loaded from server:', this.deck);
+  // Create a new deck
+  createDeck(): void {
+    if (!this.newDeckName.trim()) return;
+
+    this.http.post('/api/deck', { deckName: this.newDeckName }).subscribe(
+      () => {
+        this.loadDeckNames();
+        this.loadDeck(this.newDeckName);
+        console.log(`✅ Deck "${this.newDeckName}" created`);
+        this.newDeckName = ''; // Clear input field after creation
       },
-      (error) => {
-        console.error('Error loading deck from server', error);
-      }
+      (error) => console.error('❌ Error creating deck', error)
     );
   }
 
-  // Optional: A method to load a deck from a local JSON file (if needed)
-  loadDeck(event: any): void {
-    const file = event.target.files[0];
-    if (!file) return;
-  
-    const reader = new FileReader();
-    reader.onload = (e: ProgressEvent<FileReader>) => {
-      const result = e.target?.result;
-      if (!result) return;
-  
-      try {
-        const json = JSON.parse(result as string);
-        this.deck = json;
-        // Optionally update savedDeck if you want to treat the loaded file as saved data:
-        // this.savedDeck = json.slice();
-      } catch (error) {
-        console.error('Invalid JSON file', error);
-      }
-    };
-    reader.readAsText(file);
+  addToDeck(card: any) {
+    this.deck.push(card);
   }
 
-  // Handler for right-click (contextmenu) event on a card
+  
+
+  // Remove a card from the selected deck and immediately update the backend
+  removeCard(): void {
+    if (!this.selectedCard) return;
+
+    console.log(`🗑️ Removing card from '${this.selectedDeck}':`, this.selectedCard);
+    
+    const index = this.deck.findIndex(card => card.id === this.selectedCard.id);
+    if (index !== -1) {
+      this.deck.splice(index, 1);
+      
+      // Send updated deck to backend
+      this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [], removedCards: [this.selectedCard] }).subscribe(
+        (response) => {
+          console.log(`✅ Card removed from deck '${this.selectedDeck}':`, response);
+        },
+        (error) => console.error('❌ Error removing card from deck', error)
+      );
+    }
+
+    this.contextMenuVisible = false;
+    this.selectedCard = null;
+  }
+
+  // Right-click context menu for card removal
   onRightClick(event: MouseEvent, card: any): void {
-    event.preventDefault(); // Prevent the default browser context menu
+    event.preventDefault();
     this.selectedCard = card;
-    // Get the mouse position to display the menu at that location
     this.contextMenuX = event.clientX;
     this.contextMenuY = event.clientY;
     this.contextMenuVisible = true;
   }
 
-  // Method to remove the selected card from the deck
-  removeCard(): void {
-    if (this.selectedCard) {
-      const index = this.deck.indexOf(this.selectedCard);
-      if (index !== -1) {
-        this.deck.splice(index, 1);
-        console.log('Card removed:', this.selectedCard);
-      }
-      // Hide the context menu after removal
-      this.contextMenuVisible = false;
-      this.selectedCard = null;
-    }
+    // Delete a deck
+  deleteDeck(): void {
+    if (!this.selectedDeck) return;
+
+    this.http.delete(`/api/deck/${this.selectedDeck}`).subscribe(
+      () => {
+        console.log(`🗑️ Deck "${this.selectedDeck}" deleted`);
+        this.selectedDeck = '';
+        this.deck = [];
+        this.savedDeck = [];
+        this.loadDeckNames();
+      },
+      (error) => console.error('❌ Error deleting deck', error)
+    );
   }
 
-  // Hide the context menu if user clicks anywhere else on the document
+  setCommander(): void {
+    if (!this.selectedCard) {
+      console.warn('⚠️ No card selected to set as commander.');
+      return;
+    }
+  
+    if (!this.selectedDeck) {
+      console.warn('⚠️ No deck selected. Cannot set commander.');
+      return;
+    }
+  
+    console.log(`👑 Setting commander for '${this.selectedDeck}':`, this.selectedCard);
+  
+    this.http.post(`/api/deck/${this.selectedDeck}/commander`, { commander: this.selectedCard }).subscribe(
+      (response) => {
+        console.log(`✅ Commander set for '${this.selectedDeck}':`, response);
+        alert(`Commander set to ${this.selectedCard.name}`);
+      },
+      (error) => {
+        console.error('❌ Error setting commander', error);
+        alert('Failed to set commander. Please try again.');
+      }
+    );
+  
+    this.contextMenuVisible = false;
+    this.selectedCard = null;
+  }
+  
+  
+
   @HostListener('document:click')
   onDocumentClick(): void {
     this.contextMenuVisible = false;
