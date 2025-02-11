@@ -232,9 +232,11 @@ export class PlayComponent implements OnInit {
         if (response.commander) {
           this.commander = response.commander;
           console.log(`Commander loaded:`, this.commander);
+          this.life = 40;
           this.placeCommanderInPlay();
         } else {
           console.log('No commander found for this deck.');
+          this.life = 20;
         }
         
       },
@@ -390,15 +392,35 @@ export class PlayComponent implements OnInit {
     this.hidePlayContextMenu();
     this.hideGraveContextMenu();
   }
+  
   // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
     this.draggedSource = source;
     this.draggedCard = item;
+  
     if (event.dataTransfer) {
       event.dataTransfer.setData('text/plain', JSON.stringify(item));
       event.dataTransfer.effectAllowed = 'move';
+  
+      // Create an image element for the drag preview
+      const dragImage = new Image();
+      dragImage.src = item.image_uris?.normal || 'https://example.com/default-token.jpg';
+      dragImage.width = 200;
+      dragImage.style.height = 'auto';
+      dragImage.style.opacity = '0.8';
+  
+      document.body.appendChild(dragImage);
+
+      const offsetX = 50;
+      const offsetY = 100;
+      event.dataTransfer.setDragImage(dragImage, offsetX, offsetY);
+  
+      setTimeout(() => {
+        document.body.removeChild(dragImage);
+      }, 0);
     }
   }
+  
 
   onDragOver(event: DragEvent): void {
     event.preventDefault();
