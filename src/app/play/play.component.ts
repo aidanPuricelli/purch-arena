@@ -19,6 +19,10 @@ export class PlayComponent implements OnInit {
   tokenTypes: { name: string; imageUrl: string }[] = [];
   selectedToken: string = '';
 
+  selectedDeckCard: any = null;
+  showTutor: boolean = false;
+  showToken: boolean = false;
+
   deckNames: string[] = [];
   selectedDeck: string = ''; 
 
@@ -392,7 +396,7 @@ export class PlayComponent implements OnInit {
     this.hidePlayContextMenu();
     this.hideGraveContextMenu();
   }
-  
+
   // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
     this.draggedSource = source;
@@ -631,7 +635,38 @@ export class PlayComponent implements OnInit {
       this.playContextMenuVisible = true;
     }
   }
-  
-  
+
+  // Add selected card to hand and remove it from the deck
+  addToHandFromDeck(): void {
+    if (!this.selectedDeckCard) {
+      console.warn('No card selected.');
+      return;
+    }
+
+    const index = this.deck.indexOf(this.selectedDeckCard);
+    if (index !== -1) {
+      this.deck.splice(index, 1);
+      this.hand.push(this.selectedDeckCard);
+      console.log('Card added to hand:', this.selectedDeckCard);
+    }
+
+    this.selectedDeckCard = null;
+  }
+
+  // Toggle the TUTOR dropdown
+  toggleTutor(): void {
+    this.showTutor = !this.showTutor;
+    if (this.showTutor) {
+      this.showToken = false;
+    }
+  }
+
+  // Toggle the TOKEN dropdown
+  toggleToken(): void {
+    this.showToken = !this.showToken;
+    if (this.showToken) {
+      this.showTutor = false;
+    }
+  }
 
 }

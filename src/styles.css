@@ -341,6 +341,15 @@ html, body {
     margin: 30px 0 0 0;
 }
 
+.card-selection {
+    margin: 30px 0 0 0;
+}
+
+.card-selection label {
+    color: white;
+    margin-right: 10px;
+}
+
 .token-selection label {
     color: white;
     margin-right: 10px;

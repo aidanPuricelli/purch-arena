@@ -65,7 +65,20 @@
   <a class="purch-btn" href="#" (click)="drawCard(); $event.preventDefault()">DRAW</a>
   <a class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
   <a class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
-  <div class="token-selection">
+  <a class="purch-btn" href="#" (click)="toggleTutor(); $event.preventDefault()">TUTOR</a>
+  <a class="purch-btn" href="#" (click)="toggleToken(); $event.preventDefault()">TOKEN</a>
+
+  <!-- CARD SEARCH DROPDOWN (TUTOR) -->
+  <div *ngIf="showTutor" class="card-selection">
+    <label for="cardSelect">Search for a Card:</label>
+    <select id="cardSelect" [(ngModel)]="selectedDeckCard">
+      <option *ngFor="let card of deck" [ngValue]="card">{{ card.name }}</option>
+    </select>
+    <button class="purch-btn" (click)="addToHandFromDeck()">Add to Hand</button>
+  </div>
+
+  <!-- TOKEN SELECTION (TOKEN) -->
+  <div *ngIf="showToken" class="token-selection">
     <label for="tokenSelect">Select a Token:</label>
     <select id="tokenSelect" [(ngModel)]="selectedToken">
       <option *ngFor="let token of tokenTypes" [value]="token.name">{{ token.name }}</option>
@@ -73,6 +86,8 @@
     <button class="purch-btn" (click)="placeTokenInPlay()">Place Token</button>
   </div>
 </div>
+
+
 
 <!-- HAND -->
 <div class="hand">
