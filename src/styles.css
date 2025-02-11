@@ -400,6 +400,30 @@ html, body {
     outline: 3px solid blue;
     border-radius: 5px;
 }
+
+/* Zoom Overlay */
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.zoomed-card {
+    width: 50vw;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+  
   
   
   

@@ -19,6 +19,8 @@ export class PlayComponent implements OnInit {
   tokenTypes: { name: string; imageUrl: string }[] = [];
   selectedToken: string = '';
 
+  zoomedCard: any = null;
+
   selectedDeckCard: any = null;
   showTutor: boolean = false;
   showToken: boolean = false;
@@ -667,6 +669,19 @@ export class PlayComponent implements OnInit {
     if (this.showToken) {
       this.showTutor = false;
     }
+  }
+
+  // Zoom 
+  zoomSelectedCard(): void {
+    if (this.selectedPlayCards.length === 1) {
+      this.zoomedCard = this.selectedPlayCards[0].card;
+      console.log('Zooming card:', this.zoomedCard);
+    }
+  }
+
+  // Close zoom overlay when clicking outside
+  closeZoom(): void {
+    this.zoomedCard = null;
   }
 
 }

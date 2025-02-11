@@ -130,6 +130,7 @@
     <li (click)="backToHand()">Back to Hand</li>
     <li (click)="increaseCounterOnSelectedCards($event)">Add Counter</li>
     <li (click)="decreaseCounterOnSelectedCards($event)">Remove Counter</li>
+    <li (click)="zoomSelectedCard()" *ngIf="selectedPlayCards.length === 1">Zoom</li>
   </ul>
 </div>
 
@@ -147,6 +148,13 @@
 (click)="increaseLife()"
 (contextmenu)="decreaseLife($event)">
   <div class="life-counter">{{ life }}</div>
+</div>
+
+<!-- ZOOMED CARD OVERLAY -->
+<div *ngIf="zoomedCard" class="zoom-overlay" (click)="closeZoom()">
+  <img [src]="zoomedCard.image_uris?.normal || 'https://example.com/default-card.jpg'" 
+       [alt]="zoomedCard.name" 
+       class="zoomed-card" />
 </div>
 
 
