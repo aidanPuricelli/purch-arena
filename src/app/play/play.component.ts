@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface PlayedCard {
@@ -19,8 +19,14 @@ export class PlayComponent implements OnInit {
   tokenTypes: { name: string; imageUrl: string }[] = [];
   selectedToken: string = '';
 
-  deckNames: string[] = []; // List of available decks
-  selectedDeck: string = ''; // Store selected deck
+  deckNames: string[] = [];
+  selectedDeck: string = ''; 
+
+  isDragging = false;
+  selectionBox = { x: 0, y: 0, width: 0, height: 0 };
+  startX = 0;
+  startY = 0;
+  selectedPlayCards: PlayedCard[] = [];
 
   deck: any[] = [];
   hand: any[] = [];
@@ -55,7 +61,7 @@ export class PlayComponent implements OnInit {
     { text: 'Home', href: '/' }
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadDeckNames();
@@ -127,22 +133,66 @@ export class PlayComponent implements OnInit {
     );
   }
 
-  // Increase counter
-  increaseCounter(playedCard: PlayedCard): void {
-    playedCard.counters = (playedCard.counters || 0) + 1;
-    console.log(`Increased counter: ${playedCard.counters}`);
-  }
+  // Increase counters for selected cards
+  increaseCounterOnSelectedCards(event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  
+    if (this.selectedPlayCards.length > 0) {
+      this.selectedPlayCards.forEach(card => {
+        card.counters = (card.counters || 0) + 1;
+      });
 
-  // Decrease counter
-  decreaseCounter(played: PlayedCard, event: MouseEvent): void {
+      this.cdRef.detectChanges();
+  
+      console.log("Increased counters for selected cards:", this.selectedPlayCards);
+    }
+  }
+  
+  // Decrease counters for selected cards
+  decreaseCounterOnSelectedCards(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
   
-    if (!played || !played.counters) return;
-    
-    played.counters = Math.max(0, played.counters - 1);
-    console.log(`Counter removed: ${played.counters}`, played);
+    if (this.selectedPlayCards.length > 0) {
+      this.selectedPlayCards.forEach(card => {
+        if (card.counters && card.counters > 0) {
+          card.counters = Math.max(0, card.counters - 1);
+        }
+      });
+  
+      this.cdRef.detectChanges();
+  
+      console.log("Decreased counters for selected cards:", this.selectedPlayCards);
+    }
   }
+  
+
+  // Increase counter for a specific card (direct click)
+  increaseCounter(card: PlayedCard, event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
+    card.counters = (card.counters || 0) + 1;
+    console.log(`Increased counter for ${card.card.name}:`, card.counters);
+  }
+
+  // Decrease counter for a specific card (direct click)
+  decreaseCounter(card: PlayedCard, event: MouseEvent): void {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (card.counters && card.counters > 0) {
+      card.counters = Math.max(0, card.counters - 1);
+      console.log(`Decreased counter for ${card.card.name}:`, card.counters);
+    }
+  }
+  
+  
   
   // Increase life
   increaseLife() {
@@ -160,18 +210,18 @@ export class PlayComponent implements OnInit {
   onDeckSelected(): void {
     if (!this.selectedDeck) return;
     
-    console.log(`🎯 Loading deck: '${this.selectedDeck}'`);
+    console.log(`Loading deck: '${this.selectedDeck}'`);
 
     this.http.get<{ deck: any[] }>(`/api/deck/${this.selectedDeck}`).subscribe(
       (response) => {
         this.deck = response.deck;
-        console.log(`📥 Loaded deck '${this.selectedDeck}':`, this.deck);
-        
+        console.log(`Loaded deck '${this.selectedDeck}':`, this.deck);
+      
+        this.loadCommander();
         this.shuffleDeck();
         this.drawHand();
-        this.loadCommander();
       },
-      (error) => console.error('❌ Error loading deck', error)
+      (error) => console.error('Error loading deck', error)
     );
   }
 
@@ -181,17 +231,14 @@ export class PlayComponent implements OnInit {
       (response) => {
         if (response.commander) {
           this.commander = response.commander;
-          console.log(`👑 Commander loaded:`, this.commander);
+          console.log(`Commander loaded:`, this.commander);
           this.placeCommanderInPlay();
         } else {
-          console.log('⚠️ No commander found for this deck.');
+          console.log('No commander found for this deck.');
         }
         
-        // Shuffle and draw after loading the commander
-        this.shuffleDeck();
-        this.drawHand();
       },
-      (error) => console.error('❌ Error loading commander', error)
+      (error) => console.error('Error loading commander', error)
     );
   }
 
@@ -199,7 +246,7 @@ export class PlayComponent implements OnInit {
   placeCommanderInPlay(): void {
     if (this.commander) {
       this.playCards.push({ card: this.commander, x: 100, y: 100 });
-      console.log(`🚀 Commander placed in play area:`, this.commander);
+      console.log(`Commander placed in play area:`, this.commander);
     }
   }
 
@@ -270,42 +317,51 @@ export class PlayComponent implements OnInit {
   // Context menu for play area cards
   onPlayRightClick(event: MouseEvent, played: PlayedCard): void {
     event.preventDefault();
+
+    if (!this.selectedPlayCards.includes(played)) {
+      this.selectedPlayCards.push(played);
+    }
+
     this.selectedPlayCard = played;
     this.playContextMenuX = event.clientX;
     this.playContextMenuY = event.clientY;
     this.playContextMenuVisible = true;
   }
 
-  // Tap/Untap functionality
+  // Tap all selected cards
   tapSelectedCard(): void {
-    if (this.selectedPlayCard) {
-      this.selectedPlayCard.tapped = true;
-      console.log('Tapped card:', this.selectedPlayCard);
+    if (this.selectedPlayCards.length > 0) {
+      this.selectedPlayCards.forEach(card => card.tapped = true);
+      console.log("Tapped multiple cards:", this.selectedPlayCards);
       this.hidePlayContextMenu();
     }
   }
-
-  // upntap, could probably combine this and tap
+  
+  // Untap all selected cards
   untapSelectedCard(): void {
-    if (this.selectedPlayCard) {
-      this.selectedPlayCard.tapped = false;
-      console.log('Untapped card:', this.selectedPlayCard);
+    if (this.selectedPlayCards.length > 0) {
+      this.selectedPlayCards.forEach(card => card.tapped = false);
+      console.log("Untapped multiple cards:", this.selectedPlayCards);
+      this.hidePlayContextMenu();
+    }
+  }  
+
+  // Send all selected cards to graveyard
+  sendToGraveyardSelectedCard(): void {
+    if (this.selectedPlayCards.length > 0) {
+      this.selectedPlayCards.forEach(card => {
+        const index = this.playCards.indexOf(card);
+        if (index !== -1) {
+          this.playCards.splice(index, 1);
+          this.graveyard.push(card.card);
+        }
+      });
+      console.log("Moved selected cards to graveyard:", this.selectedPlayCards);
+      this.selectedPlayCards = []; // clear all selected cards
       this.hidePlayContextMenu();
     }
   }
-
-  // Send to graveyard
-  sendToGraveyardSelectedCard(): void {
-    if (this.selectedPlayCard) {
-      const index = this.playCards.indexOf(this.selectedPlayCard);
-      if (index !== -1) {
-        const removed = this.playCards.splice(index, 1)[0];
-        this.graveyard.push(removed.card);
-        console.log('Card sent to graveyard:', removed.card);
-      }
-    }
-    this.hidePlayContextMenu();
-  }
+  
 
   // Exile functionality (for now, log the action)
   exileSelectedCard(): void {
@@ -482,5 +538,78 @@ export class PlayComponent implements OnInit {
       this.hidePlayContextMenu();
     }
   }
+
+  // Mouse Down (Start Selection)
+  onMouseDown(event: MouseEvent): void {
+    const playContainer = event.currentTarget as HTMLElement;
+    const containerRect = playContainer.getBoundingClientRect();
+
+    const target = event.target as HTMLElement;
+    if (target.closest('.played-card')) {
+      return;
+    }
+  
+    this.isDragging = true;
+    this.startX = event.clientX - containerRect.left;
+    this.startY = event.clientY - containerRect.top;
+    this.selectionBox = { x: this.startX, y: this.startY, width: 0, height: 0 };
+  }
+  
+  
+
+  // Mouse Move (Update Selection Box)
+  onMouseMove(event: MouseEvent): void {
+    if (!this.isDragging) return;
+
+    const currentX = event.clientX;
+    const currentY = event.clientY;
+
+    this.selectionBox = {
+      x: Math.min(this.startX, currentX),
+      y: Math.min(this.startY, currentY),
+      width: Math.abs(currentX - this.startX),
+      height: Math.abs(currentY - this.startY)
+    };
+  }
+
+  // Get all cards in selection box
+  onMouseUp(event: MouseEvent): void {
+    if (!this.isDragging) return;
+    
+    this.isDragging = false;
+  
+    this.selectedPlayCards = [];
+  
+    const selectionLeft = this.selectionBox.x;
+    const selectionTop = this.selectionBox.y;
+    const selectionRight = selectionLeft + this.selectionBox.width;
+    const selectionBottom = selectionTop + this.selectionBox.height;
+  
+    this.playCards.forEach(card => {
+      const cardLeft = card.x;
+      const cardTop = card.y;
+      const cardRight = cardLeft + 100;
+      const cardBottom = cardTop + 140;
+  
+      if (
+        cardRight >= selectionLeft &&
+        cardLeft <= selectionRight &&
+        cardBottom >= selectionTop &&
+        cardTop <= selectionBottom
+      ) {
+        if (!this.selectedPlayCards.includes(card)) {
+          this.selectedPlayCards.push(card);
+        }
+      }
+    });
+  
+    if (this.selectedPlayCards.length > 0) {
+      this.playContextMenuX = event.clientX;
+      this.playContextMenuY = event.clientY;
+      this.playContextMenuVisible = true;
+    }
+  }
+  
+  
 
 }
