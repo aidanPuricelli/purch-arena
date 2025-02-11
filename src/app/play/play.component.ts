@@ -408,15 +408,16 @@ export class PlayComponent implements OnInit {
       event.dataTransfer.setData('text/plain', JSON.stringify(item));
       event.dataTransfer.effectAllowed = 'move';
   
-      // Create an image element for the drag preview
       const dragImage = new Image();
-      dragImage.src = item.image_uris?.normal || 'https://example.com/default-token.jpg';
+      dragImage.src = item.card?.image_uris?.normal || item.image_uris?.normal || 'https://example.com/default-token.jpg';
       dragImage.width = 200;
       dragImage.style.height = 'auto';
+      dragImage.style.position = 'absolute';
       dragImage.style.opacity = '0.8';
+      dragImage.style.pointerEvents = 'none';
   
       document.body.appendChild(dragImage);
-
+  
       const offsetX = 50;
       const offsetY = 100;
       event.dataTransfer.setDragImage(dragImage, offsetX, offsetY);
@@ -426,6 +427,8 @@ export class PlayComponent implements OnInit {
       }, 0);
     }
   }
+  
+
   
 
   onDragOver(event: DragEvent): void {
