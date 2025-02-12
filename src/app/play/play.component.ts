@@ -222,6 +222,8 @@ export class PlayComponent implements OnInit {
       (response) => {
         this.deck = response.deck;
         console.log(`Loaded deck '${this.selectedDeck}':`, this.deck);
+
+        this.playCards = [];
       
         this.loadCommander();
         this.shuffleDeck();
@@ -246,7 +248,10 @@ export class PlayComponent implements OnInit {
         }
         
       },
-      (error) => console.error('Error loading commander', error)
+      (error) => {
+        console.error('Error loading commander', error);
+        this.life = 20;
+      }
     );
   }
 
@@ -413,6 +418,8 @@ export class PlayComponent implements OnInit {
       dragImage.width = 200;
       dragImage.style.height = 'auto';
       dragImage.style.position = 'absolute';
+      dragImage.style.border = 'solid 3px white';
+      dragImage.style.borderRadius = '10px';
       dragImage.style.opacity = '0.8';
       dragImage.style.pointerEvents = 'none';
   

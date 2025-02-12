@@ -397,8 +397,8 @@ html, body {
 }
 
 .selected {
-    outline: 3px solid blue;
-    border-radius: 5px;
+    outline: 3px solid rgb(38, 0, 255);
+    border-radius: 7px;
 }
 
 /* Zoom Overlay */
@@ -421,7 +421,8 @@ html, body {
     max-width: 500px;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    border: solid 5px white;
+    box-shadow: 0 0 20px rgba(193, 226, 231, 0.5);
 }
   
   
