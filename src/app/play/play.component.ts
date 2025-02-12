@@ -435,7 +435,7 @@ export class PlayComponent implements OnInit {
       const action: GameAction = {
         type: 'sendToGraveyard',
         cards: this.selectedPlayCards.map(card => ({
-          card: { ...card },  // Create a copy to avoid mutation issues
+          card: { ...card.card },
           previousLocation: 'play',
           previousPosition: { x: card.x, y: card.y }
         }))
@@ -447,15 +447,16 @@ export class PlayComponent implements OnInit {
         const index = this.playCards.indexOf(card);
         if (index !== -1) {
           this.playCards.splice(index, 1);
-          this.graveyard.push(card);
+          this.graveyard.push(card.card);
         }
       });
   
       console.log("Moved selected cards to graveyard:", this.selectedPlayCards);
-      this.selectedPlayCards = []; // Clear selection
+      this.selectedPlayCards = [];
       this.hidePlayContextMenu();
     }
   }
+  
   
   
   
@@ -797,11 +798,11 @@ export class PlayComponent implements OnInit {
           break;
   
         case 'sendToGraveyard':
-          this.restoreCard(entry, this.graveyard, this.playCards);
+          this.restoreCard(entry, this.graveyard, this.playCards, true); // Wrap as PlayedCard
           break;
   
         case 'exile':
-          this.restoreCard(entry, this.exile, this.playCards);
+          this.restoreCard(entry, this.exile, this.playCards, true); // Wrap as PlayedCard
           break;
   
         case 'discard':
@@ -825,23 +826,34 @@ export class PlayComponent implements OnInit {
     });
   }
   
+  
 
-  private restoreCard(entry: { card: PlayedCard; previousLocation?: string; previousPosition?: { x: number; y: number } }, fromZone: PlayedCard[], toZone: PlayedCard[]): void {
-    const index = fromZone.findIndex(c => c.card.name === entry.card.card.name);
+  private restoreCard(
+    entry: { card: any; previousLocation?: string; previousPosition?: { x: number; y: number } }, 
+    fromZone: any[], 
+    toZone: any[], 
+    wrapAsPlayedCard: boolean = false
+  ): void {
+    const index = fromZone.findIndex(c => c.name === entry.card.name);
     if (index !== -1) {
       const restoredCard = fromZone.splice(index, 1)[0];
   
-      toZone.push({
-        card: restoredCard.card,
-        x: entry.previousPosition?.x || 100,
-        y: entry.previousPosition?.y || 100
-      });
+      if (wrapAsPlayedCard) {
+        toZone.push({
+          card: restoredCard, 
+          x: entry.previousPosition?.x || 100, 
+          y: entry.previousPosition?.y || 100 
+        });
+      } else {
+        toZone.push(restoredCard);
+      }
   
-      console.log(`Restored ${entry.card.card.name} from ${entry.previousLocation} to play.`);
+      console.log(`Restored ${entry.card.name} from ${entry.previousLocation} to ${wrapAsPlayedCard ? "play" : "another zone"}.`);
     } else {
-      console.warn(`Could not restore ${entry.card.card.name}. Card not found in ${entry.previousLocation}.`);
+      console.warn(`Could not restore ${entry.card.name}. Card not found in ${entry.previousLocation}.`);
     }
   }
+  
   
   
   
