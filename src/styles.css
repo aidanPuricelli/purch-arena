@@ -209,7 +209,7 @@ html, body {
 
 .play-container {
     z-index: 10;
-    height: calc(100vh - 2rem);
+    height: calc(100vh - 20px);
     position: relative;
 }
 
