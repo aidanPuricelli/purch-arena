@@ -1,7 +1,7 @@
 <app-navbar [links]="navLinks"></app-navbar>
 
 <!-- DECK SELECTION -->W
-<div class="deck-selection">
+<div *ngIf="deckSelectFlag" class="deck-selection">
   <label for="deckSelect">Select a Deck:</label>
   <select id="deckSelect" [(ngModel)]="selectedDeck" (change)="onDeckSelected()">
     <option *ngFor="let deck of deckNames" class="deck-opt" [value]="deck">{{ deck }}</option>
@@ -62,13 +62,20 @@
 
 <!-- PLAY OPTIONS -->
 <div class="play-options">
-  <a class="purch-btn" href="#" (click)="shuffleDeck(); $event.preventDefault()">SHUFFLE</a>
   <a class="purch-btn" href="#" (click)="drawCard(); $event.preventDefault()">DRAW</a>
-  <a class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
-  <a class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
-  <a class="purch-btn" href="#" (click)="toggleTutor(); $event.preventDefault()">TUTOR</a>
-  <a class="purch-btn" href="#" (click)="toggleToken(); $event.preventDefault()">TOKEN</a>
-  <a class="purch-btn" href="#" (click)="undoAction(); $event.preventDefault()">UNDO</a>
+  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="shuffleDeck(); $event.preventDefault()">SHUFFLE</a>
+  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
+  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
+  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="toggleTutor(); $event.preventDefault()">TUTOR</a>
+  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="toggleToken(); $event.preventDefault()">TOKEN</a>
+  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="undoAction(); $event.preventDefault()">UNDO</a>
+  <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
+  <div *ngIf="showSettings" class="settings-dropdown">
+    <a (click)="toggleResize()" class="settings-option">Resize</a>
+    <a (click)="toggleDeckSelect()" class="settings-option">Select Deck</a>
+    <a *ngIf="!minimizedOptions" (click)="toggleOptions()" class="settings-option">Less options</a>
+    <a *ngIf="minimizedOptions" (click)="toggleOptions()" class="settings-option">More options</a>
+  </div>
 
   <!-- CARD SEARCH DROPDOWN (TUTOR) -->
   <div *ngIf="showTutor" class="card-selection">
@@ -88,7 +95,7 @@
     <button class="purch-btn" (click)="placeTokenInPlay()">Place Token</button>
   </div>
 
-  <div class="resize-container">
+  <div class="resize-container" *ngIf="resizeFlag">
     <input id="cardSize" type="range" min="50" max="250" [(ngModel)]="cardWidth">
   </div>
 </div>

@@ -35,6 +35,11 @@ export class PlayComponent implements OnInit {
 
   zoomedCard: any = null;
 
+  resizeFlag = false;
+  deckSelectFlag = true;
+  showSettings = false;
+  minimizedOptions = false;
+
   selectedDeckCard: any = null;
   showTutor: boolean = false;
   showToken: boolean = false;
@@ -86,6 +91,30 @@ export class PlayComponent implements OnInit {
   updateCardWidth(newWidth: number): void {
     this.cardWidth = newWidth;
     this.cdRef.detectChanges();
+  }
+
+  toggleSettings(): void {
+    if (this.resizeFlag || this.deckSelectFlag) {
+      this.resizeFlag = false;
+      this.deckSelectFlag = false;
+      return
+    }
+    this.showSettings = !this.showSettings;
+  }
+
+  toggleResize() {
+    this.resizeFlag = !this.resizeFlag;
+    this.showSettings = false;
+  }
+
+  toggleDeckSelect() {
+    this.deckSelectFlag = !this.deckSelectFlag;
+    this.showSettings = false;
+  }
+
+  toggleOptions() {
+    this.minimizedOptions = !this.minimizedOptions;
+    this.showSettings = false;
   }
 
   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
@@ -245,7 +274,8 @@ export class PlayComponent implements OnInit {
         console.log(`Loaded deck '${this.selectedDeck}':`, this.deck);
 
         this.playCards = [];
-      
+        
+        this.toggleDeckSelect();
         this.loadCommander();
         this.shuffleDeck();
         this.drawHand();

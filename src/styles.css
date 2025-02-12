@@ -303,8 +303,8 @@ html, body {
     z-index: 9999 !important; /* Force it to be on top */
     background: rgb(0, 0, 0) !important; /* Ensure it’s visible */
     padding: 10px;
-    top: 100px;
-    left: 20px;
+    top: 250px;
+    right: 20px;
     color: rgb(182, 228, 255);
     border: solid 2px rgb(153, 235, 255);
     border-radius: 10px;
@@ -376,8 +376,8 @@ html, body {
 
 .life-container {
     position: absolute;
-    top: 180px;
-    left: 50px;
+    top: 100px;
+    left: 15px;
     background: rgb(0, 0, 0);
     z-index: 10;
     padding: 20px;
