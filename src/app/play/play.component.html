@@ -9,13 +9,13 @@
 </div>
 
 <!-- PLAY CONTAINER -->
-<div class="play-container mt-5"
+<div class="play-container"
      (mousedown)="onMouseDown($event)"
      (mousemove)="onMouseMove($event)"
      (mouseup)="onMouseUp($event)"
      (dragover)="onDragOver($event)"
      (drop)="onDrop($event)"
-     style="position: relative; min-height: 400px; border: 2px dashed #ccc;">
+     style="position: relative; border: 2px dashed #ccc;">
 
   <!-- Selection Box -->
   <div *ngIf="isDragging" class="selection-box"
