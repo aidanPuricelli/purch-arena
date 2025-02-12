@@ -1,4 +1,20 @@
-<app-navbar [links]="[{ text: 'FAQ', href: '#' }]"></app-navbar>
+<app-navbar [links]="[]"></app-navbar> <!-- Empty links since we manually add settings -->
+
+<div class="purch-nav">
+    <div class="left"></div>
+    <div class="right">
+        <div class="settings-container">
+            <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
+            <div *ngIf="showSettings" class="settings-dropdown">
+                <a (click)="downloadBoth()" class="settings-option">Download</a>
+                <label class="settings-option">
+                    Import<input type="file" (change)="uploadFile($event)" accept=".json" hidden />
+                </label>
+            </div>
+        </div>        
+    </div>
+</div>
+
 <div class="home-container container d-flex justify-content-center align-items-center vh-100">
     <div class="text-center">
         <div class="purch-header">

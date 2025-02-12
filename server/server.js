@@ -139,6 +139,57 @@ app.delete('/api/deck/:deckName', (req, res) => {
   res.json({ message: `Deck "${deckName}" deleted successfully` });
 });
 
+// download json
+app.get('/api/download/:fileName', (req, res) => {
+  const { fileName } = req.params;
+  const allowedFiles = ['decks.json', 'commander.json'];
+  
+  if (!allowedFiles.includes(fileName)) {
+    return res.status(400).json({ message: 'Invalid file request' });
+  }
+
+  const filePath = path.join(__dirname, fileName);
+  res.download(filePath, fileName, (err) => {
+    if (err) {
+      console.error('Error sending file:', err);
+      res.status(500).json({ message: 'Error downloading file' });
+    }
+  });
+});
+
+// use multer for uploads
+const multer = require('multer');
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+
+  const allowedFiles = ['decks.json', 'commander.json'];
+  const uploadedFileName = req.file.originalname;
+
+  if (!allowedFiles.includes(uploadedFileName)) {
+    return res.status(400).json({ message: 'Invalid file type' });
+  }
+
+  const destinationPath = path.join(__dirname, uploadedFileName);
+
+  if (fs.existsSync(destinationPath)) {
+    fs.unlinkSync(destinationPath);
+  }
+
+  fs.writeFile(destinationPath, req.file.buffer, (err) => {
+    if (err) {
+      console.error('Error saving file:', err);
+      return res.status(500).json({ message: 'Error saving file' });
+    }
+    res.json({ message: `${uploadedFileName} updated successfully` });
+  });
+});
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

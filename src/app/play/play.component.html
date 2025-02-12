@@ -40,7 +40,8 @@
       [class.tapped]="played.tapped"
       [class.selected]="selectedPlayCards.includes(played)">
 
-    <img [src]="played.card.image_uris.normal" alt="card image">
+      <img [src]="played.card.image_uris.normal" alt="card image"
+      [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
 
     <!-- Counter Circle -->
     <div class="counter-circle"
@@ -67,6 +68,7 @@
   <a class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
   <a class="purch-btn" href="#" (click)="toggleTutor(); $event.preventDefault()">TUTOR</a>
   <a class="purch-btn" href="#" (click)="toggleToken(); $event.preventDefault()">TOKEN</a>
+  <a class="purch-btn" href="#" (click)="undoAction(); $event.preventDefault()">UNDO</a>
 
   <!-- CARD SEARCH DROPDOWN (TUTOR) -->
   <div *ngIf="showTutor" class="card-selection">
@@ -85,6 +87,10 @@
     </select>
     <button class="purch-btn" (click)="placeTokenInPlay()">Place Token</button>
   </div>
+
+  <div class="resize-container">
+    <input id="cardSize" type="range" min="50" max="250" [(ngModel)]="cardWidth">
+  </div>
 </div>
 
 
@@ -96,7 +102,7 @@
          draggable="true"
          (dragstart)="onDragStart($event, card, 'hand')"
          (contextmenu)="onRightClick($event, card)">
-      <img [src]="card.image_uris.normal" alt="card image">
+      <img [src]="card.image_uris.normal" alt="card image" [ngStyle]="{'width.px': cardWidth }">
     </div>
   </div>
 </div>

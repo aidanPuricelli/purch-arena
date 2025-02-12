@@ -9,12 +9,26 @@ interface PlayedCard {
   counters?: number;
 }
 
+interface GameAction {
+  type: 'tap' | 'untap' | 'sendToGraveyard' | 'exile' | 'discard' | 'moveBack';
+  cards?: { 
+    card: PlayedCard; 
+    previousState?: boolean;
+    previousLocation?: 'play' | 'hand' | 'graveyard' | 'exile';
+    previousPosition?: { x: number; y: number };
+  }[];
+}
+
+
+
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.css']
 })
 export class PlayComponent implements OnInit {
+
+  actionHistory: GameAction[] = [];
 
   tokenTypes: { name: string; imageUrl: string }[] = [];
   selectedToken: string = '';
@@ -63,9 +77,16 @@ export class PlayComponent implements OnInit {
 
   life = 20;
 
+  cardWidth = 200; // Default width
+
   navLinks = [
     { text: 'Home', href: '/' }
   ];
+
+  updateCardWidth(newWidth: number): void {
+    this.cardWidth = newWidth;
+    this.cdRef.detectChanges();
+  }
 
   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
 
@@ -344,36 +365,69 @@ export class PlayComponent implements OnInit {
   // Tap all selected cards
   tapSelectedCard(): void {
     if (this.selectedPlayCards.length > 0) {
+      // Store previous tap state in action history
+      this.actionHistory.push({
+        type: 'tap',
+        cards: this.selectedPlayCards.map(card => ({
+          card,
+          previousState: card.tapped
+        }))
+      });
+
       this.selectedPlayCards.forEach(card => card.tapped = true);
       console.log("Tapped multiple cards:", this.selectedPlayCards);
       this.hidePlayContextMenu();
     }
   }
-  
+
   // Untap all selected cards
   untapSelectedCard(): void {
     if (this.selectedPlayCards.length > 0) {
+      // Store previous tap state in action history
+      this.actionHistory.push({
+        type: 'untap',
+        cards: this.selectedPlayCards.map(card => ({
+          card,
+          previousState: card.tapped
+        }))
+      });
+
       this.selectedPlayCards.forEach(card => card.tapped = false);
       console.log("Untapped multiple cards:", this.selectedPlayCards);
       this.hidePlayContextMenu();
     }
-  }  
+  }
+ 
 
-  // Send all selected cards to graveyard
+  // send selected to graveyard
   sendToGraveyardSelectedCard(): void {
     if (this.selectedPlayCards.length > 0) {
+      const action: GameAction = {
+        type: 'sendToGraveyard',
+        cards: this.selectedPlayCards.map(card => ({
+          card: { ...card },  // Create a copy to avoid mutation issues
+          previousLocation: 'play',
+          previousPosition: { x: card.x, y: card.y }
+        }))
+      };
+  
+      this.addActionToHistory(action);
+  
       this.selectedPlayCards.forEach(card => {
         const index = this.playCards.indexOf(card);
         if (index !== -1) {
           this.playCards.splice(index, 1);
-          this.graveyard.push(card.card);
+          this.graveyard.push(card);
         }
       });
+  
       console.log("Moved selected cards to graveyard:", this.selectedPlayCards);
-      this.selectedPlayCards = []; // clear all selected cards
+      this.selectedPlayCards = []; // Clear selection
       this.hidePlayContextMenu();
     }
   }
+  
+  
   
 
   // Exile functionality (for now, log the action)
@@ -693,5 +747,85 @@ export class PlayComponent implements OnInit {
   closeZoom(): void {
     this.zoomedCard = null;
   }
+
+  undoAction(): void {
+    if (this.actionHistory.length === 0) {
+      console.log("No actions to undo.");
+      return;
+    }
+  
+    const lastAction = this.actionHistory.pop(); // Get the most recent action
+    if (!lastAction || !lastAction.cards) return;
+  
+    console.log("Undoing action:", lastAction);
+  
+    lastAction.cards.forEach(entry => {
+      switch (lastAction.type) {
+        case 'tap':
+        case 'untap':
+          entry.card.tapped = entry.previousState ?? false;
+          break;
+  
+        case 'sendToGraveyard':
+          this.restoreCard(entry, this.graveyard, this.playCards);
+          break;
+  
+        case 'exile':
+          this.restoreCard(entry, this.exile, this.playCards);
+          break;
+  
+        case 'discard':
+          this.restoreCard(entry, this.graveyard, this.hand);
+          break;
+  
+        case 'moveBack':
+          this.restoreCard(entry, this.hand, this.deck);
+          break;
+  
+        default:
+          console.warn("Undo action type not recognized:", lastAction.type);
+      }
+    });
+  
+    console.log("Undo complete. Current state:", {
+      hand: this.hand,
+      play: this.playCards,
+      graveyard: this.graveyard,
+      exile: this.exile
+    });
+  }
+  
+
+  private restoreCard(entry: { card: PlayedCard; previousLocation?: string; previousPosition?: { x: number; y: number } }, fromZone: PlayedCard[], toZone: PlayedCard[]): void {
+    const index = fromZone.findIndex(c => c.card.name === entry.card.card.name);
+    if (index !== -1) {
+      const restoredCard = fromZone.splice(index, 1)[0];
+  
+      toZone.push({
+        card: restoredCard.card,
+        x: entry.previousPosition?.x || 100,
+        y: entry.previousPosition?.y || 100
+      });
+  
+      console.log(`Restored ${entry.card.card.name} from ${entry.previousLocation} to play.`);
+    } else {
+      console.warn(`Could not restore ${entry.card.card.name}. Card not found in ${entry.previousLocation}.`);
+    }
+  }
+  
+  
+  
+
+  // add action to history, prune if needee
+  addActionToHistory(action: GameAction): void {
+    this.actionHistory.push(action);
+
+    if (this.actionHistory.length > 10) {
+      this.actionHistory.splice(0, this.actionHistory.length - 10);
+      console.log("Action history pruned to last 10 actions.");
+    }
+  }
+
+  
 
 }
