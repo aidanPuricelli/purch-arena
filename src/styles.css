@@ -215,7 +215,7 @@ html, body {
 
 .play-options {
     position: fixed;
-    top: 120px;
+    top: var(--play-options-position, 120px);
     z-index: 10;
     right: 20px;
     padding: 20px 5px;
@@ -227,10 +227,21 @@ html, body {
 
 .play-options a {
     margin: 0 5px;
+    font-size: var(--play-options-font-size, 16px);
+}
+
+.font-size-container {
+    padding: 5px;
+    color: white;
+    border-top: solid 2px white;
+}
+
+.font-size-container label {
+    font-size: var(--play-options-font-size, 16px);
 }
 
 .life-total {
-    font-size: 32px;
+    font-size: var(--play-options-font-size, 16px);
 }
 
 .hand {
@@ -299,12 +310,12 @@ html, body {
   }
 
   .deck-selection {
-    position: absolute;
-    z-index: 9999 !important; /* Force it to be on top */
-    background: rgb(0, 0, 0) !important; /* Ensure it’s visible */
+    position: fixed;
+    z-index: 9999 !important;
+    background: rgb(0, 0, 0) !important;
     padding: 10px;
-    top: 250px;
-    right: 20px;
+    top: var(--play-options-position, 120px);
+    left: 150px;
     color: rgb(182, 228, 255);
     border: solid 2px rgb(153, 235, 255);
     border-radius: 10px;
@@ -377,12 +388,12 @@ html, body {
 .life-container {
     cursor: pointer;
     position: absolute;
-    top: 100px;
+    top: var(--play-options-position, 100px);
     left: 15px;
     background: rgb(0, 0, 0);
     z-index: 10;
     padding: 20px;
-    font-size: 30px;
+    font-size: var(--life-font-size, 20px);
     border-radius: 10px;
     border: solid 2px rgb(210, 245, 255);
     box-shadow: 0 5px rgb(29, 68, 80);
@@ -494,7 +505,7 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 .settings-icon {
-    font-size: 30px;
+    font-size: var(--play-options-font-size, 30px); /* Sync with buttons */
     color: rgb(255, 255, 255);
     transition: color 0.3s ease;
     cursor: pointer;

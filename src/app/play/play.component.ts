@@ -35,10 +35,13 @@ export class PlayComponent implements OnInit {
 
   zoomedCard: any = null;
 
+  lifeFontSize = 30;
+
   resizeFlag = false;
   deckSelectFlag = true;
   showSettings = false;
   minimizedOptions = false;
+  showNav = true;
 
   selectedDeckCard: any = null;
   showTutor: boolean = false;
@@ -80,6 +83,9 @@ export class PlayComponent implements OnInit {
   playContextMenuY: number = 0;
   selectedPlayCard: PlayedCard | null = null;
 
+  playOptionsFontSize = 18;
+  playOptionsPosition = 120;
+
   life = 20;
 
   cardWidth = 200; // Default width
@@ -117,11 +123,32 @@ export class PlayComponent implements OnInit {
     this.showSettings = false;
   }
 
+  toggleNav() {
+    this.showNav = !this.showNav;
+    this.showSettings = false;
+
+    if (this.showNav) {
+      this.playOptionsPosition = 120;
+    } else {
+      this.playOptionsPosition = 20;
+
+    }
+    document.documentElement.style.setProperty('--play-options-position', `${this.playOptionsPosition}px`);
+    document.documentElement.style.setProperty('--deck-selection=position', `${this.playOptionsPosition + 120}px`);
+  }
+
   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadDeckNames();
     this.fetchTokens();
+    this.updateFontSize();
+  }
+
+  // update font size of play options
+  updateFontSize() {
+    document.documentElement.style.setProperty('--play-options-font-size', `${this.playOptionsFontSize}px`);
+    document.documentElement.style.setProperty('--life-font-size', `${this.playOptionsFontSize + 10}px`);
   }
 
   // Fetch all tokens
@@ -500,7 +527,7 @@ export class PlayComponent implements OnInit {
   
       const dragImage = new Image();
       dragImage.src = item.card?.image_uris?.normal || item.image_uris?.normal || 'https://example.com/default-token.jpg';
-      dragImage.width = 200;
+      dragImage.width = this.cardWidth;
       dragImage.style.height = 'auto';
       dragImage.style.position = 'absolute';
       dragImage.style.border = 'solid 3px white';

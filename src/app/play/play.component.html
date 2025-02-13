@@ -1,4 +1,4 @@
-<app-navbar [links]="navLinks"></app-navbar>
+<app-navbar *ngIf="showNav" [links]="navLinks"></app-navbar>
 
 <!-- DECK SELECTION -->W
 <div *ngIf="deckSelectFlag" class="deck-selection">
@@ -15,7 +15,7 @@
      (mouseup)="onMouseUp($event)"
      (dragover)="onDragOver($event)"
      (drop)="onDrop($event)"
-     style="position: relative; border: 2px dashed #ccc;">
+     style="position: relative;">
 
   <!-- Selection Box -->
   <div *ngIf="isDragging" class="selection-box"
@@ -71,10 +71,15 @@
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="undoAction(); $event.preventDefault()">UNDO</a>
   <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
   <div *ngIf="showSettings" class="settings-dropdown">
-    <a (click)="toggleResize()" class="settings-option">Resize</a>
+    <a (click)="toggleResize()" class="settings-option">Resize Cards</a>
     <a (click)="toggleDeckSelect()" class="settings-option">Select Deck</a>
     <a *ngIf="!minimizedOptions" (click)="toggleOptions()" class="settings-option">Less options</a>
     <a *ngIf="minimizedOptions" (click)="toggleOptions()" class="settings-option">More options</a>
+    <a (click)="toggleNav()" class="settings-option">Toggle Nav</a>
+    <div class="font-size-container">
+      <label for="fontSizeSlider">Font Size:</label>
+      <input id="fontSizeSlider" type="range" min="10" max="24" [(ngModel)]="playOptionsFontSize" (input)="updateFontSize()">
+    </div>
   </div>
 
   <!-- CARD SEARCH DROPDOWN (TUTOR) -->
