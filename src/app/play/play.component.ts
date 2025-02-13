@@ -806,6 +806,10 @@ export class PlayComponent implements OnInit {
     this.zoomedCard = null;
   }
 
+  closeGraveyard() {
+    this.showGrave = false;
+  }
+
   undoAction(): void {
     if (this.actionHistory.length === 0) {
       console.log("No actions to undo.");

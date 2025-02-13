@@ -15,7 +15,8 @@
      (mouseup)="onMouseUp($event)"
      (dragover)="onDragOver($event)"
      (drop)="onDrop($event)"
-     style="position: relative;">
+     style="position: relative;"
+     (click)="closeGraveyard()">
 
   <!-- Selection Box -->
   <div *ngIf="isDragging" class="selection-box"
