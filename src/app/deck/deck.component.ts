@@ -15,6 +15,8 @@ export class DeckComponent implements OnInit {
   savedDeck: any[] = [];
   newDeckName: string = '';
 
+  deckSelectedFlag = false;
+
   contextMenuVisible: boolean = false;
   contextMenuX: number = 0;
   contextMenuY: number = 0;
@@ -46,6 +48,8 @@ export class DeckComponent implements OnInit {
 
   // Load the selected deck 
   loadDeck(deckName: string): void {
+    this.deckSelectedFlag = true;
+
     if (!deckName) {
       return;
     }

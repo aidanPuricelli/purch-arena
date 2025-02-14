@@ -2,12 +2,14 @@
   <div class="banner-container">
     <div class="banner gitrog">
       <h3>Manage Your Decks</h3>
+
+      <input class="deck-option deck-name" type="text" [(ngModel)]="newDeckName" placeholder="New Deck Name">
       
-      <select [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
+      <select  class="drpdwn" [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
+        <option value="">-- Select Deck --</option>
         <option *ngFor="let deck of deckNames" [value]="deck">{{ deck }}</option>
       </select>
 
-      <input type="text" [(ngModel)]="newDeckName" placeholder="New Deck Name">
       <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
       <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
 
@@ -18,7 +20,7 @@
         <option value="manaCost">Mana Cost</option>
       </select>
 
-      <p class="cardNum">{{ deckCount }}</p>
+      <p class="cardNum" *ngIf="deckSelectedFlag">{{ deckCount }}</p>
     </div>
 </div>
 
