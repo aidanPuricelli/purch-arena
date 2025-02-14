@@ -6,6 +6,7 @@
 
 html, body {
     background: rgb(27, 27, 27) !important;
+    caret-color: rgb(181, 238, 255);
 }
 
 
@@ -574,6 +575,7 @@ input[type="range"]::-moz-range-thumb:hover {
     border-radius: 10px;
     border: solid 2px rgb(159, 241, 255);
     background: rgb(14, 14, 14);
+    color: white;
 }
   
 
