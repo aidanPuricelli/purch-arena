@@ -90,6 +90,10 @@ html, body {
     box-shadow: 0 5px rgb(51, 102, 122);
 }
 
+.gitrog {
+    padding-bottom: 25px;
+}
+
 /* context menu */
 
 .custom-menu {
@@ -543,6 +547,22 @@ input[type="range"]::-moz-range-thumb:hover {
 
 .purch-btns .purch-btn {
     font-size: 50px;
+}
+
+.cardNum {
+    padding: 10px;
+    border: solid 2px rgb(182, 232, 255);
+    border-radius: 10px;
+    float: right;
+    font-size: 25px;
+    font-weight: bolder;
+    box-shadow: 0 5px rgb(25, 71, 85);
+}
+
+.drpdwn {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px rgb(33, 68, 88);
 }
   
 

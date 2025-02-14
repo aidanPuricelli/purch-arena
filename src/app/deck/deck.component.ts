@@ -20,6 +20,8 @@ export class DeckComponent implements OnInit {
   contextMenuY: number = 0;
   selectedCard: any = null;
 
+  deckCount = this.deck.length;
+
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
@@ -56,10 +58,66 @@ export class DeckComponent implements OnInit {
       (response) => {
         console.log(`Loaded deck '${deckName}':`, response.deck);
         this.deck = response.deck || [];
+        this.deckCount = this.deck.length;
+        this.cdr.detectChanges();
       },
       (error) => console.error('Error loading deck', error)
     );
   }
+
+  sortCriteria: string = '';
+
+  sortBy(parameter: string) {
+    if (!this.deck || this.deck.length === 0) return;
+  
+    switch (parameter) {
+      case 'type':
+        this.deck.sort((a, b) => {
+          const typeA = this.extractMainType(a.type_line);
+          const typeB = this.extractMainType(b.type_line);
+          return typeA.localeCompare(typeB);
+        });
+        break;
+  
+      case 'manaCost':
+        this.deck.sort((a, b) => this.extractNumericManaCost(b.mana_cost) - this.extractNumericManaCost(a.mana_cost));
+        break;
+  
+      default:
+        console.warn('Invalid sorting parameter:', parameter);
+    }
+  
+    this.cdr.detectChanges(); // Ensure UI updates
+  }
+  
+  
+
+  extractMainType(typeLine: string): string {
+    if (!typeLine) return 'Unknown';
+  
+    // Remove supertypes (Legendary, Basic, Snow, etc.)
+    const typeParts = typeLine.split('—')[0].trim().split(' ');
+    const mainType = typeParts.find(type => !['Legendary', 'Basic', 'Snow', 'Token'].includes(type));
+  
+    return mainType || 'Unknown'; // Default to 'Unknown' if not found
+  }
+
+  extractNumericManaCost(manaCost: string): number {
+    if (!manaCost) return 0; // Default to 0 if no mana cost
+  
+    const numericPart = manaCost.match(/\d+/g); // Extract numbers (e.g., "3" from "{3}{W}{U}{B}")
+    const coloredMana = manaCost.match(/[WUBRGC]/g); // Extract letters (colored mana symbols)
+  
+    const numericValue = numericPart ? numericPart.map(Number).reduce((sum, val) => sum + val, 0) : 0;
+    const coloredCount = coloredMana ? coloredMana.length : 0;
+  
+    return numericValue + coloredCount; // Sum numeric and colored mana costs
+  }
+  
+  
+  
+  
+  
 
   // Create a new deck
   createDeck(): void {
@@ -78,6 +136,7 @@ export class DeckComponent implements OnInit {
 
   addToDeck(card: any) {
     this.deck.push(card);
+    this.deckCount = this.deck.length;
   }
 
   
@@ -100,6 +159,7 @@ export class DeckComponent implements OnInit {
       );
     }
 
+    this.deckCount = this.deck.length;
     this.contextMenuVisible = false;
     this.selectedCard = null;
   }

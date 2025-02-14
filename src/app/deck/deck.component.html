@@ -1,6 +1,6 @@
 <div class="deck-container">
   <div class="banner-container">
-    <div class="banner">
+    <div class="banner gitrog">
       <h3>Manage Your Decks</h3>
       
       <select [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
@@ -10,8 +10,17 @@
       <input type="text" [(ngModel)]="newDeckName" placeholder="New Deck Name">
       <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
       <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
+
+      <!-- Sort Dropdown -->
+      <select class="drpdwn" id="sortSelect" [(ngModel)]="sortCriteria" (change)="sortBy(sortCriteria)">
+        <option value="">-- Sort By --</option>
+        <option value="type">Card Type</option>
+        <option value="manaCost">Mana Cost</option>
+      </select>
+
+      <p class="cardNum">{{ deckCount }}</p>
     </div>
-  </div>
+</div>
 
   <ul *ngIf="deck.length > 0">
     <div class="d-flex flex-wrap cards justify-content-center">
