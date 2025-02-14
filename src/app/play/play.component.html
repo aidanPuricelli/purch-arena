@@ -77,6 +77,7 @@
     <a *ngIf="!minimizedOptions" (click)="toggleOptions()" class="settings-option">Less options</a>
     <a *ngIf="minimizedOptions" (click)="toggleOptions()" class="settings-option">More options</a>
     <a (click)="toggleNav()" class="settings-option">Toggle Nav</a>
+    <a (click)="newSeven()" class="settings-option">New Seven</a>
     <div class="font-size-container">
       <label for="fontSizeSlider">Font Size:</label>
       <input id="fontSizeSlider" type="range" min="10" max="24" [(ngModel)]="playOptionsFontSize" (input)="updateFontSize()">

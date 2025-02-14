@@ -301,6 +301,8 @@ export class PlayComponent implements OnInit {
         console.log(`Loaded deck '${this.selectedDeck}':`, this.deck);
 
         this.playCards = [];
+        this.graveyard = [];
+        this.exile = [];
         
         this.toggleDeckSelect();
         this.loadCommander();
@@ -808,6 +810,18 @@ export class PlayComponent implements OnInit {
 
   closeGraveyard() {
     this.showGrave = false;
+  }
+
+  // draw new 7
+  newSeven() {
+    this.playCards = [];
+    this.graveyard = [];
+    this.exile = [];
+    this.hand = [];
+
+    this.loadCommander();
+    this.shuffleDeck();
+    this.drawHand();
   }
 
   undoAction(): void {
