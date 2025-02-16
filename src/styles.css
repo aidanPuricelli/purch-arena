@@ -61,7 +61,7 @@ html, body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-    z-index: 10;
+    z-index: 5;
     border: solid 2px rgb(255, 255, 255);
 }
 
@@ -70,7 +70,7 @@ html, body {
 }
 
 .deck-card-wrapper {
-    z-index: 11;
+    z-index: 5;
     position: relative;
 }
 
@@ -164,7 +164,7 @@ html, body {
 /* button stylings */
 
 .purch-btn {
-    margin: 0 20px;
+    margin: 0 10px;
     padding: 10px 15px;
     text-decoration: none;
     border: solid 2px rgb(171, 231, 255);
@@ -191,7 +191,7 @@ html, body {
 .no-cards {
     color: white;
     position: relative;
-    z-index: 10;
+    z-index: 5;
     background: rgb(223, 169, 169);
     width: 50%;
     margin: auto;
@@ -530,6 +530,7 @@ input[type="range"]::-moz-range-thumb:hover {
     border-radius: 10px;
     overflow: hidden;
     width: 120px;
+    z-index: 50;
 }
 
 .settings-option {
@@ -540,6 +541,7 @@ input[type="range"]::-moz-range-thumb:hover {
     text-decoration: none;
     transition: background 0.3s ease;
     cursor: pointer;
+    z-index: 50;
 }
 
 .settings-option:hover {
@@ -554,8 +556,10 @@ input[type="range"]::-moz-range-thumb:hover {
     padding: 10px;
     border: solid 2px rgb(182, 232, 255);
     border-radius: 10px;
-    float: right;
-    font-size: 25px;
+    position: absolute;
+    right: 80px;
+    top: 10px;
+    font-size: 20px;
     font-weight: bolder;
     box-shadow: 0 5px rgb(25, 71, 85);
 }
@@ -578,6 +582,37 @@ input[type="range"]::-moz-range-thumb:hover {
     color: white;
 }
   
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 
   
   

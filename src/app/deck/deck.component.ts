@@ -15,6 +15,11 @@ export class DeckComponent implements OnInit {
   savedDeck: any[] = [];
   newDeckName: string = '';
 
+  isLoading: boolean = false;
+
+  showSettings = false;
+  isSettingsDisabled: boolean = true;
+
   deckSelectedFlag = false;
 
   contextMenuVisible: boolean = false;
@@ -28,6 +33,8 @@ export class DeckComponent implements OnInit {
 
   ngOnInit() {
     this.loadDeckNames();
+
+    this.isSettingsDisabled = !this.selectedDeck;
 
     // Listen for adding cards
     window.addEventListener('addCardToDeck', (event: any) => {
@@ -49,6 +56,8 @@ export class DeckComponent implements OnInit {
   // Load the selected deck 
   loadDeck(deckName: string): void {
     this.deckSelectedFlag = true;
+
+    this.isSettingsDisabled = false;
 
     if (!deckName) {
       return;
@@ -181,6 +190,8 @@ export class DeckComponent implements OnInit {
   deleteDeck(): void {
     if (!this.selectedDeck) return;
 
+    this.isSettingsDisabled = true;
+
     this.http.delete(`/api/deck/${this.selectedDeck}`).subscribe(
       () => {
         console.log(`🗑️ Deck "${this.selectedDeck}" deleted`);
@@ -221,6 +232,98 @@ export class DeckComponent implements OnInit {
     this.contextMenuVisible = false;
     this.selectedCard = null;
   }
+
+  // Method to download a single deck
+  downloadDeck(): void {
+    if (!this.selectedDeck) {
+      alert('No deck selected to download.');
+      return;
+    }
+
+    const url = `/api/deck/${this.selectedDeck}/download`;
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${this.selectedDeck}.json`;
+    link.click();
+  }
+
+  // Method to import a single deck
+  importDeck(event: any): void {
+    if (!this.selectedDeck) {
+      alert('Please select a deck before importing.');
+      return;
+    }
+  
+    const file = event.target.files[0];
+    if (!file) {
+      alert('No file selected.');
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    this.http.post(`/api/deck/${this.selectedDeck}/import`, formData).subscribe(
+      (response) => {
+        console.log(response);
+        alert(`Deck "${this.selectedDeck}" imported successfully.`);
+        this.loadDeck(this.selectedDeck);
+  
+        // Reset the file input after successful upload
+        event.target.value = '';
+      },
+      (error) => {
+        console.error('Error importing deck:', error);
+        alert('Failed to import deck.');
+        // Reset the file input even if the import fails
+        event.target.value = '';
+      }
+    );
+  }
+
+  // import deck from text file (e.g. from archidekt)
+  importDeckFromText(event: any): void {
+    if (!this.selectedDeck) {
+      alert('Please select a deck before importing.');
+      return;
+    }
+  
+    const file = event.target.files[0];
+    if (!file) {
+      alert('No file selected.');
+      return;
+    }
+
+    this.isLoading = true;
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    this.http.post(`/api/deck/${this.selectedDeck}/import-text`, formData).subscribe(
+      (response) => {
+        console.log(response);
+        alert(`Deck "${this.selectedDeck}" imported from text file successfully.`);
+        this.loadDeck(this.selectedDeck);
+  
+        // Reset the file input after successful upload
+        this.isLoading = false;
+        event.target.value = '';
+      },
+      (error) => {
+        console.error('Error importing deck from text:', error);
+        alert('Failed to import deck from text.');
+        event.target.value = '';
+      }
+    );
+  }  
+  
+  
+
+  toggleSettings(): void {
+    this.showSettings = !this.showSettings;
+  }
+  
+
   
   
   @HostListener('document:click')

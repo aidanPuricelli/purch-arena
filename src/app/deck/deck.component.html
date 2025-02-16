@@ -1,17 +1,16 @@
 <div class="deck-container">
   <div class="banner-container">
     <div class="banner gitrog">
-      <h3>Manage Your Decks</h3>
 
       <input class="deck-option deck-name" type="text" [(ngModel)]="newDeckName" placeholder="New Deck Name">
+
+      <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
+      <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
       
       <select  class="drpdwn" [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
         <option value="">-- Select Deck --</option>
         <option *ngFor="let deck of deckNames" [value]="deck">{{ deck }}</option>
       </select>
-
-      <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
-      <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
 
       <!-- Sort Dropdown -->
       <select class="drpdwn" id="sortSelect" [(ngModel)]="sortCriteria" (change)="sortBy(sortCriteria)">
@@ -19,6 +18,20 @@
         <option value="type">Card Type</option>
         <option value="manaCost">Mana Cost</option>
       </select>
+
+      <div class="settings-container">
+        <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
+        <div *ngIf="showSettings" class="settings-dropdown">
+            <a [class.disabled]="isSettingsDisabled" (click)="!isSettingsDisabled && downloadDeck()" class="settings-option">Download</a>
+            <label class="settings-option" [class.disabled]="isSettingsDisabled">
+                Import (JSON)<input type="file" [disabled]="isSettingsDisabled" (change)="importDeck($event)" accept="application/json" hidden />
+            </label>
+            <label class="settings-option" [class.disabled]="isSettingsDisabled">
+              Import (Text)
+              <input type="file" (change)="importDeckFromText($event)" accept=".txt" hidden />
+            </label>
+        </div>
+      </div>
 
       <p class="cardNum" *ngIf="deckSelectedFlag">{{ deckCount }}</p>
     </div>
@@ -42,4 +55,10 @@
       <li (click)="setCommander()">Set Commander</li>
     </ul>
   </div>
+</div>
+
+<!-- Loading Spinner -->
+<div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Importing deck, please wait...</p>
 </div>

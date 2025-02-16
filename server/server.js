@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
 app.use(bodyParser.json());
@@ -189,6 +190,128 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
     res.json({ message: `${uploadedFileName} updated successfully` });
   });
 });
+
+// Download a single deck
+app.get('/api/deck/:deckName/download', (req, res) => {
+  const { deckName } = req.params;
+  const decks = loadDecks();
+
+  if (!decks[deckName]) {
+    return res.status(404).json({ message: 'Deck not found' });
+  }
+
+  const deckData = JSON.stringify(decks[deckName], null, 2);
+  const fileName = `${deckName}.json`;
+
+  res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+  res.setHeader('Content-Type', 'application/json');
+  res.send(deckData);
+});
+
+// Import a single deck
+app.post('/api/deck/:deckName/import', upload.single('file'), (req, res) => {
+  const { deckName } = req.params;
+
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+
+  try {
+    const deckData = JSON.parse(req.file.buffer.toString());
+
+    const decks = loadDecks();
+    decks[deckName] = deckData;
+    saveDecks(decks);
+
+    res.json({ message: `Deck "${deckName}" imported successfully.` });
+  } catch (error) {
+    console.error('Error importing deck:', error);
+    res.status(500).json({ message: 'Invalid deck file.' });
+  }
+});
+
+// Import deck from text file using Scryfall API
+app.post('/api/deck/:deckName/import-text', upload.single('file'), async (req, res) => {
+  const { deckName } = req.params;
+
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+
+  const textContent = req.file.buffer.toString();
+  const lines = textContent.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('SIDEBOARD'));
+
+  const deck = [];
+
+  // Fetch card details from Scryfall API
+  const fetchCardData = async (cardName) => {
+    try {
+      const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`);
+      if (!response.ok) {
+        console.warn(`Failed to fetch card: ${cardName}`);
+        return null;
+      }
+      const card = await response.json();
+      return {
+        id: card.id,
+        name: card.name,
+        set: card.set,
+        collector_number: card.collector_number,
+        type_line: card.type_line,
+        oracle_text: card.oracle_text,
+        mana_cost: card.mana_cost,
+        image_uris: card.image_uris,
+        colors: card.colors,
+        color_identity: card.color_identity,
+        prices: card.prices,
+        rarity: card.rarity,
+      };
+    } catch (error) {
+      console.error(`Error fetching card "${cardName}":`, error);
+      return null;
+    }
+  };
+
+  // Process each line
+  for (const line of lines) {
+    // Check for the original format
+    const oldFormatMatch = line.match(/^(\d+)x (.+) \((\w+)\) (\S+) \[(.+)\]$/);
+    const newFormatMatch = line.match(/^(\d+)\s+(.+)$/);
+
+    if (oldFormatMatch) {
+      // Original format
+      const [, quantity, name, set, collectorNumber, category] = oldFormatMatch;
+      const card = await fetchCardData(name);
+      if (card) {
+        for (let i = 0; i < quantity; i++) {
+          deck.push({ ...card, category });
+        }
+      }
+    } else if (newFormatMatch) {
+      // New format
+      const [, quantity, name] = newFormatMatch;
+      const card = await fetchCardData(name);
+      if (card) {
+        for (let i = 0; i < quantity; i++) {
+          deck.push({ ...card, category: 'Uncategorized' });
+        }
+      }
+    }
+  }
+
+  if (deck.length === 0) {
+    return res.status(400).json({ message: 'No valid cards found in the file.' });
+  }
+
+  const decks = loadDecks();
+  decks[deckName] = deck;
+  saveDecks(decks);
+
+  res.json({ message: `Deck "${deckName}" imported from text file successfully.` });
+});
+
+
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
