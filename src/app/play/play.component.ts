@@ -40,6 +40,7 @@ export class PlayComponent implements OnInit {
   resizeFlag = false;
   deckSelectFlag = true;
   showSettings = false;
+  handFlag = true;
   minimizedOptions = false;
   showNav = true;
 
@@ -112,6 +113,12 @@ export class PlayComponent implements OnInit {
     this.resizeFlag = !this.resizeFlag;
     this.showSettings = false;
   }
+
+  toggleHand() {
+    this.handFlag = !this.handFlag;
+    this.showSettings = false;
+  }
+
 
   toggleDeckSelect() {
     this.deckSelectFlag = !this.deckSelectFlag;
