@@ -344,8 +344,11 @@ app.get('/api/saved-states', (req, res) => {
       return res.status(500).json({ message: 'Failed to retrieve saved states.' });
     }
 
-    // Filter only JSON files excluding decks.json and commander.json
-    const savedStates = files.filter(file => file.endsWith('.json') && !['decks.json', 'commander.json'].includes(file));
+    // Filter only JSON files excluding decks.json, commander.json, and settings.json
+    const savedStates = files.filter(file => 
+      file.endsWith('.json') && 
+      !['decks.json', 'commander.json', 'settings.json'].includes(file)
+    );
 
     res.json({ savedStates });
   });
