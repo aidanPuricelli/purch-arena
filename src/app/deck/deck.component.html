@@ -2,7 +2,7 @@
   <div class="banner-container">
     <div class="banner gitrog">
 
-      <input class="deck-option deck-name" type="text" [(ngModel)]="newDeckName" placeholder="New Deck Name">
+      <input class="deck-option deck-name" type="text" [(ngModel)]="newDeckName" (ngModelChange)="onInputChange()" placeholder="New Deck Name">
 
       <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
       <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
@@ -46,7 +46,9 @@
     </div>
   </ul>
 
-  <p *ngIf="deck.length === 0" class="no-cards">No cards in deck.</p>
+  <p *ngIf="deck.length === 0 && deckSelectedFlag" class="no-cards animate__animated animate__fadeInDown">No cards in deck, '{{selectedDeck}}'</p>
+  <p class="no-cards animate__animated animate__fadeInDown" *ngIf="!deckSelectedFlag">No deck selected.</p>
+  <p class="no-cards error animate__animated" [ngClass]="{'animate__fadeInDown': noInputError, 'animate__fadeOutUp': fadeOutError}" *ngIf="showError">Enter a name to create a new deck.</p>
 
   <div class="context-menu" *ngIf="contextMenuVisible" 
        [ngStyle]="{'top.px': contextMenuY, 'left.px': contextMenuX}">

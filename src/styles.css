@@ -190,18 +190,28 @@ html, body {
 }
 
 .no-cards {
-    color: white;
     position: relative;
     z-index: 5;
-    background: rgb(223, 169, 169);
+    background: rgb(0, 0, 0);
     width: 50%;
     margin: auto;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
     border: solid 2px rgb(255, 127, 127);
-    color: rgb(110, 74, 74);
-    box-shadow: 0 3px rgb(180, 47, 47);
+    color: rgb(183, 126, 126);
+    box-shadow: 0 5px rgb(180, 47, 47);
+}
+
+.error {
+    margin-top: 20px;
+    border: solid 2px rgb(205, 105, 105);
+    color: rgb(150, 103, 103);
+    box-shadow: 0 5px rgb(145, 38, 38);
+    background: rgb(0, 0, 0);
+    position: absolute;
+    top: 97px;
+    left: 25%;
 }
 
 .save-btn {

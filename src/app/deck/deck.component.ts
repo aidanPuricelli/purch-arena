@@ -17,6 +17,12 @@ export class DeckComponent implements OnInit {
 
   isLoading: boolean = false;
 
+  sortCriteria: string = '';
+
+  noInputError = false;
+  fadeOutError = false;
+  showError = false;
+
   showSettings = false;
   isSettingsDisabled: boolean = true;
 
@@ -36,10 +42,15 @@ export class DeckComponent implements OnInit {
 
     this.isSettingsDisabled = !this.selectedDeck;
 
-    // Listen for adding cards
     window.addEventListener('addCardToDeck', (event: any) => {
       this.addToDeck(event.detail);
     });
+  }
+
+ // Track input changes
+  onInputChange(): void {
+    this.noInputError = false;
+    this.fadeOutError = false;
   }
 
   // Load all deck names
@@ -61,7 +72,6 @@ export class DeckComponent implements OnInit {
       (response) => {
         this.deck = response.deck || [];
   
-        // Load commander and insert at position 0
         this.http.get<{ commander: any }>(`/api/deck/${deckName}/commander`).subscribe(
           (commanderResponse) => {
             if (commanderResponse.commander) {
@@ -80,10 +90,8 @@ export class DeckComponent implements OnInit {
       (error) => console.error('Error loading deck:', error)
     );
   }
-  
 
-  sortCriteria: string = '';
-
+  // sort by parameter
   sortBy(parameter: string) {
     if (!this.deck || this.deck.length === 0) return;
   
@@ -104,59 +112,69 @@ export class DeckComponent implements OnInit {
         console.warn('Invalid sorting parameter:', parameter);
     }
   
-    this.cdr.detectChanges(); // Ensure UI updates
+    this.cdr.detectChanges();
   }
   
-  
-
+  // extract card type (update needed to work for artifact creatures)
   extractMainType(typeLine: string): string {
     if (!typeLine) return 'Unknown';
   
-    // Remove supertypes (Legendary, Basic, Snow, etc.)
     const typeParts = typeLine.split('—')[0].trim().split(' ');
     const mainType = typeParts.find(type => !['Legendary', 'Basic', 'Snow', 'Token'].includes(type));
   
-    return mainType || 'Unknown'; // Default to 'Unknown' if not found
+    return mainType || 'Unknown';
   }
 
+  // extract mana cost
   extractNumericManaCost(manaCost: string): number {
-    if (!manaCost) return 0; // Default to 0 if no mana cost
+    if (!manaCost) return 0; 
   
-    const numericPart = manaCost.match(/\d+/g); // Extract numbers (e.g., "3" from "{3}{W}{U}{B}")
-    const coloredMana = manaCost.match(/[WUBRGC]/g); // Extract letters (colored mana symbols)
+    const numericPart = manaCost.match(/\d+/g); // Extract numbers
+    const coloredMana = manaCost.match(/[WUBRGC]/g); // Extract letters
   
     const numericValue = numericPart ? numericPart.map(Number).reduce((sum, val) => sum + val, 0) : 0;
     const coloredCount = coloredMana ? coloredMana.length : 0;
   
-    return numericValue + coloredCount; // Sum numeric and colored mana costs
+    return numericValue + coloredCount; 
   }
   
-  
-  
-  
-  
-
   // Create a new deck
   createDeck(): void {
-    if (!this.newDeckName.trim()) return;
+    if (!this.newDeckName.trim()) {
+      this.noInputError = true;
+      this.showError = true;
+  
+      setTimeout(() => {
+        this.fadeOutError = true;
+      }, 3000);
+  
+      setTimeout(() => {
+        this.showError = false;
+        this.fadeOutError = false;
+        this.noInputError = false;
+      }, 3500);
+  
+      return;
+    }
 
     this.http.post('/api/deck', { deckName: this.newDeckName }).subscribe(
       () => {
         this.loadDeckNames();
+        this.selectedDeck = this.newDeckName;
         this.loadDeck(this.newDeckName);
-        console.log(`Deck "${this.newDeckName}" created`);
+        console.log(`Deck "${this.newDeckName}" created and selected`);
+
         this.newDeckName = '';
       },
       (error) => console.error('Error creating deck', error)
     );
   }
 
+  // add card to deck
   addToDeck(card: any) {
     this.deck.push(card);
     this.deckCount = this.deck.length;
   }
-
-  
 
   // Remove a card 
   removeCard(): void {
@@ -196,6 +214,8 @@ export class DeckComponent implements OnInit {
 
     this.isSettingsDisabled = true;
 
+    this.deckSelectedFlag = false;
+
     this.http.delete(`/api/deck/${this.selectedDeck}`).subscribe(
       () => {
         console.log(`🗑️ Deck "${this.selectedDeck}" deleted`);
@@ -220,7 +240,6 @@ export class DeckComponent implements OnInit {
       return;
     }
 
-    // Remove the selected card from the deck
     const cardIndex = this.deck.findIndex(card => card === this.selectedCard);
     if (cardIndex === -1) {
       console.warn('Selected card not found in deck.');
@@ -228,13 +247,12 @@ export class DeckComponent implements OnInit {
     }
     const [commanderCard] = this.deck.splice(cardIndex, 1);
 
-    // Update the server: remove the card from the deck and set commander
     this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [], removedCards: [commanderCard] }).subscribe(
       () => {
         this.http.post(`/api/deck/${this.selectedDeck}/commander`, { commander: commanderCard }).subscribe(
           () => {
             alert(`Commander set to ${commanderCard.name}`);
-            this.loadDeck(this.selectedDeck); // Reload the deck to reflect changes
+            this.loadDeck(this.selectedDeck);
           },
           (error) => {
             console.error('Error setting commander:', error);
@@ -251,8 +269,6 @@ export class DeckComponent implements OnInit {
     this.contextMenuVisible = false;
     this.selectedCard = null;
   }
-
-
 
   // Method to download a single deck
   downloadDeck(): void {
@@ -290,13 +306,12 @@ export class DeckComponent implements OnInit {
         alert(`Deck "${this.selectedDeck}" imported successfully.`);
         this.loadDeck(this.selectedDeck);
   
-        // Reset the file input after successful upload
         event.target.value = '';
       },
       (error) => {
         console.error('Error importing deck:', error);
         alert('Failed to import deck.');
-        // Reset the file input even if the import fails
+
         event.target.value = '';
       }
     );
@@ -326,7 +341,6 @@ export class DeckComponent implements OnInit {
         alert(`Deck "${this.selectedDeck}" imported from text file successfully.`);
         this.loadDeck(this.selectedDeck);
   
-        // Reset the file input after successful upload
         this.isLoading = false;
         event.target.value = '';
       },
@@ -338,14 +352,9 @@ export class DeckComponent implements OnInit {
     );
   }  
   
-  
-
   toggleSettings(): void {
     this.showSettings = !this.showSettings;
   }
-  
-
-  
   
   @HostListener('document:click')
   onDocumentClick(): void {
