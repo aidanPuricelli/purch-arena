@@ -19,7 +19,7 @@ export class SearchComponent {
   constructor( private http: HttpClient ) {}
 
   onSearch() {
-    if (!this.searchQuery.trim()) return;
+    if (!this.searchQuery.trim()) this.cardImages = [];
 
     const apiUrl = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(this.searchQuery)}`;
 

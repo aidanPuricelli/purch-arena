@@ -25,6 +25,7 @@ html, body {
 
 /* search */
 .search-container {
+    caret-color: black;
     margin: auto;
     z-index: 10;
     margin-top: 90px;
