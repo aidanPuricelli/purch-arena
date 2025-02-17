@@ -164,6 +164,7 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+// upload commander and deck json files
 app.post('/api/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
@@ -208,7 +209,7 @@ app.get('/api/deck/:deckName/download', (req, res) => {
   res.send(deckData);
 });
 
-// Import a single deck
+// Import a single deck with data cleanup for old formats
 app.post('/api/deck/:deckName/import', upload.single('file'), (req, res) => {
   const { deckName } = req.params;
 
@@ -217,10 +218,21 @@ app.post('/api/deck/:deckName/import', upload.single('file'), (req, res) => {
   }
 
   try {
-    const deckData = JSON.parse(req.file.buffer.toString());
+    let deckData = JSON.parse(req.file.buffer.toString());
+
+    // Clean deck data to ensure only the necessary fields
+    const cleanedDeck = deckData.map(card => {
+      return {
+        name: card.name,
+        mana_cost: card.mana_cost,
+        type_line: card.type_line,
+        // Check old and new formats for image_uri
+        image_uri: card.image_uri || (card.image_uris?.normal || null)
+      };
+    });
 
     const decks = loadDecks();
-    decks[deckName] = deckData;
+    decks[deckName] = cleanedDeck;
     saveDecks(decks);
 
     res.json({ message: `Deck "${deckName}" imported successfully.` });
@@ -229,6 +241,8 @@ app.post('/api/deck/:deckName/import', upload.single('file'), (req, res) => {
     res.status(500).json({ message: 'Invalid deck file.' });
   }
 });
+
+
 
 // Import deck from text file using Scryfall API
 app.post('/api/deck/:deckName/import-text', upload.single('file'), async (req, res) => {
@@ -243,7 +257,7 @@ app.post('/api/deck/:deckName/import-text', upload.single('file'), async (req, r
 
   const deck = [];
 
-  // Fetch card details from Scryfall API
+  // Fetch card details from Scryfall API with only the necessary fields
   const fetchCardData = async (cardName) => {
     try {
       const response = await fetch(`https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`);
@@ -253,24 +267,17 @@ app.post('/api/deck/:deckName/import-text', upload.single('file'), async (req, r
       }
       const card = await response.json();
       return {
-        id: card.id,
         name: card.name,
-        set: card.set,
-        collector_number: card.collector_number,
-        type_line: card.type_line,
-        oracle_text: card.oracle_text,
         mana_cost: card.mana_cost,
-        image_uris: card.image_uris,
-        colors: card.colors,
-        color_identity: card.color_identity,
-        prices: card.prices,
-        rarity: card.rarity,
+        type_line: card.type_line,
+        image_uri: card.image_uris?.normal || null,
       };
     } catch (error) {
       console.error(`Error fetching card "${cardName}":`, error);
       return null;
     }
   };
+
 
   // Process each line
   for (const line of lines) {
@@ -394,7 +401,7 @@ app.post('/api/save-settings', (req, res) => {
   // Write to settings.json
   try {
     fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
-    res.json({ message: 'Settings saved successfully.' });
+    res.json({ message: 'Card width and font size saved.' });
   } catch (error) {
     console.error('Failed to save settings:', error);
     res.status(500).json({ message: 'Failed to save settings.' });

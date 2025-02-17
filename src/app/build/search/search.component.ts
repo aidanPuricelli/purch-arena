@@ -19,21 +19,34 @@ export class SearchComponent {
   constructor( private http: HttpClient ) {}
 
   onSearch() {
-    if (!this.searchQuery.trim()) this.cardImages = [];
+      if (!this.searchQuery.trim()) {
+          this.cardImages = [];
+          return;
+      }
 
-    const apiUrl = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(this.searchQuery)}`;
+      const apiUrl = `https://api.scryfall.com/cards/search?q=${encodeURIComponent(this.searchQuery)}`;
 
-    this.http.get<any>(apiUrl).subscribe(response => {
-        console.log('API Response:', response);
-        if (response.data) {
-            this.cardImages = response.data.filter((card: any) => card.image_uris && card.image_uris.normal);
-            console.log('Filtered Images:', this.cardImages);
-        }
-    }, error => {
-        console.error('Error fetching cards:', error);
-        this.cardImages = [];
-    });
+      this.http.get<any>(apiUrl).subscribe(response => {
+          console.log('API Response:', response);
+          if (response.data) {
+              // Filter and map the response to only include the necessary fields
+              this.cardImages = response.data
+                  .filter((card: any) => card.image_uris?.normal)
+                  .map((card: any) => ({
+                      name: card.name,
+                      mana_cost: card.mana_cost,
+                      type_line: card.type_line,
+                      image_uri: card.image_uris.normal
+                  }));
+
+              console.log('Filtered Images:', this.cardImages);
+          }
+      }, error => {
+          console.error('Error fetching cards:', error);
+          this.cardImages = [];
+      });
   }
+
 
   onRightClick(event: MouseEvent, card?: any) {
     event.preventDefault();
@@ -48,23 +61,32 @@ export class SearchComponent {
   }
 
   saveImage() {
-    if (!this.selectedDeck) {
-      console.warn('⚠️ No deck selected. Cannot add card.');
-      return;
-    }
+      if (!this.selectedDeck) {
+          console.warn('⚠️ No deck selected. Cannot add card.');
+          return;
+      }
 
-    if (this.selectedCard) {
-      console.log(`Saving card to deck '${this.selectedDeck}':`, this.selectedCard);
+      if (this.selectedCard) {
+          // Ensure only the necessary fields are sent when saving
+          const cardToSave = {
+              name: this.selectedCard.name,
+              mana_cost: this.selectedCard.mana_cost,
+              type_line: this.selectedCard.type_line,
+              image_uri: this.selectedCard.image_uri
+          };
 
-      window.dispatchEvent(new CustomEvent('addCardToDeck', { detail: this.selectedCard }));
+          console.log(`Saving card to deck '${this.selectedDeck}':`, cardToSave);
 
-      this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [this.selectedCard], removedCards: [] }).subscribe(
-        (response) => {
-          console.log(`Card added to deck '${this.selectedDeck}':`, response);
-        },
-        (error) => console.error('Error adding card to deck', error)
-      );
-    }
-    this.hideContextMenu();
+          window.dispatchEvent(new CustomEvent('addCardToDeck', { detail: cardToSave }));
+
+          this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [cardToSave], removedCards: [] }).subscribe(
+              (response) => {
+                  console.log(`Card added to deck '${this.selectedDeck}':`, response);
+              },
+              (error) => console.error('Error adding card to deck', error)
+          );
+      }
+      this.hideContextMenu();
   }
+
 }

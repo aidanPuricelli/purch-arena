@@ -44,7 +44,7 @@
       [class.selected]="selectedPlayCards.includes(played)">
 
       <!-- Card Image -->
-      <img [src]="played.card.image_uris.normal" alt="card image"
+      <img [src]="played.card.image_uri" alt="card image"
           [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
 
       <!-- Counter Circle -->
@@ -81,12 +81,12 @@
     <a (click)="toggleDeckSelect()" class="settings-option">Select Deck</a>
     <a (click)="toggleNav()" class="settings-option">Toggle Nav</a>
     <a (click)="toggleHand()" class="settings-option">Toggle Hand</a>
-    <a *ngIf="!minimizedOptions" (click)="toggleOptions()" class="settings-option">Less options</a>
-    <a *ngIf="minimizedOptions" (click)="toggleOptions()" class="settings-option">More options</a>
+    <a *ngIf="!minimizedOptions" (click)="toggleOptions()" class="settings-option" title="Hint: double click the play options to do this automatically">Less options</a>
+    <a *ngIf="minimizedOptions" (click)="toggleOptions()" class="settings-option" title="Hint: double click the play options to do this automatically">More options</a>
     <a (click)="toggleAdvanced()" class="settings-option">Advanced...</a>
     <a *ngIf="advancedFlag" (click)="openSaveModal()" class="settings-option advanced-option">Save Game</a>
     <a *ngIf="advancedFlag" (click)="openLoadModal()" class="settings-option advanced-option">Load Game</a>
-    <a *ngIf="advancedFlag" (click)="saveSettings()" class="settings-option advanced-option">Save Settings</a>
+    <a *ngIf="advancedFlag" (click)="saveSettings()" title="This will save the current card width and font size" class="settings-option advanced-option">Save Settings</a>
 
 
     <div class="font-size-container">
@@ -127,7 +127,7 @@
          draggable="true"
          (dragstart)="onDragStart($event, card, 'hand')"
          (contextmenu)="onRightClick($event, card)">
-      <img [src]="card.image_uris.normal" alt="card image" [ngStyle]="{'width.px': cardWidth }">
+      <img [src]="card.image_uri" alt="card image" [ngStyle]="{'width.px': cardWidth }">
     </div>
   </div>
 </div>
@@ -135,7 +135,7 @@
 <div class="graveyard" *ngIf="showGrave">
     <div class="d-flex flex-wrap cards justify-content-center">
       <div *ngFor="let card of graveyard" class="card" (contextmenu)="onGraveRightClick($event, card)">
-        <img [src]="card.image_uris.normal" alt="card image">
+        <img [src]="card.image_uri" alt="card image">
       </div>
     </div>
 </div>

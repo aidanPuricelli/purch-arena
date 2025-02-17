@@ -42,7 +42,7 @@
     <div class="d-flex flex-wrap cards justify-content-center">
       <li *ngFor="let card of deck" class="deck-card-wrapper"
           (contextmenu)="onRightClick($event, card)">
-        <img [src]="card.image_uris?.normal || 'default-card-image.jpg'" class="card-img">
+        <img [src]="card.image_uri || 'default-card-image.jpg'" class="card-img">
       </li>
     </div>
   </ul>

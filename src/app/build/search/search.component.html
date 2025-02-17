@@ -11,7 +11,7 @@
         <div *ngIf="cardImages.length > 0">
             <div class="d-flex flex-wrap cards justify-content-center">
                 <div *ngFor="let card of cardImages" class="card-wrapper">
-                    <img *ngIf="card.image_uris" [src]="card.image_uris.normal" class="card-img" (contextmenu)="onRightClick($event, card)">
+                    <img *ngIf="card.image_uri" [src]="card.image_uri" class="card-img" (contextmenu)="onRightClick($event, card)">
                 </div>
             </div>
         </div>        
