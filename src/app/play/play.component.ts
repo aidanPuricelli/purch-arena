@@ -655,7 +655,7 @@ export class PlayComponent implements OnInit {
       event.dataTransfer.effectAllowed = 'move';
   
       const dragImage = new Image();
-      dragImage.src = item.card?.image_uris?.normal || item.image_uris?.normal || 'https://example.com/default-token.jpg';
+      dragImage.src = item.card?.image_uri || item.image_uri || 'https://example.com/default-token.jpg';
       dragImage.width = this.cardWidth;
       dragImage.style.height = 'auto';
       dragImage.style.position = 'absolute';
