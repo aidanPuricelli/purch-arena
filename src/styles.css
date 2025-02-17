@@ -8,6 +8,7 @@ html, body {
     background: rgb(27, 27, 27) !important;
     caret-color: rgb(181, 238, 255);
     user-select: none;
+    overflow-y: hidden;
 }
 
 
@@ -226,8 +227,11 @@ html, body {
 
 .play-container {
     z-index: 10;
-    height: calc(100vh - 20px);
-    position: relative;
+    height: calc(100vh);
+    position: absolute;
+    width: 100vw;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .play-options {
@@ -288,6 +292,7 @@ html, body {
 
 .played-card {
     position: absolute;
+    will-change: transform, top, left;
 }
 
 .played-card img {
