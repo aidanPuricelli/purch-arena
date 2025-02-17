@@ -19,6 +19,14 @@ interface GameAction {
   }[];
 }
 
+interface Card {
+  name: string;
+  id: string;
+  image_uris?: {
+    normal: string;
+  };
+}
+
 
 
 @Component({
@@ -38,6 +46,7 @@ export class PlayComponent implements OnInit {
   lifeFontSize = 30;
 
   resizeFlag = false;
+  advancedFlag = false;
   deckSelectFlag = false;
   showSettings = false;
   handFlag = true;
@@ -95,6 +104,13 @@ export class PlayComponent implements OnInit {
     { text: 'Home', href: '/' }
   ];
 
+  showSaveModal = false;
+  showLoadModal = false;
+  savedStates: string[] = [];
+  selectedSavedState: string = '';
+  saveGameName = '';
+
+
   // update card width
   updateCardWidth(newWidth: number): void {
     this.cardWidth = newWidth;
@@ -113,6 +129,7 @@ export class PlayComponent implements OnInit {
       this.deckSelectFlag = false;
       return
     }
+    if (this.advancedFlag) this.advancedFlag = false;
     this.showSettings = !this.showSettings;
   }
 
@@ -120,6 +137,11 @@ export class PlayComponent implements OnInit {
   toggleResize() {
     this.resizeFlag = !this.resizeFlag;
     this.showSettings = false;
+  }
+
+  // toggle display of card resize
+  toggleAdvanced() {
+    this.advancedFlag = !this.advancedFlag;
   }
 
   // toggle display of hand
@@ -159,6 +181,7 @@ export class PlayComponent implements OnInit {
 
   // on init of page
   ngOnInit(): void {
+    this.loadSettings();
     this.loadDeckNames();
     this.fetchTokens();
     this.updateFontSize();
@@ -590,11 +613,18 @@ export class PlayComponent implements OnInit {
   // ???
   @HostListener('document:keydown', ['$event'])
   handleDeleteKey(event: KeyboardEvent): void {
-    if ((event.key === 'Delete' || event.key === 'Backspace')) {
+    const target = event.target as HTMLElement;
+
+    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+      return;
+    }
+
+    if (event.key === 'Delete' || event.key === 'Backspace') {
       event.preventDefault();
       this.sendToGraveyardSelectedCard();
     }
   }
+
 
   // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
@@ -1020,4 +1050,208 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  // Open the save game modal
+  openSaveModal() {
+    this.showSaveModal = true;
+    this.saveGameName = '';
+  }
+
+  // open load game modal
+  openLoadModal() {
+    this.showLoadModal = true;
+    this.fetchSavedStates();
+  }
+
+  // Close the modal
+  closeSaveModal() {
+    this.showSaveModal = false;
+    this.selectedSavedState = '';
+  }
+
+  // close load mocal
+  closeLoadModal() {
+    this.showLoadModal = false;
+  }
+
+  // fetch saved states from server
+  fetchSavedStates() {
+    fetch('/api/saved-states')
+      .then(response => response.json())
+      .then(data => {
+        if (data.savedStates) {
+          this.savedStates = data.savedStates;
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching saved states:', error);
+        alert('Failed to retrieve saved states.');
+      });
+  }
+
+  // Load the selected game state
+  loadSelectedState() {
+    if (!this.selectedSavedState) {
+      alert('Please select a saved state to load.');
+      return;
+    }
+
+    // Fetch the game state from the server
+    fetch(`/api/load-game/${this.selectedSavedState}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Failed to load game state: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((gameState) => {
+        this.hand = gameState.hand.map((card: Card) => ({
+          ...card,
+          image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        }));
+
+        this.playCards = gameState.play.map((pc: any) => ({
+          card: {
+            ...pc.card,
+            image_uris: pc.card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+          },
+          x: pc.x,
+          y: pc.y,
+          tapped: pc.tapped ?? false,
+          counters: pc.counters ?? 0
+        }));
+
+        this.graveyard = gameState.graveyard.map((card: Card) => ({
+          ...card,
+          image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        }));
+
+        this.exile = gameState.exile.map((card: Card) => ({
+          ...card,
+          image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        }));
+
+        this.deck = gameState.deck.map((card: Card) => ({
+          ...card,
+          image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        }));
+
+        this.closeLoadModal();
+
+        alert(`Game state "${this.selectedSavedState}" loaded successfully!`);
+      })
+      .catch(error => {
+        console.error('Error loading game state:', error);
+        alert('Failed to load the selected game state.');
+      });
+  }
+
+
+
+  // save game state
+  saveState() {
+    if (!this.saveGameName) {
+      alert('Please enter a name for the game state.');
+      return;
+    }
+
+    const gameState = {
+      hand: this.hand.map(card => ({
+        name: card.name,
+        id: card.id,
+        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+      })),
+      play: this.playCards.map(pc => ({
+        card: {
+          name: pc.card.name,
+          id: pc.card.id,
+          image_uris: pc.card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        },
+        x: pc.x,
+        y: pc.y,
+        tapped: pc.tapped ?? false,
+        counters: pc.counters ?? 0
+      })),
+      graveyard: this.graveyard.map(card => ({
+        name: card.name,
+        id: card.id,
+        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+      })),
+      exile: this.exile.map(card => ({
+        name: card.name,
+        id: card.id,
+        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+      })),
+      deck: this.deck.map(card => ({
+        name: card.name,
+        id: card.id,
+        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+      })),
+      timestamp: new Date().toISOString()
+    };
+
+    // Send the game state to the server
+    fetch('/api/save-game', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        gameName: this.saveGameName,
+        gameState: gameState
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          alert(data.message);
+          this.closeSaveModal();
+        } else {
+          alert('Failed to save game state.');
+        }
+      })
+      .catch(error => {
+        console.error('Error saving game state:', error);
+        alert('Failed to save game state.');
+      });
+  }
+
+  // save current card width and font-size
+  saveSettings() {
+    const settings = {
+      cardWidth: this.cardWidth,
+      playOptionsFontSize: this.playOptionsFontSize
+    };
+
+    fetch('/api/save-settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(settings)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          alert(data.message);
+        } else {
+          alert('Failed to save settings.');
+        }
+      })
+      .catch(error => {
+        console.error('Error saving settings:', error);
+        alert('Failed to save settings.');
+      });
+  }
+
+  // load card width and font size
+  loadSettings() {
+    fetch('/api/load-settings')
+      .then(response => response.json())
+      .then(settings => {
+        if (settings.cardWidth !== undefined) this.cardWidth = settings.cardWidth;
+        if (settings.playOptionsFontSize !== undefined) {
+          this.playOptionsFontSize = settings.playOptionsFontSize;
+          this.updateFontSize();
+        } 
+      })
+      .catch(error => {
+        console.error('Failed to load settings:', error);
+      });
+  }
 }

@@ -83,6 +83,12 @@
     <a (click)="toggleHand()" class="settings-option">Toggle Hand</a>
     <a *ngIf="!minimizedOptions" (click)="toggleOptions()" class="settings-option">Less options</a>
     <a *ngIf="minimizedOptions" (click)="toggleOptions()" class="settings-option">More options</a>
+    <a (click)="toggleAdvanced()" class="settings-option">Advanced...</a>
+    <a *ngIf="advancedFlag" (click)="openSaveModal()" class="settings-option advanced-option">Save Game</a>
+    <a *ngIf="advancedFlag" (click)="openLoadModal()" class="settings-option advanced-option">Load Game</a>
+    <a *ngIf="advancedFlag" (click)="saveSettings()" class="settings-option advanced-option">Save Settings</a>
+
+
     <div class="font-size-container">
       <label for="fontSizeSlider">Font Size:</label>
       <input id="fontSizeSlider" type="range" min="10" max="24" [(ngModel)]="playOptionsFontSize" (input)="updateFontSize()">
@@ -182,6 +188,33 @@
   <img [src]="zoomedCard.image_uris?.normal || 'https://example.com/default-card.jpg'" 
        [alt]="zoomedCard.name" 
        class="zoomed-card" />
+</div>
+
+<!-- Modal for Saving Game -->
+<div class="save-modal" *ngIf="showSaveModal">
+  <div class="modal-content">
+    <input type="text" [(ngModel)]="saveGameName" placeholder="Enter a name for your save..." />
+    <div class="modal-actions">
+      <button class="purch-btn" (click)="saveState()">Save</button>
+      <button class="purch-btn" (click)="closeSaveModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Loading Game -->
+<div class="save-modal" *ngIf="showLoadModal">
+  <div class="modal-content">
+
+    <!-- Dropdown of saved states -->
+    <select [(ngModel)]="selectedSavedState" class="saved-state-select">
+      <option *ngFor="let state of savedStates" [value]="state">{{ state }}</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="purch-btn" (click)="loadSelectedState()">Load</button>
+      <button class="purch-btn" (click)="closeLoadModal()">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <!-- HAND TAB -->

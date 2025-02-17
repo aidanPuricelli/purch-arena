@@ -5,7 +5,7 @@ const path = require('path');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 
 const filePath = path.join(__dirname, 'decks.json');
 const commandersFilePath = path.join(__dirname, 'commander.json');
@@ -310,7 +310,111 @@ app.post('/api/deck/:deckName/import-text', upload.single('file'), async (req, r
   res.json({ message: `Deck "${deckName}" imported from text file successfully.` });
 });
 
+// Save a custom game state
+app.post('/api/save-game', (req, res) => {
+  const { gameName, gameState } = req.body;
 
+  // Validate inputs
+  if (!gameName || !gameState || typeof gameName !== 'string') {
+    return res.status(400).json({ message: 'Valid game name and game state are required.' });
+  }
+
+  // Sanitize file name
+  const sanitizedGameName = gameName.replace(/[^a-zA-Z0-9_-]/g, '_');
+  const savePath = path.join(__dirname, `${sanitizedGameName}.json`);
+
+  try {
+    // Write game state to file
+    fs.writeFileSync(savePath, JSON.stringify(gameState, null, 2));
+    console.log(`Game state saved: ${sanitizedGameName}.json`);
+    res.json({ message: `Game state saved as ${sanitizedGameName}.json` });
+  } catch (error) {
+    console.error('Error saving game state:', error);
+    res.status(500).json({ message: 'Failed to save game state.' });
+  }
+});
+
+// Endpoint to get a list of saved game states
+app.get('/api/saved-states', (req, res) => {
+  const dir = __dirname;
+
+  fs.readdir(dir, (err, files) => {
+    if (err) {
+      console.error('Error reading directory:', err);
+      return res.status(500).json({ message: 'Failed to retrieve saved states.' });
+    }
+
+    // Filter only JSON files excluding decks.json and commander.json
+    const savedStates = files.filter(file => file.endsWith('.json') && !['decks.json', 'commander.json'].includes(file));
+
+    res.json({ savedStates });
+  });
+});
+
+// Load a saved game state
+app.get('/api/load-game/:fileName', (req, res) => {
+  const { fileName } = req.params;
+
+  // Sanitize file name to prevent path traversal
+  const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9_.-]/g, '');
+  const filePath = path.join(__dirname, sanitizedFileName);
+
+  // Ensure the file exists
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ message: 'Game state not found.' });
+  }
+
+  // Read and send the game state
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const gameState = JSON.parse(data);
+    res.json(gameState);
+  } catch (error) {
+    console.error('Error loading game state:', error);
+    res.status(500).json({ message: 'Failed to load game state.' });
+  }
+});
+
+// Save settings to settings.json
+app.post('/api/save-settings', (req, res) => {
+  const { cardWidth, playOptionsFontSize } = req.body;
+  const settingsPath = path.join(__dirname, 'settings.json');
+
+  // Validate input
+  if (typeof cardWidth !== 'number' || typeof playOptionsFontSize !== 'number') {
+    return res.status(400).json({ message: 'Invalid settings data.' });
+  }
+
+  // Construct settings object
+  const settings = { cardWidth, playOptionsFontSize };
+
+  // Write to settings.json
+  try {
+    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
+    res.json({ message: 'Settings saved successfully.' });
+  } catch (error) {
+    console.error('Failed to save settings:', error);
+    res.status(500).json({ message: 'Failed to save settings.' });
+  }
+});
+
+// Load settings from settings.json
+app.get('/api/load-settings', (req, res) => {
+  const settingsPath = path.join(__dirname, 'settings.json');
+
+  try {
+    if (!fs.existsSync(settingsPath)) {
+      return res.status(404).json({ message: 'Settings file not found.' });
+    }
+
+    const settingsData = fs.readFileSync(settingsPath, 'utf-8');
+    const settings = JSON.parse(settingsData);
+    res.json(settings);
+  } catch (error) {
+    console.error('Failed to load settings:', error);
+    res.status(500).json({ message: 'Failed to load settings.' });
+  }
+});
 
 
 // Start the server
