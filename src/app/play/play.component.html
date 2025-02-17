@@ -1,6 +1,6 @@
 <app-navbar *ngIf="showNav" [links]="navLinks"></app-navbar>
 
-<!-- DECK SELECTION -->W
+<!-- DECK SELECTION -->
 <div *ngIf="deckSelectFlag" class="deck-selection">
   <label for="deckSelect">Select a Deck:</label>
   <select id="deckSelect" [(ngModel)]="selectedDeck" (change)="onDeckSelected()">

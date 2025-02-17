@@ -525,6 +525,15 @@ export class PlayComponent implements OnInit {
     this.hideGraveContextMenu();
   }
 
+  // Listen some more
+  @HostListener('dblclick', ['$event'])
+  onDoubleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('play-options') || target.closest('.play-options')) {
+      this.minimizedOptions = !this.minimizedOptions;
+    }
+  }
+
   // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
     this.draggedSource = source;
