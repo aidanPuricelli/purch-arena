@@ -10,6 +10,7 @@
                 <label class="settings-option">
                     Import from JSON<input type="file" (change)="uploadFile($event)" accept=".json" hidden />
                 </label>
+                <a (click)="openSaveModal()" class="settings-option">Manage Saved Games</a>
             </div>
         </div>        
     </div>
@@ -24,5 +25,21 @@
             <a routerLink="build" class="purch-btn">BUILD</a>
             <a routerLink="play" class="purch-btn purch-btn-alt">PLAY</a>
         </div>
+    </div>
+</div>
+
+<!-- Modal for Managing Game Saves -->
+<div class="save-modal" *ngIf="showSaveModal">
+    <div class="modal-content">
+  
+      <!-- Dropdown of saved states -->
+      <select [(ngModel)]="selectedSavedState" class="saved-state-select">
+        <option *ngFor="let state of savedStates" [value]="state">{{ state }}</option>
+      </select>
+  
+      <div class="modal-actions">
+        <button class="purch-btn" (click)="deleteSelectedState()">Delete</button>
+        <button class="purch-btn" (click)="closeSaveModal()">Cancel</button>
+      </div>
     </div>
 </div>

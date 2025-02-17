@@ -419,6 +419,35 @@ app.get('/api/load-settings', (req, res) => {
   }
 });
 
+// Endpoint to delete a saved game state
+app.delete('/api/delete-game/:fileName', (req, res) => {
+  const { fileName } = req.params;
+
+  // Sanitize file name to prevent path traversal
+  const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9_.-]/g, '');
+  const filePath = path.join(__dirname, `${sanitizedFileName}.json`);
+
+  // Prevent deletion of protected files
+  const protectedFiles = ['decks.json', 'commander.json', 'settings.json'];
+  if (protectedFiles.includes(`${sanitizedFileName}.json`)) {
+    return res.status(403).json({ message: 'Cannot delete protected file.' });
+  }
+
+  // Delete the file if it exists
+  if (fs.existsSync(filePath)) {
+    try {
+      fs.unlinkSync(filePath);
+      res.json({ message: `File "${sanitizedFileName}.json" deleted successfully.` });
+    } catch (error) {
+      console.error('Error deleting file:', error);
+      res.status(500).json({ message: 'Failed to delete file.' });
+    }
+  } else {
+    res.status(404).json({ message: 'File not found.' });
+  }
+});
+
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
