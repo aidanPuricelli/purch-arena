@@ -625,6 +625,27 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  // you're kidding
+  @HostListener('document:click', ['$event'])
+  handleOutsideClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const dropdown = document.querySelector('.settings-dropdown');
+    const settingsIcon = document.querySelector('.settings-icon');
+
+    // Close settings if the click is outside the dropdown and not on the settings icon
+    if (
+      this.showSettings &&
+      dropdown &&
+      !dropdown.contains(target) &&
+      settingsIcon &&
+      !settingsIcon.contains(target)
+    ) {
+      this.showSettings = false;
+    }
+  }
+
+
+
 
   // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
