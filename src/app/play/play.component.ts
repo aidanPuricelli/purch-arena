@@ -1180,13 +1180,13 @@ export class PlayComponent implements OnInit {
       hand: this.hand.map(card => ({
         name: card.name,
         id: card.id,
-        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        image_uri: card.image_uri || 'https://via.placeholder.com/200x280?text=No+Image'
       })),
       play: this.playCards.map(pc => ({
         card: {
           name: pc.card.name,
           id: pc.card.id,
-          image_uris: pc.card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+          image_uri: pc.card.image_uri || 'https://via.placeholder.com/200x280?text=No+Image'
         },
         x: pc.x,
         y: pc.y,
@@ -1196,17 +1196,17 @@ export class PlayComponent implements OnInit {
       graveyard: this.graveyard.map(card => ({
         name: card.name,
         id: card.id,
-        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        image_uri: card.image_uri || 'https://via.placeholder.com/200x280?text=No+Image'
       })),
       exile: this.exile.map(card => ({
         name: card.name,
         id: card.id,
-        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        image_uri: card.image_uri || 'https://via.placeholder.com/200x280?text=No+Image'
       })),
       deck: this.deck.map(card => ({
         name: card.name,
         id: card.id,
-        image_uris: card.image_uris || { normal: 'https://via.placeholder.com/200x280?text=No+Image' }
+        image_uri: card.image_uri || 'https://via.placeholder.com/200x280?text=No+Image'
       })),
       timestamp: new Date().toISOString()
     };
@@ -1234,6 +1234,7 @@ export class PlayComponent implements OnInit {
         alert('Failed to save game state.');
       });
   }
+
 
   // save current card width and font-size
   saveSettings() {
