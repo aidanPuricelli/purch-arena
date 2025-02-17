@@ -576,13 +576,18 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 .drpdwn {
-    padding: 10px;
+    /* appearance: none; */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding: 5px 30px;
     border-radius: 10px;
     box-shadow: 0 5px rgb(33, 68, 88);
+    text-align: right;
+    direction: rtl;
 }
 
 .deck-option {
-    margin: 0 20px 0 10px;
+    margin: 0;
 }
 
 .deck-name {

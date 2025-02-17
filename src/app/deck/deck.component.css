@@ -38,7 +38,11 @@
 }
 
 .settings-dropdown {
-  top: 60px;
+  top: 80px;
+  width: 200px;
+  border-top: none;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .settings-option.disabled {

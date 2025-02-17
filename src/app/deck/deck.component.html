@@ -7,8 +7,9 @@
       <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
       <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
       
+      <!-- make this a custom drop down -->
       <select  class="drpdwn" [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
-        <option value="">-- Select Deck --</option>
+        <option value="">Select Deck</option>
         <option *ngFor="let deck of deckNames" [value]="deck">{{ deck }}</option>
       </select>
 
