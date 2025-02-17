@@ -671,6 +671,27 @@ export class PlayComponent implements OnInit {
     this.hideGraveContextMenu();
   }
 
+  // Play selected card from graveyard
+  playFromGraveyard(): void {
+    if (this.selectedGraveCard) {
+      const index = this.graveyard.indexOf(this.selectedGraveCard);
+      if (index !== -1) {
+
+        const cardToPlay = this.graveyard.splice(index, 1)[0];
+
+        this.playCards.push({
+          card: cardToPlay,
+          x: 100,
+          y: 100,
+          tapped: false,
+          counters: 0,
+        });
+
+        console.log('Played card from graveyard:', cardToPlay);
+      }
+    }
+    this.hideGraveContextMenu();
+  }
 
   // Mill
   mill(): void {
