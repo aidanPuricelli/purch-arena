@@ -160,7 +160,8 @@
 <div class="context-menu grave-context-menu" *ngIf="graveContextMenuVisible" 
      [ngStyle]="{'top.px': graveContextMenuY, 'left.px': graveContextMenuX}">
   <ul>
-    <li (click)="returnToHandSelectedCard()">Return to hand</li>
+    <li (click)="handFromGraveyard()">Return to hand</li>
+    <li (click)="exileFromGraveyard()">Send to Exile</li>
   </ul>
 </div>
 

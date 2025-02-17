@@ -637,7 +637,7 @@ export class PlayComponent implements OnInit {
   }
 
   // Move back to hand
-  returnToHandSelectedCard(): void {
+  handFromGraveyard(): void {
     if (this.selectedGraveCard) {
       const index = this.graveyard.indexOf(this.selectedGraveCard);
       if (index !== -1) {
@@ -654,6 +654,23 @@ export class PlayComponent implements OnInit {
     this.graveContextMenuVisible = false;
     this.selectedGraveCard = null;
   }
+
+  // Send selected card to exile
+  exileFromGraveyard(): void {
+    if (this.selectedGraveCard) {
+      const index = this.graveyard.indexOf(this.selectedGraveCard);
+      if (index !== -1) {
+
+        const exiledCard = this.graveyard.splice(index, 1)[0];
+
+        this.exile.push(exiledCard);
+
+        console.log('Sent card from graveyard to exile:', exiledCard);
+      }
+    }
+    this.hideGraveContextMenu();
+  }
+
 
   // Mill
   mill(): void {
