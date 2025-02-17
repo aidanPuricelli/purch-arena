@@ -56,27 +56,31 @@ export class DeckComponent implements OnInit {
   // Load the selected deck 
   loadDeck(deckName: string): void {
     this.deckSelectedFlag = true;
-
     this.isSettingsDisabled = false;
-
-    if (!deckName) {
-      return;
-    }
-
-    this.selectedDeck = deckName;
-    this.deckSelected.emit(deckName);
-    console.log(`Selected deck set to: '${this.selectedDeck}'`);
-
     this.http.get<{ deck: any[] }>(`/api/deck/${deckName}`).subscribe(
       (response) => {
-        console.log(`Loaded deck '${deckName}':`, response.deck);
         this.deck = response.deck || [];
-        this.deckCount = this.deck.length;
-        this.cdr.detectChanges();
+  
+        // Load commander and insert at position 0
+        this.http.get<{ commander: any }>(`/api/deck/${deckName}/commander`).subscribe(
+          (commanderResponse) => {
+            if (commanderResponse.commander) {
+              this.deck.unshift(commanderResponse.commander);
+            }
+            this.deckCount = this.deck.length;
+            this.cdr.detectChanges();
+          },
+          (error) => {
+            console.warn('No commander found for this deck.');
+            this.deckCount = this.deck.length;
+            this.cdr.detectChanges();
+          }
+        );
       },
-      (error) => console.error('Error loading deck', error)
+      (error) => console.error('Error loading deck:', error)
     );
   }
+  
 
   sortCriteria: string = '';
 
@@ -210,28 +214,45 @@ export class DeckComponent implements OnInit {
       console.warn('No card selected to set as commander.');
       return;
     }
-  
+
     if (!this.selectedDeck) {
       console.warn('No deck selected. Cannot set commander.');
       return;
     }
-  
-    console.log(`Setting commander for '${this.selectedDeck}':`, this.selectedCard);
-  
-    this.http.post(`/api/deck/${this.selectedDeck}/commander`, { commander: this.selectedCard }).subscribe(
-      (response) => {
-        console.log(`Commander set for '${this.selectedDeck}':`, response);
-        alert(`Commander set to ${this.selectedCard.name}`);
+
+    // Remove the selected card from the deck
+    const cardIndex = this.deck.findIndex(card => card === this.selectedCard);
+    if (cardIndex === -1) {
+      console.warn('Selected card not found in deck.');
+      return;
+    }
+    const [commanderCard] = this.deck.splice(cardIndex, 1);
+
+    // Update the server: remove the card from the deck and set commander
+    this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [], removedCards: [commanderCard] }).subscribe(
+      () => {
+        this.http.post(`/api/deck/${this.selectedDeck}/commander`, { commander: commanderCard }).subscribe(
+          () => {
+            alert(`Commander set to ${commanderCard.name}`);
+            this.loadDeck(this.selectedDeck); // Reload the deck to reflect changes
+          },
+          (error) => {
+            console.error('Error setting commander:', error);
+            alert('Failed to set commander.');
+          }
+        );
       },
       (error) => {
-        console.error('Error setting commander', error);
-        alert('Failed to set commander. Please try again.');
+        console.error('Error updating deck:', error);
+        alert('Failed to update deck after setting commander.');
       }
     );
-  
+
     this.contextMenuVisible = false;
     this.selectedCard = null;
   }
+
+
 
   // Method to download a single deck
   downloadDeck(): void {
