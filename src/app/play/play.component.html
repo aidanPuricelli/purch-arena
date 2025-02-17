@@ -66,7 +66,7 @@
 
 
 <!-- PLAY OPTIONS -->
-<div class="play-options">
+<div class="play-options animate__animated animate__fadeInRight">
   <a class="purch-btn" href="#" (click)="drawCard(); $event.preventDefault()">DRAW</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="shuffleDeck(); $event.preventDefault()">SHUFFLE</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
@@ -76,13 +76,13 @@
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="undoAction(); $event.preventDefault()">UNDO</a>
   <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
   <div *ngIf="showSettings" class="settings-dropdown">
+    <a (click)="newSeven()" class="settings-option">New Seven</a>
     <a (click)="toggleResize()" class="settings-option">Resize Cards</a>
     <a (click)="toggleDeckSelect()" class="settings-option">Select Deck</a>
+    <a (click)="toggleNav()" class="settings-option">Toggle Nav</a>
+    <a (click)="toggleHand()" class="settings-option">Toggle Hand</a>
     <a *ngIf="!minimizedOptions" (click)="toggleOptions()" class="settings-option">Less options</a>
     <a *ngIf="minimizedOptions" (click)="toggleOptions()" class="settings-option">More options</a>
-    <a (click)="toggleNav()" class="settings-option">Toggle Nav</a>
-    <a (click)="newSeven()" class="settings-option">New Seven</a>
-    <a (click)="toggleHand()" class="settings-option">Toggle Hand</a>
     <div class="font-size-container">
       <label for="fontSizeSlider">Font Size:</label>
       <input id="fontSizeSlider" type="range" min="10" max="24" [(ngModel)]="playOptionsFontSize" (input)="updateFontSize()">
@@ -115,9 +115,9 @@
 
 
 <!-- HAND -->
-<div class="hand" *ngIf="handFlag">
+<div class="hand" *ngIf="handFlag && deck.length > 0">
   <div class="d-flex flex-wrap cards justify-content-center">
-    <div *ngFor="let card of hand" class="card"
+    <div *ngFor="let card of hand" class="card animate__animated animate__fadeInDown"
          draggable="true"
          (dragstart)="onDragStart($event, card, 'hand')"
          (contextmenu)="onRightClick($event, card)">
@@ -171,7 +171,7 @@
 </div>
 
 <!-- LIFE COUNTER -->
-<div class="life-container" 
+<div class="life-container animate__animated animate__fadeInDown" 
 (click)="increaseLife()"
 (contextmenu)="decreaseLife($event)">
   <div class="life-counter">{{ life }}</div>
@@ -183,5 +183,8 @@
        [alt]="zoomedCard.name" 
        class="zoomed-card" />
 </div>
+
+<!-- HAND TAB -->
+<h1 class="hand-tab" *ngIf="!handFlag" (click)="toggleHand()">SHOW HAND</h1>
 
 

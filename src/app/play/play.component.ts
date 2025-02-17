@@ -38,10 +38,10 @@ export class PlayComponent implements OnInit {
   lifeFontSize = 30;
 
   resizeFlag = false;
-  deckSelectFlag = true;
+  deckSelectFlag = false;
   showSettings = false;
   handFlag = true;
-  minimizedOptions = false;
+  minimizedOptions = true;
   showNav = true;
 
   selectedDeckCard: any = null;
@@ -146,13 +146,13 @@ export class PlayComponent implements OnInit {
     this.showSettings = false;
 
     if (this.showNav) {
-      this.playOptionsPosition = 120;
+      this.playOptionsPosition = 100;
     } else {
       this.playOptionsPosition = 20;
 
     }
     document.documentElement.style.setProperty('--play-options-position', `${this.playOptionsPosition}px`);
-    document.documentElement.style.setProperty('--deck-selection=position', `${this.playOptionsPosition + 120}px`);
+    document.documentElement.style.setProperty('--deck-selection-position', `${this.playOptionsPosition + 120}px`);
   }
 
   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
@@ -293,8 +293,6 @@ export class PlayComponent implements OnInit {
       console.log(`Decreased counter for ${card.card.name}:`, card.counters);
     }
   }
-  
-  
   
   // Increase life
   increaseLife() {
@@ -469,7 +467,6 @@ export class PlayComponent implements OnInit {
       });
 
       this.selectedPlayCards.forEach(card => card.tapped = true);
-      console.log("Tapped multiple cards:", this.selectedPlayCards);
       this.hidePlayContextMenu();
     }
   }
@@ -496,12 +493,23 @@ export class PlayComponent implements OnInit {
   toggleTapCard(played: any, event: MouseEvent): void {
     event.stopPropagation();
 
+    // Push the action of tapping the double-clicked card to the history
+    this.actionHistory.push({
+      type: 'tap',
+      cards: [{
+        card: played,
+        previousState: played.tapped
+      }]
+    });
+
+    // Toggle the tapped state
     played.tapped = !played.tapped;
 
     this.cdRef.detectChanges();
 
     console.log(`Card "${played.card.name}" tapped state: ${played.tapped}`);
   }
+
 
   // send selected to graveyard
   sendToGraveyardSelectedCard(): void {
@@ -563,8 +571,12 @@ export class PlayComponent implements OnInit {
   @HostListener('dblclick', ['$event'])
   onDoubleClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    if (target.classList.contains('play-options') || target.closest('.play-options')) {
+    if (target.classList.contains('play-options')) {
       this.minimizedOptions = !this.minimizedOptions;
+    }
+
+    if (target.classList.contains('hand')) {
+      this.handFlag = !this.minimizedOptions;
     }
   }
 

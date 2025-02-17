@@ -66,6 +66,14 @@
   box-shadow: 0 5px rgb(38, 81, 105);
 }
 
+.play-options {
+  position: absolute;
+  z-index: 100;
+}
+
 .settings-dropdown {
   top: 80px;
+  position: absolute;
+  z-index: 50;
+  width: 150px;
 }

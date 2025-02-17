@@ -6,9 +6,9 @@
         <div class="settings-container">
             <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
             <div *ngIf="showSettings" class="settings-dropdown">
-                <a (click)="downloadBoth()" class="settings-option">Download</a>
+                <a (click)="downloadBoth()" class="settings-option">Download All Decks</a>
                 <label class="settings-option">
-                    Import<input type="file" (change)="uploadFile($event)" accept=".json" hidden />
+                    Import from JSON<input type="file" (change)="uploadFile($event)" accept=".json" hidden />
                 </label>
             </div>
         </div>        

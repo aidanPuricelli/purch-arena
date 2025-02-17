@@ -16,7 +16,7 @@ export class DeckComponent implements OnInit {
   newDeckName: string = '';
 
   placeIndex = 0;
-  deckPlaceHolderList = ['Sen Tr...', 'Edgar Ma...', 'Tergri...']
+  deckPlaceHolderList = ['Sen Tr...', 'Edgar Ma...', 'Tergri...', 'Grand Arbit...']
   deckPlaceHolder = this.deckPlaceHolderList[this.placeIndex];
 
   isLoading: boolean = false;

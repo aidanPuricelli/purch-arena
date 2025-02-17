@@ -231,7 +231,7 @@ html, body {
 
 .play-options {
     position: fixed;
-    top: var(--play-options-position, 120px);
+    top: var(--play-options-position, 100px);
     z-index: 10;
     right: 20px;
     padding: 20px 5px;
@@ -330,8 +330,8 @@ html, body {
     z-index: 9999 !important;
     background: rgb(0, 0, 0) !important;
     padding: 10px;
-    top: var(--play-options-position, 120px);
-    left: 150px;
+    top: var(--play-options-position, 100px);
+    left: 100px;
     color: rgb(182, 228, 255);
     border: solid 2px rgb(153, 235, 255);
     border-radius: 10px;
@@ -625,6 +625,22 @@ input[type="range"]::-moz-range-thumb:hover {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.hand-tab {
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    font-size: var(--play-options-font-size, 20px);
+    right: 0;
+    padding: 5px;
+    border-top-left-radius: 10px;
+    background: black;
+    border: solid 2px white;
+    border-bottom: none;
+    border-right: none;
+    color: rgb(166, 237, 255);
+    cursor: pointer;
 }
 
 
