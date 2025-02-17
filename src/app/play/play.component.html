@@ -33,6 +33,8 @@
       draggable="true"
       (dragstart)="onDragStart($event, played, 'play')"
       (contextmenu)="onPlayRightClick($event, played)"
+      (click)="toggleCardSelection(played, $event)"
+      (dblclick)="toggleTapCard(played, $event)"
       [ngStyle]="{
         'position': 'absolute',
         'left.px': played.x,
@@ -41,22 +43,24 @@
       [class.tapped]="played.tapped"
       [class.selected]="selectedPlayCards.includes(played)">
 
+      <!-- Card Image -->
       <img [src]="played.card.image_uris.normal" alt="card image"
-      [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
+          [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
 
-    <!-- Counter Circle -->
-    <div class="counter-circle"
-      (click)="increaseCounter(played, $event)"
-      (contextmenu)="decreaseCounter(played, $event)"
-      *ngIf="played.counters !== undefined && played.counters > 0">
-      {{ played.counters }}
-    </div>
+      <!-- Counter Circle -->
+      <div class="counter-circle"
+          (click)="increaseCounter(played, $event)"
+          (contextmenu)="decreaseCounter(played, $event)"
+          *ngIf="played.counters !== undefined && played.counters > 0">
+        {{ played.counters }}
+      </div>
 
-
-    <span *ngIf="played.tapped" class="tap-icon material-symbols-outlined">
-      refresh
-    </span>
+      <!-- Tapped Icon -->
+      <span *ngIf="played.tapped" class="tap-icon material-symbols-outlined">
+        refresh
+      </span>
   </div>
+
 </div>
 
 

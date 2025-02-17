@@ -89,17 +89,24 @@ export class PlayComponent implements OnInit {
 
   life = 20;
 
-  cardWidth = 200; // Default width
+  cardWidth = 200;
 
   navLinks = [
     { text: 'Home', href: '/' }
   ];
 
+  // update card width
   updateCardWidth(newWidth: number): void {
     this.cardWidth = newWidth;
     this.cdRef.detectChanges();
   }
 
+  // ***************************
+  // need to combine all toggle
+  // methods into a single method
+  // ***************************
+
+  // toggle display of settings drop down
   toggleSettings(): void {
     if (this.resizeFlag || this.deckSelectFlag) {
       this.resizeFlag = false;
@@ -109,27 +116,31 @@ export class PlayComponent implements OnInit {
     this.showSettings = !this.showSettings;
   }
 
+  // toggle display of card resize
   toggleResize() {
     this.resizeFlag = !this.resizeFlag;
     this.showSettings = false;
   }
 
+  // toggle display of hand
   toggleHand() {
     this.handFlag = !this.handFlag;
     this.showSettings = false;
   }
 
-
+  // toggle display of deck selection
   toggleDeckSelect() {
     this.deckSelectFlag = !this.deckSelectFlag;
     this.showSettings = false;
   }
 
+  // toggle display of play options
   toggleOptions() {
     this.minimizedOptions = !this.minimizedOptions;
     this.showSettings = false;
   }
 
+  // toggle display of nav
   toggleNav() {
     this.showNav = !this.showNav;
     this.showSettings = false;
@@ -146,6 +157,7 @@ export class PlayComponent implements OnInit {
 
   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
 
+  // on init of page
   ngOnInit(): void {
     this.loadDeckNames();
     this.fetchTokens();
@@ -400,6 +412,22 @@ export class PlayComponent implements OnInit {
     this.contextMenuVisible = true;
   }
 
+  // Toggle card selection on normal click
+  toggleCardSelection(played: any, event: MouseEvent): void {
+    event.stopPropagation();
+
+    const index = this.selectedPlayCards.indexOf(played);
+
+    if (index === -1) {
+      this.selectedPlayCards.push(played);
+    } else {
+      this.selectedPlayCards.splice(index, 1);
+    }
+
+    this.cdRef.detectChanges();
+  }
+
+
   // Discard a card
   discardSelectedCard(): void {
     if (this.selectedCard) {
@@ -431,7 +459,7 @@ export class PlayComponent implements OnInit {
   // Tap all selected cards
   tapSelectedCard(): void {
     if (this.selectedPlayCards.length > 0) {
-      // Store previous tap state in action history
+
       this.actionHistory.push({
         type: 'tap',
         cards: this.selectedPlayCards.map(card => ({
@@ -449,7 +477,7 @@ export class PlayComponent implements OnInit {
   // Untap all selected cards
   untapSelectedCard(): void {
     if (this.selectedPlayCards.length > 0) {
-      // Store previous tap state in action history
+      
       this.actionHistory.push({
         type: 'untap',
         cards: this.selectedPlayCards.map(card => ({
@@ -463,7 +491,17 @@ export class PlayComponent implements OnInit {
       this.hidePlayContextMenu();
     }
   }
- 
+
+  // Toggle tapped state for a single card
+  toggleTapCard(played: any, event: MouseEvent): void {
+    event.stopPropagation();
+
+    played.tapped = !played.tapped;
+
+    this.cdRef.detectChanges();
+
+    console.log(`Card "${played.card.name}" tapped state: ${played.tapped}`);
+  }
 
   // send selected to graveyard
   sendToGraveyardSelectedCard(): void {
@@ -493,11 +531,7 @@ export class PlayComponent implements OnInit {
     }
   }
   
-  
-  
-  
-
-  // Exile functionality (for now, log the action)
+  // Exile functionality, add logic for logging action for undo
   exileSelectedCard(): void {
     if (this.selectedPlayCard) {
       console.log('Exile selected. Functionality not fully implemented.', this.selectedPlayCard);
@@ -534,6 +568,22 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  // Listen even more?
+  @HostListener('document:keydown.control.z', ['$event'])
+  handleUndoShortcut(event: KeyboardEvent): void {
+    event.preventDefault();
+    this.undoAction();
+  }
+
+  // ???
+  @HostListener('document:keydown', ['$event'])
+  handleDeleteKey(event: KeyboardEvent): void {
+    if ((event.key === 'Delete' || event.key === 'Backspace')) {
+      event.preventDefault();
+      this.sendToGraveyardSelectedCard();
+    }
+  }
+
   // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
     this.draggedSource = source;
@@ -564,10 +614,8 @@ export class PlayComponent implements OnInit {
       }, 0);
     }
   }
-  
 
-  
-
+  // dragging over play area
   onDragOver(event: DragEvent): void {
     event.preventDefault();
     if (event.dataTransfer) {
@@ -575,6 +623,7 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  // on dropping card
   onDrop(event: DragEvent): void {
     event.preventDefault();
     const playContainer = event.currentTarget as HTMLElement;
@@ -761,8 +810,6 @@ export class PlayComponent implements OnInit {
     this.selectionBox = { x: this.startX, y: this.startY, width: 0, height: 0 };
   }
   
-  
-
   // Mouse Move (Update Selection Box)
   onMouseMove(event: MouseEvent): void {
     if (!this.isDragging) return;
@@ -884,7 +931,7 @@ export class PlayComponent implements OnInit {
       return;
     }
   
-    const lastAction = this.actionHistory.pop(); // Get the most recent action
+    const lastAction = this.actionHistory.pop();
     if (!lastAction || !lastAction.cards) return;
   
     console.log("Undoing action:", lastAction);
@@ -897,11 +944,11 @@ export class PlayComponent implements OnInit {
           break;
   
         case 'sendToGraveyard':
-          this.restoreCard(entry, this.graveyard, this.playCards, true); // Wrap as PlayedCard
+          this.restoreCard(entry, this.graveyard, this.playCards, true);
           break;
   
         case 'exile':
-          this.restoreCard(entry, this.exile, this.playCards, true); // Wrap as PlayedCard
+          this.restoreCard(entry, this.exile, this.playCards, true);
           break;
   
         case 'discard':
@@ -925,8 +972,6 @@ export class PlayComponent implements OnInit {
     });
   }
   
-  
-
   private restoreCard(
     entry: { card: any; previousLocation?: string; previousPosition?: { x: number; y: number } }, 
     fromZone: any[], 
@@ -953,10 +998,6 @@ export class PlayComponent implements OnInit {
     }
   }
   
-  
-  
-  
-
   // add action to history, prune if needee
   addActionToHistory(action: GameAction): void {
     this.actionHistory.push(action);
@@ -966,7 +1007,5 @@ export class PlayComponent implements OnInit {
       console.log("Action history pruned to last 10 actions.");
     }
   }
-
-  
 
 }
