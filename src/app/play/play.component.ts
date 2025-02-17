@@ -1073,13 +1073,14 @@ export class PlayComponent implements OnInit {
     this.showLoadModal = false;
   }
 
-  // fetch saved states from server
+  // Fetch saved states from server and remove .json extensions
   fetchSavedStates() {
     fetch('/api/saved-states')
       .then(response => response.json())
       .then(data => {
         if (data.savedStates) {
-          this.savedStates = data.savedStates;
+          // Remove .json extension from each state name
+          this.savedStates = data.savedStates.map((state: string) => state.replace(/\.json$/, ''));
         }
       })
       .catch(error => {
@@ -1095,8 +1096,10 @@ export class PlayComponent implements OnInit {
       return;
     }
 
+    const fileName = `${this.selectedSavedState}.json`;
+
     // Fetch the game state from the server
-    fetch(`/api/load-game/${this.selectedSavedState}`)
+    fetch(`/api/load-game/${fileName}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Failed to load game state: ${response.status}`);
