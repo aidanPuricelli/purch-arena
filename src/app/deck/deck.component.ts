@@ -66,8 +66,14 @@ export class DeckComponent implements OnInit {
 
   // Load the selected deck 
   loadDeck(deckName: string): void {
+    this.selectedDeck = deckName;
+    this.deckSelected.emit(deckName);
+
     this.deckSelectedFlag = true;
     this.isSettingsDisabled = false;
+
+    this.cdr.detectChanges();
+
     this.http.get<{ deck: any[] }>(`/api/deck/${deckName}`).subscribe(
       (response) => {
         this.deck = response.deck || [];
@@ -160,7 +166,10 @@ export class DeckComponent implements OnInit {
     this.http.post('/api/deck', { deckName: this.newDeckName }).subscribe(
       () => {
         this.loadDeckNames();
+
         this.selectedDeck = this.newDeckName;
+        this.deckSelected.emit(this.selectedDeck);
+
         this.loadDeck(this.newDeckName);
         console.log(`Deck "${this.newDeckName}" created and selected`);
 

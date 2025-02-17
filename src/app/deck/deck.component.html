@@ -13,7 +13,7 @@
       </select>
 
       <!-- Sort Dropdown -->
-      <select class="drpdwn" id="sortSelect" [(ngModel)]="sortCriteria" (change)="sortBy(sortCriteria)">
+      <select *ngIf="deckSelectedFlag" class="drpdwn" id="sortSelect" [(ngModel)]="sortCriteria" (change)="sortBy(sortCriteria)">
         <option value="">-- Sort By --</option>
         <option value="type">Card Type</option>
         <option value="manaCost">Mana Cost</option>
