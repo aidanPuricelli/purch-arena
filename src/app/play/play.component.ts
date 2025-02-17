@@ -583,12 +583,29 @@ export class PlayComponent implements OnInit {
   }
 
   // Listen
-  @HostListener('document:click')
-  onDocumentClick(): void {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const dropdown = document.querySelector('.settings-dropdown');
+    const settingsIcon = document.querySelector('.settings-icon');
+
+    // Hide all context menus
     this.hideContextMenu();
     this.hidePlayContextMenu();
     this.hideGraveContextMenu();
+
+    // Hide settings if the click is outside the dropdown and settings icon
+    if (
+      this.showSettings &&
+      dropdown &&
+      !dropdown.contains(target) &&
+      settingsIcon &&
+      !settingsIcon.contains(target)
+    ) {
+      this.showSettings = false;
+    }
   }
+
 
   // Listen some more
   @HostListener('dblclick', ['$event'])
@@ -622,25 +639,6 @@ export class PlayComponent implements OnInit {
     if (event.key === 'Delete' || event.key === 'Backspace') {
       event.preventDefault();
       this.sendToGraveyardSelectedCard();
-    }
-  }
-
-  // you're kidding
-  @HostListener('document:click', ['$event'])
-  handleOutsideClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    const dropdown = document.querySelector('.settings-dropdown');
-    const settingsIcon = document.querySelector('.settings-icon');
-
-    // Close settings if the click is outside the dropdown and not on the settings icon
-    if (
-      this.showSettings &&
-      dropdown &&
-      !dropdown.contains(target) &&
-      settingsIcon &&
-      !settingsIcon.contains(target)
-    ) {
-      this.showSettings = false;
     }
   }
 
