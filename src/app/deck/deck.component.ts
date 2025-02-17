@@ -15,6 +15,10 @@ export class DeckComponent implements OnInit {
   savedDeck: any[] = [];
   newDeckName: string = '';
 
+  placeIndex = 0;
+  deckPlaceHolderList = ['Sen Tr...', 'Edgar Ma...', 'Tergri...']
+  deckPlaceHolder = this.deckPlaceHolderList[this.placeIndex];
+
   isLoading: boolean = false;
 
   sortCriteria: string = '';
@@ -51,6 +55,11 @@ export class DeckComponent implements OnInit {
   onInputChange(): void {
     this.noInputError = false;
     this.fadeOutError = false;
+
+    if (!this.newDeckName) {
+      this.placeIndex = (this.placeIndex + 1) % this.deckPlaceHolderList.length;
+      this.deckPlaceHolder = this.deckPlaceHolderList[this.placeIndex];
+    }
   }
 
   // Load all deck names
