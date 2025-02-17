@@ -582,8 +582,6 @@ input[type="range"]::-moz-range-thumb:hover {
     padding: 5px 30px;
     border-radius: 10px;
     box-shadow: 0 5px rgb(33, 68, 88);
-    text-align: right;
-    direction: rtl;
 }
 
 .deck-option {
