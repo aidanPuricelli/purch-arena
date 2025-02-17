@@ -1,0 +1,4 @@
+[] Save setting preferences for play area
+[] Save board state 
+[] Double sided cards
+[] Move all selected cards at once
