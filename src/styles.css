@@ -452,7 +452,7 @@ html, body {
 }
 
 .zoomed-card {
-    width: 50vw;
+    width: 24vw;
     max-width: 500px;
     height: auto;
     border-radius: 10px;
