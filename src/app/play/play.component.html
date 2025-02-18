@@ -69,7 +69,7 @@
 <div class="play-options animate__animated animate__fadeInRight">
   <a class="purch-btn" href="#" (click)="drawCard(); $event.preventDefault()">DRAW</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="shuffleDeck(); $event.preventDefault()">SHUFFLE</a>
-  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()">GRAVEYARD</a>
+  <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="showGraveyard(); $event.preventDefault()" title="Shortcut: ctrl + g">GRAVEYARD</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="mill(); $event.preventDefault()">MILL</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="toggleTutor(); $event.preventDefault()">TUTOR</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="toggleToken(); $event.preventDefault()">TOKEN</a>
