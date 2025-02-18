@@ -642,34 +642,41 @@ export class PlayComponent implements OnInit {
     }
   }
 
-
-
+  // Track cursor offset when dragging
+  private cursorOffsetX = 0;
+  private cursorOffsetY = 0;
 
   // Drag and Drop methods
   onDragStart(event: DragEvent, item: any, source: 'hand' | 'play'): void {
     this.draggedSource = source;
     this.draggedCard = item;
-  
+
     if (event.dataTransfer) {
       event.dataTransfer.setData('text/plain', JSON.stringify(item));
       event.dataTransfer.effectAllowed = 'move';
-  
+
+      const target = event.target as HTMLElement;
+      const rect = target.getBoundingClientRect();
+      this.cursorOffsetX = event.clientX - rect.left;
+      this.cursorOffsetY = event.clientY - rect.top;
+
       const dragImage = new Image();
       dragImage.src = item.card?.image_uri || item.image_uri || 'https://example.com/default-token.jpg';
       dragImage.width = this.cardWidth;
-      dragImage.style.height = 'auto';
+
+      const cardHeight = this.cardWidth * 1.4;
+      dragImage.height = cardHeight;
+
       dragImage.style.position = 'absolute';
       dragImage.style.border = 'solid 3px white';
       dragImage.style.borderRadius = '10px';
       dragImage.style.opacity = '0.8';
       dragImage.style.pointerEvents = 'none';
-  
+
       document.body.appendChild(dragImage);
-  
-      const offsetX = 50;
-      const offsetY = 100;
-      event.dataTransfer.setDragImage(dragImage, offsetX, offsetY);
-  
+
+      event.dataTransfer.setDragImage(dragImage, this.cursorOffsetX, this.cursorOffsetY);
+
       setTimeout(() => {
         document.body.removeChild(dragImage);
       }, 0);
@@ -689,9 +696,10 @@ export class PlayComponent implements OnInit {
     event.preventDefault();
     const playContainer = event.currentTarget as HTMLElement;
     const containerRect = playContainer.getBoundingClientRect();
-    const dropX = event.clientX - containerRect.left - 50; // change later maybe
-    const dropY = event.clientY - containerRect.top - 100;  // change later maybe
-  
+
+    const dropX = event.clientX - containerRect.left - this.cursorOffsetX;
+    const dropY = event.clientY - containerRect.top - this.cursorOffsetY;
+
     let cardData: any = null;
     if (event.dataTransfer) {
       const data = event.dataTransfer.getData('text/plain');
@@ -703,7 +711,7 @@ export class PlayComponent implements OnInit {
         }
       }
     }
-  
+
     if (cardData && cardData.source === 'hand') {
       const card = cardData.card;
       const index = this.hand.indexOf(card);
@@ -728,11 +736,12 @@ export class PlayComponent implements OnInit {
         playedCard.y = dropY;
       }
     }
-  
+
     this.draggedCard = null;
     this.draggedSource = null;
   }
 
+  // toggle show graveyardd
   showGraveyard() {
     this.showGrave = !this.showGrave;
   }
