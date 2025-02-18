@@ -642,6 +642,13 @@ export class PlayComponent implements OnInit {
     }
   }
 
+  // you're kidding
+  @HostListener('document:keydown.control.g', ['$event'])
+  handleShowGraveyardShortcut(event: KeyboardEvent): void {
+    event.preventDefault();
+    this.showGraveyard();
+  }
+
   // Track cursor offset when dragging
   private cursorOffsetX = 0;
   private cursorOffsetY = 0;
