@@ -186,7 +186,7 @@
 
 <!-- ZOOMED CARD OVERLAY -->
 <div *ngIf="zoomedCard" class="zoom-overlay" (click)="closeZoom()">
-  <img [src]="zoomedCard.image_uris?.normal || 'https://example.com/default-card.jpg'" 
+  <img [src]="zoomedCard.image_uri || 'https://example.com/default-card.jpg'" 
        [alt]="zoomedCard.name" 
        class="zoomed-card" />
 </div>
