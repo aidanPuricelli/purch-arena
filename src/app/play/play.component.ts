@@ -840,6 +840,31 @@ export class PlayComponent implements OnInit {
     this.selectedCard = null;
   }
 
+  // put card from hand on bottom of library
+  onBottom(): void {
+    let index = this.deck.indexOf(this.selectedCard);
+
+    if (index !== -1) {
+        const card = this.deck.splice(index, 1)[0];
+        this.deck.push(card);
+        console.log('Card moved to bottom of deck:', card);
+    } else {
+        index = this.hand.indexOf(this.selectedCard);
+
+        if (index !== -1) {
+            const card = this.hand.splice(index, 1)[0];
+            this.deck.push(card);
+            console.log('Card moved from hand to bottom of deck:', card);
+        } else {
+            console.log('Card not found in deck or hand.');
+        }
+    }
+
+    this.contextMenuVisible = false;
+    this.selectedCard = null;
+  }
+
+
   // Move card from board back to hand
   backToHand(): void {
     if (this.selectedPlayCard) {
