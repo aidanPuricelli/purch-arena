@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DeckComponent } from './deck/deck.component';
 import { PlayComponent } from './play/play.component';
+import { CreateComponent } from './create/create.component';
+import { QuickStartComponent } from './quick-start/quick-start.component';
+import { ReleaseNotesComponent } from './release-notes/release-notes.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { PlayComponent } from './play/play.component';
     BuildComponent,
     SearchComponent,
     DeckComponent,
-    PlayComponent
+    PlayComponent,
+    CreateComponent,
+    QuickStartComponent,
+    ReleaseNotesComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,8 @@ export class HomePageComponent {
   showSaveModal = false;
   savedStates: string[] = [];
   selectedSavedState: string = '';
+  releaseNotes = false;
+  releaseText = 'Release Notes';
 
   constructor(private http: HttpClient) {}
 
@@ -125,6 +127,15 @@ export class HomePageComponent {
         console.error('Error deleting save:', error);
         alert('Failed to delete the selected save.');
       });
+  }
+
+  toggleReleaseNotes() {
+    this.releaseNotes = !this.releaseNotes;
+    if (this.releaseNotes) {
+      this.releaseText = 'x';
+    } else {
+      this.releaseText = 'Release Notes';
+    }
   }
 
 }

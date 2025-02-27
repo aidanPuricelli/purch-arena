@@ -3,12 +3,15 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const { createCanvas, loadImage } = require('canvas');
 
 const app = express();
 app.use(bodyParser.json({ limit: '50mb' }));
+app.use('/custom_images', express.static(path.join(__dirname, 'custom_images')));
 
 const filePath = path.join(__dirname, 'decks.json');
 const commandersFilePath = path.join(__dirname, 'commander.json');
+const customCardsPath = path.join(__dirname, 'custom_cards.json');
 
 // Load all decks
 const loadDecks = () => {
@@ -454,6 +457,65 @@ app.delete('/api/delete-game/:fileName', (req, res) => {
   }
 });
 
+
+// get symbols
+app.get('/api/symbols', async (req, res) => {
+  try {
+    const response = await fetch('https://api.scryfall.com/symbology');
+    const data = await response.json();
+
+    if (!data.data) {
+      return res.status(500).json({ message: 'Failed to fetch symbols' });
+    }
+
+    // Extract only the symbol image URLs
+    const symbols = data.data.map(symbol => symbol.svg_uri);
+
+    res.json({ symbols });
+  } catch (error) {
+    console.error('Error fetching symbols:', error);
+    res.status(500).json({ message: 'Error fetching symbols' });
+  }
+});
+
+const loadCustomCards = () => {
+  try {
+    const data = fs.readFileSync(customCardsPath, 'utf8');
+    return JSON.parse(data);
+  } catch (err) {
+    return [];
+  }
+};
+
+const saveCustomCards = (cards) => {
+  fs.writeFileSync(customCardsPath, JSON.stringify(cards, null, 2));
+};
+
+app.post('/api/save-custom-card', async (req, res) => {
+  const { name, image } = req.body;
+
+  if (!name || !image) {
+    return res.status(400).json({ message: 'Invalid card data' });
+  }
+
+  const imageBuffer = Buffer.from(image.replace(/^data:image\/png;base64,/, ''), 'base64');
+  const fileName = `${name.replace(/\s+/g, '_')}.png`;
+  const filePath = path.join(__dirname, 'custom_images', fileName);
+
+  fs.writeFileSync(filePath, imageBuffer);
+
+  const customCards = loadCustomCards();
+  customCards.push({ name, image_uri: `/custom_images/${fileName}` });
+  saveCustomCards(customCards);
+
+  res.json({ message: 'Custom card saved successfully', image_uri: `/custom_images/${fileName}` });
+});
+
+// GET custom cards
+app.get('/api/custom-cards', (req, res) => {
+  const customCards = loadCustomCards();
+  res.json(customCards);
+});
 
 
 // Start the server

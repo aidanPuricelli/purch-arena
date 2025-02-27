@@ -1,3 +1,19 @@
 .settings-dropdown {
     width: 200px;
 }
+
+.release-notes {
+    position: absolute;
+    top: 59px;
+    background: rgb(61, 59, 57);
+    z-index: 12;
+    right: 0;
+    padding: 0px;
+    color: rgb(241, 221, 199);
+    cursor: pointer;
+}
+
+.release-notes p {
+    padding: 5px 10px;
+    margin: 0;
+}

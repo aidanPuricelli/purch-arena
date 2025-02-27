@@ -1,45 +1,68 @@
-<app-navbar [links]="[]"></app-navbar> <!-- Empty links since we manually add settings -->
 
-<div class="purch-nav">
-    <div class="left"></div>
-    <div class="right">
-        <div class="settings-container">
-            <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
-            <div *ngIf="showSettings" class="settings-dropdown">
-                <a (click)="downloadBoth()" class="settings-option">Download All Decks</a>
-                <label class="settings-option">
-                    Import from JSON<input type="file" (change)="uploadFile($event)" accept=".json" hidden />
-                </label>
-                <a (click)="openSaveModal()" class="settings-option">Manage Saved Games</a>
+
+<div class="main-home">
+    <div class="purch-nav animate__animated animate__fadeInDown animate__delay-1s">
+        <div class="left"></div>
+        <div class="right">
+            <div class="settings-container">
+                <!--release info button-->
+                <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
+            </div>        
+        </div>
+    </div>
+
+    <div (click)="toggleReleaseNotes()" class="release-notes animate__animated animate__fadeInRight animate__delay-1s">
+        <p class="beleren-bold">{{releaseText}}</p>
+    </div>
+    
+    <div *ngIf="showSettings" class="settings-dropdown">
+        <a (click)="downloadBoth()" class="settings-option">Download Decks</a>
+        <label class="settings-option">
+            Import Decks<input type="file" (change)="uploadFile($event)" accept=".json" hidden />
+        </label>
+        <a (click)="openSaveModal()" class="settings-option">Manage Saved Games</a>
+        <a class="settings-option version beleren-bold">Version: 1.0.0</a>
+    </div>
+
+    <div class="home-container container d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <div class="purch-header">
+                <h1 class="beleren-bold animate__animated animate__pulse">PurchArena</h1>
+                <img src="../../assets/symbols-png/W.png">
+                <img src="../../assets/symbols-png/U.png">
+                <img src="../../assets/symbols-png/B.png">
+                <img src="../../assets/symbols-png/R.png">
+                <img src="../../assets/symbols-png/G.png">
             </div>
-        </div>        
+        </div>
+    </div>
+    
+    <div class="purch-btns animate__animated animate__fadeInLeft animate__delay-1s">
+        <a routerLink="build" class="purch-btn ">BUILD</a>
+        <a routerLink="play" class="purch-btn purch-btn-alt">PLAY</a>
+    </div>
+
+    <div class="quick-start animate__animated animate__fadeInUp animate__delay-1s">
+        <h1 class="beleren-bold">Quick Start Guide</h1>
+    </div>
+    
+    <!-- Modal for Managing Game Saves -->
+    <div class="save-modal" *ngIf="showSaveModal">
+        <div class="modal-content">
+      
+          <!-- Dropdown of saved states -->
+          <select [(ngModel)]="selectedSavedState" class="saved-state-select">
+            <option *ngFor="let state of savedStates" [value]="state">{{ state }}</option>
+          </select>
+      
+          <div class="modal-actions">
+            <button class="purch-btn" (click)="deleteSelectedState()">Delete</button>
+            <button class="purch-btn" (click)="closeSaveModal()">Cancel</button>
+          </div>
+        </div>
     </div>
 </div>
 
-<div class="home-container container d-flex justify-content-center align-items-center vh-100">
-    <div class="text-center">
-        <div class="purch-header">
-            <!-- <h1>Welcome to <span id="purch-add-color">&#60;insert_name></span> </h1> -->
-        </div>
-        <div class="purch-btns mt-5">
-            <a routerLink="build" class="purch-btn">BUILD</a>
-            <a routerLink="play" class="purch-btn purch-btn-alt">PLAY</a>
-        </div>
-    </div>
-</div>
+<app-quick-start></app-quick-start>
+<app-release-notes *ngIf="releaseNotes"></app-release-notes>
 
-<!-- Modal for Managing Game Saves -->
-<div class="save-modal" *ngIf="showSaveModal">
-    <div class="modal-content">
-  
-      <!-- Dropdown of saved states -->
-      <select [(ngModel)]="selectedSavedState" class="saved-state-select">
-        <option *ngFor="let state of savedStates" [value]="state">{{ state }}</option>
-      </select>
-  
-      <div class="modal-actions">
-        <button class="purch-btn" (click)="deleteSelectedState()">Delete</button>
-        <button class="purch-btn" (click)="closeSaveModal()">Cancel</button>
-      </div>
-    </div>
-</div>

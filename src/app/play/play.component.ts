@@ -94,7 +94,7 @@ export class PlayComponent implements OnInit {
   selectedPlayCard: PlayedCard | null = null;
 
   playOptionsFontSize = 18;
-  playOptionsPosition = 120;
+  playOptionsPosition = 80;
 
   life = 20;
 
@@ -168,7 +168,7 @@ export class PlayComponent implements OnInit {
     this.showSettings = false;
 
     if (this.showNav) {
-      this.playOptionsPosition = 100;
+      this.playOptionsPosition = 80;
     } else {
       this.playOptionsPosition = 20;
 

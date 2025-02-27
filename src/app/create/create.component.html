@@ -1,0 +1,58 @@
+<app-navbar [links]="navLinks"></app-navbar>
+<div class="create-container">
+    <div class="card-container" id="card-container">
+        <img id="card" src="../../assets/images/multi-color.png" crossOrigin="anonymous">
+
+        <div class="card-text">
+            <p contenteditable="true"
+               (focus)="showTextOptions($event)">Card Text</p>
+        </div>
+        
+        <div class="card-text quote">
+            <p contenteditable="true"
+               (focus)="showTextOptions($event)">Quote</p>
+        </div> 
+        
+        <div class="card-text type">
+            <p contenteditable="true"
+               (focus)="showTextOptions($event)">Type</p>
+        </div>  
+
+        <div class="card-text name">
+            <p contenteditable="true"
+               (focus)="showTextOptions($event)">Name</p>
+        </div>  
+        
+        <div class="card-text mana">
+            <p contenteditable="true"
+               (focus)="showTextOptions($event)">Mana</p>
+        </div>  
+
+        <div class="card-text power-toughness">
+            <p contenteditable="true"
+               (focus)="showTextOptions($event)">1/1</p>
+        </div>  
+
+        <!-- Div where the uploaded image will appear -->
+        <div class="card-art">
+            <img *ngIf="uploadedImage" [src]="uploadedImage" alt="Card Art">
+        </div>
+    </div>
+
+    <div class="text-options">
+        <p class="purch-btn" (mousedown)="toggleItalic($event)"><i>I</i></p>
+        <p class="purch-btn" (mousedown)="toggleBold($event)">B</p>
+        <p class="purch-btn" (mousedown)="applyEmptySetFont($event)">&empty;</p>
+
+        <select class="symbol-dropdown" (change)="insertSymbol($event)">
+            <option value="" disabled selected>Symbol</option>
+            <option *ngFor="let symbol of symbols" [value]="symbol">
+                {{ symbol }}
+            </option>
+        </select>      
+    </div> 
+    
+    <button class="purch-btn save-card" (click)="saveCustomCard()">Save Card</button>
+    <!-- Image Upload Button -->
+    <input type="file" class="image-input" (change)="onImageUpload($event)" accept="image/*">
+</div>
