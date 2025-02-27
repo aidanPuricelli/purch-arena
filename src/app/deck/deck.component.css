@@ -38,14 +38,15 @@
 }
 
 .settings-dropdown {
-  top: 247px;
+  top: 64px;
   width: 200px;
   border: solid 2px rgb(224, 195, 155);
   box-shadow: 0 3px rgb(115, 88, 70);
   border-top: none;
-  right: 100px;
+  right: 0px;
   padding: 0;
   box-sizing: content-box;
+  position: absolute;
 }
 
 .settings-option.disabled {
