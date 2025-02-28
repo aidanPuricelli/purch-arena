@@ -234,18 +234,19 @@ export class PlayComponent implements OnInit {
   placeTokenInPlay(): void {
     const token = this.tokenTypes.find(t => t.name === this.selectedToken);
     if (token) {
-      const tokenCard = {
-        id: `token-${token.name}`,
-        name: token.name,
-        image_uris: { normal: token.imageUrl }
-      };
+        const tokenCard = {
+            id: `token-${token.name}`,
+            name: token.name,
+            image_uris: { normal: token.imageUrl } // Ensure correct property name
+        };
 
-      this.playCards.push({ card: tokenCard, x: 150, y: 150, counters: 0 });
-      console.log(`Token placed in play area:`, tokenCard);
+        this.playCards.push({ card: tokenCard, x: 150, y: 150, counters: 0 });
+        console.log(`Token placed in play area:`, tokenCard);
     } else {
-      console.warn('No token selected!');
+        console.warn('No token selected!');
     }
   }
+
 
   // Load all available deck names
   loadDeckNames(): void {

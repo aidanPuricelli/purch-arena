@@ -1,7 +1,7 @@
 <app-navbar [links]="navLinks"></app-navbar>
 <div class="create-container">
     <div class="card-container" id="card-container">
-        <img id="card" src="../../assets/images/multi-color.png" crossOrigin="anonymous">
+        <!-- <img id="card" src="../../assets/images/multi-color.png" crossOrigin="anonymous"> -->
 
         <div class="card-text">
             <p contenteditable="true"
@@ -32,8 +32,6 @@
             <p contenteditable="true"
                (focus)="showTextOptions($event)">1/1</p>
         </div>  
-
-        <!-- Div where the uploaded image will appear -->
         <div class="card-art">
             <img *ngIf="uploadedImage" [src]="uploadedImage" alt="Card Art">
         </div>
