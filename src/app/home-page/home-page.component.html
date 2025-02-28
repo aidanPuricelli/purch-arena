@@ -2,7 +2,12 @@
 
 <div class="main-home">
     <div class="purch-nav animate__animated animate__fadeInDown animate__delay-1s">
-        <div class="left"></div>
+        <div class="left">
+            <label class="switch">
+                <input type="checkbox" (change)="toggleTheme($event)">
+                <span class="slider round"></span>
+            </label>
+        </div>
         <div class="right">
             <div class="settings-container">
                 <!--release info button-->

@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
   showSettings = false;
   showSaveModal = false;
   savedStates: string[] = [];
@@ -15,6 +15,10 @@ export class HomePageComponent {
   releaseText = 'Release Notes';
 
   constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.loadTheme();
+  }
 
   toggleSettings(): void {
     this.showSettings = !this.showSettings;
@@ -135,6 +139,22 @@ export class HomePageComponent {
       this.releaseText = 'x';
     } else {
       this.releaseText = 'Release Notes';
+    }
+  }
+
+  toggleTheme(event: any): void {
+    const isDarkMode = event.target.checked;
+    const theme = isDarkMode ? 'dark-theme' : 'light-theme';
+    document.documentElement.className = theme;
+    localStorage.setItem('theme', theme);
+  }
+
+  loadTheme(): void {
+    const savedTheme = localStorage.getItem('theme') || 'light-theme';
+    document.documentElement.className = savedTheme;
+    const checkbox = document.querySelector('.switch input') as HTMLInputElement;
+    if (checkbox) {
+      checkbox.checked = savedTheme === 'dark-theme';
     }
   }
 

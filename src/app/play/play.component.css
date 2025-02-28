@@ -2,7 +2,6 @@
 
 .card {
     margin: 0 10px;
-    background: rgb(255, 255, 255);
     padding: 2px;
     flex: 0 0 auto;
 }
@@ -65,7 +64,7 @@
 .settings-icon {
   margin: 0;
   font-size: var(--play-options-font-size, 20px);
-  color: rgb(200, 179, 159);
+  color: var(--play-set-icon);
 }
 
 .play-options {
@@ -78,7 +77,7 @@
   position: absolute;
   z-index: 50;
   width: 150px;
-  border: solid 2px rgb(161, 147, 135);
+  border: solid 2px var(--setting-drpdwn-border);
 }
 
 .purch-btn {
@@ -92,9 +91,9 @@
   z-index: 10;
   right: 20px;
   padding: 10px 10px 10px 5px;
-  background: rgb(106, 98, 90);
-  border: solid 2px rgb(255, 220, 171);
-  box-shadow: 0 3px rgb(134, 117, 91);
+  background: var(--play-options-background);
+  border: solid 2px var(--play-options-border);
+  box-shadow: 0 3px var(--play-options-shadow);
 }
 
 /* play */
@@ -115,8 +114,8 @@
 
 .font-size-container {
   padding: 5px;
-  color: rgb(91, 83, 73);
-  border-top: solid 2px rgb(188, 168, 141);
+  color: var(--font-size-color);
+  border-top: solid 2px var(--font-size-border);
 }
 
 .font-size-container label {
@@ -129,13 +128,13 @@
 
 .advanced-option {
   margin: 0;
-  color: rgb(223, 213, 188);
-  background: rgb(134, 126, 107);
+  color: var(--adv-option-color);
+  background: var(--adv-option-background);
 }
 
 .advanced-option:hover {
-  background: rgb(240, 231, 219);
-  color: rgb(134, 126, 107);
+  background: var(--adv-option-hover-background);
+  color: var(--adv-option-hover-color);
 }
 
 .resize-container {
@@ -196,22 +195,22 @@ input[type="range"]::-moz-range-thumb {
   z-index: 10;
   padding: 10px;
   font-size: var(--life-font-size, 20px);
-  background: rgb(106, 98, 90);
-  border: solid 2px rgb(255, 220, 171);
-  box-shadow: 0 3px rgb(134, 117, 91);
-  color: rgb(255, 227, 189);
+  background: var(--play-options-background);
+  border: solid 2px var(--play-options-border);
+  box-shadow: 0 3px var(--play-options-shadow);
+  color: var(--play-options-color);
 }
 
 .deck-selection {
   position: fixed;
   z-index: 9999 !important;
-  background: rgb(106, 98, 90) !important;
+  background: var(--play-options-background) !important;
   padding: 10px;
   top: var(--play-options-position, 80px);
   left: 100px;
-  color: rgb(255, 227, 189);
-  border: solid 2px rgb(255, 220, 171);
-  box-shadow: 0 3px rgb(134, 117, 91);
+  color: var(--play-options-color);
+  border: solid 2px var(--play-options-border);
+  box-shadow: 0 3px var(--play-options-shadow);
 }
 
 .deck-selection label {
@@ -220,13 +219,154 @@ input[type="range"]::-moz-range-thumb {
 
 #deckSelect {
   padding: 5px;
-  border: solid 2px rgb(255, 220, 171);
-  color: rgb(103, 96, 90) !important;
-  background: rgb(255, 220, 171);
+  border: solid 2px var(--play-options-border);
+  color: var(--play-options-background) !important;
+  background: var(--play-options-color);
 }
 
-.deck-opt {
+
+
+.hand {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px; /* Ensures the hand container does not exceed the viewport width */
+  padding: 20px;
+  background: var(--hand-background);
+  border: 2px solid var(--hand-border);
+  z-index: 10;
+  box-shadow: 3px 3px 7px var(--hand-shadow);
+  overflow-x: auto; /* Enable horizontal scrolling within this container */
+  /* Optional: Prevent vertical scrollbar if not needed */
+  overflow-y: hidden;
+}
+
+
+.hand img {
+  width: 200px;
+}
+
+.hand .card {
+  z-index: 11;
+}
+
+.played-card {
+  position: absolute;
+  will-change: transform, top, left;
+}
+
+.played-card img {
+  width: 200px;
+}
+
+.graveyard {
+  position: fixed;           /* Fixed position so it stays in one place */
+  top: 50%;                  /* Center vertically */
+  left: 50%;                 /* Center horizontally */
+  transform: translate(-50%, -50%);  /* Adjust centering */
+  width: 1200px;
+  height: 800px;
+  background: var(--graveyard-background);          /* White background (or choose a color) */
+  border: 2px solid var(--graveyard-border);    /* Light border */
+  padding: 20px;
+  overflow: auto;            /* Scroll if content overflows */
+  z-index: 1000;             /* Ensure it appears above other content */
+  border-radius: 10px;
+}
+
+/* Override any existing flex styles on the .cards container */
+.graveyard .cards {
+  display: grid !important;  /* Use grid layout */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  
+  /* Creates as many columns as will fit, with each card at least 150px wide */
+  gap: 10px;                 /* Gap between cards */
+  justify-items: center;     /* Center cards in their grid cell */
+}
+
+/* Optional: Style individual cards if needed */
+.graveyard .card {
+  width: 100%;
+  /* You can set a fixed height or allow it to scale naturally */
+  /* Optionally add a border or box-shadow for a card look */
+}
+
+.banner select {
   background: black;
-  border-radius: 0px;
-  border: solid 2px rgb(174, 246, 255);
+  border: solid 2px rgb(172, 255, 255);
+  margin-right: 10px;
+  color: white;
+}
+
+.token-selection {
+  margin: 30px 0 0 0;
+}
+
+.card-selection {
+  margin: 30px 0 0 0;
+}
+
+.card-selection label {
+  color: white;
+  margin-right: 10px;
+}
+
+.token-selection label {
+  color: white;
+  margin-right: 10px;
+}
+
+.counter-circle {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 25px;
+  height: 25px;
+  background: var(--counter-background);
+  color: var(--counter-color);
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+}
+
+.selection-box {
+  position: absolute;
+  background: var(--selection-background);
+  border: 2px solid var(--selection-border);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.selected {
+  outline: 3px solid var(--selected-border);
+  border-radius: 7px;
+}
+
+/* Zoom Overlay */
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5vh;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.zoomed-card {
+  width: 24vw;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  border: solid 5px white;
+  box-shadow: 0 0 20px rgba(210, 210, 210, 0.5);
 }

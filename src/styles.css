@@ -1,10 +1,173 @@
+:root.light-theme {
+    --nav-background: rgb(244, 232, 225);
+    --nav-border: rgb(240, 151, 43);
+    --dots-one: rgb(255, 223, 186);
+    --dots-two: rgb(235, 235, 235);
+    --quick-start-label: rgb(185, 156, 123);
+    --quick-start-label-border: rgb(252, 214, 188);
+    --btn-border: rgb(234, 181, 118);
+    --btn-shadow: rgb(112, 77, 47);
+    --btn-background: rgb(227, 227, 227);
+    --btn-color: rgb(150, 124, 87);
+    --btn-hover: rgb(248, 227, 197);
+    --home-header: rgb(78, 63, 50);
+
+    --hand-background: rgb(213, 195, 173);
+    --hand-border: rgb(226, 171, 115);
+    --hand-shadow: transparent;
+
+    --settings-icon: rgb(100, 100, 100);
+    --settings-option-color: rgb(124, 98, 77);
+    --version-border: rgb(185, 175, 167);
+    --version-color: rgb(225, 201, 173);
+    --version-background: rgb(152, 137, 115);
+    --version-hover: rgb(152, 137, 115);
+
+    --hand-tab-background: black;
+    --hand-tab-border: white;
+    --hand-tab-color: rgb(166, 237, 255);
+
+    --setting-drpdwn-background: rgb(228, 212, 195);
+    --setting-drpdwn-shadow: rgb(97, 75, 43);
+    --setting-drpdwn-border: rgb(188, 143, 103);
+
+    --banner-background:rgb(236, 224, 212);
+    --banner-border: rgb(224, 195, 155);
+    --banner-shadow: rgb(118, 96, 81);
+    --error-background: rgb(243, 198, 198);
+    --error-border: rgb(255, 127, 127);
+    --error-shadow: rgb(180, 47, 47);
+    --error-color: rgb(125, 82, 82);
+    --deck-name-input-border: rgb(223, 182, 128);
+    --deck-name-input-background: rgb(227, 227, 227);
+    --deck-name-input-color: rgb(71, 65, 60);
+    --deck-card-border: transparent;
+    --card-num-color: rgb(105, 96, 89);
+    --search-bar-border: rgb(190, 161, 123);
+
+    --release-text-color: rgb(49, 47, 46);
+    --release-background: rgb(190, 202, 189);
+    --release-border: rgb(255, 210, 180);
+
+    --quick-start-background: rgb(225, 210, 195);
+    --quick-start-border: rgb(116, 101, 88);
+    --quick-start-header-border: rgb(137, 129, 116);
+    --how-to-background: rgb(208, 185, 172);
+    --how-to-content-background: rgb(224, 211, 196);
+    --how-to-content-border: rgb(175, 154, 134);
+    --notice-background: rgb(218, 143, 143);
+    --notice-border: rgb(141, 62, 62);
+
+    --play-set-icon: rgb(200, 179, 159);
+    --play-options-background: rgb(106, 98, 90);
+    --play-options-border: rgb(255, 220, 171);
+    --play-options-shadow: rgb(134, 117, 91);
+    --play-options-color: rgb(255, 227, 189);
+    --font-size-color: rgb(91, 83, 73);
+    --font-size-border: rgb(188, 168, 141);
+    --adv-option-color: rgb(223, 213, 188);
+    --adv-option-background: rgb(134, 126, 107);
+    --adv-option-hover-color: rgb(240, 231, 219);
+    --adv-option-hover-background: rgb(134, 126, 107);
+    --graveyard-background: #cbbaaf;
+    --graveyard-border: #877c74;
+    --counter-background: rgb(255, 186, 103);
+    --counter-color: rgb(104, 91, 69);
+    --selection-border: rgba(255, 123, 0, 0.7);
+    --selection-background: rgba(255, 145, 0, 0.2);
+    --selected-border: rgb(255, 145, 0);
+}
+
+:root.dark-theme {
+    --nav-background: rgb(71, 66, 63);
+    --nav-border: rgb(255, 220, 177);
+    --dots-one: rgb(44, 43, 40);
+    --dots-two: rgb(23, 23, 22);
+    --quick-start-label: rgb(84, 76, 68);
+    --quick-start-label-border: rgb(252, 214, 188);
+    --btn-border: rgb(244, 211, 170);
+    --btn-shadow: rgb(177, 141, 109);
+    --btn-background: rgb(79, 74, 70);
+    --btn-color: rgb(232, 217, 197);
+    --btn-hover: rgb(156, 145, 129);
+    --home-header: rgb(195, 183, 171);
+
+    --hand-background: rgb(71, 67, 62);
+    --hand-border: rgb(213, 183, 153);
+    --hand-shadow: rgb(255, 193, 122);
+
+    --settings-icon: rgb(169, 169, 169);
+    --settings-option-color: rgb(206, 190, 176);
+    --settings-option-hover: rgb(102, 94, 90);
+    --version-border: rgb(185, 175, 167);
+    --version-color: rgb(227, 214, 198);
+    --version-background: rgb(113, 107, 98);
+    --version-hover: rgb(113, 107, 98);
+
+    --hand-tab-background: black;
+    --hand-tab-border: white;
+    --hand-tab-color: rgb(166, 237, 255);
+
+    --setting-drpdwn-background: rgb(85, 80, 75);
+    --setting-drpdwn-shadow: rgb(97, 75, 43);
+    --setting-drpdwn-border: rgb(188, 143, 103);
+
+    --banner-background:rgb(57, 53, 48);
+    --banner-border: rgb(224, 195, 155);
+    --banner-shadow: rgb(118, 96, 81);
+    --error-background: rgb(168, 98, 98);
+    --error-border: rgb(255, 127, 127);
+    --error-shadow: rgb(180, 47, 47);
+    --error-color: rgb(226, 191, 191);
+    --deck-name-input-border: rgb(223, 182, 128);
+    --deck-name-input-background: rgb(227, 227, 227);
+    --deck-name-input-color: rgb(71, 65, 60);
+    --deck-card-border: transparent;
+    --card-num-color: rgb(105, 96, 89);
+    --search-bar-border: rgb(190, 161, 123);
+
+    --release-text-color: rgb(198, 183, 175);
+    --release-background: rgb(43, 42, 39);
+    --release-border: rgb(218, 187, 168);
+
+    --quick-start-background: rgb(62, 59, 55);
+    --quick-start-border: rgb(192, 170, 151);
+    --quick-start-header-border: rgb(104, 98, 88);
+    --how-to-background: rgb(32, 30, 28);
+    --how-to-content-background: rgb(115, 109, 101);
+    --how-to-content-border: rgb(147, 137, 128);
+    --how-to-color: rgb(232, 226, 220);
+    --notice-background: rgb(218, 143, 143);
+    --notice-border: rgb(141, 62, 62);
+    --notice-color: rgb(53, 44, 44);
+
+    --play-set-icon: rgb(200, 179, 159);
+    --play-options-background: rgb(106, 98, 90);
+    --play-options-border: rgb(255, 220, 171);
+    --play-options-shadow: rgb(134, 117, 91);
+    --play-options-color: rgb(255, 227, 189);
+    --font-size-color: rgb(207, 192, 172);
+    --font-size-border: rgb(188, 168, 141);
+    --adv-option-color: rgb(223, 213, 188);
+    --adv-option-background: rgb(134, 126, 107);
+    --adv-option-hover-color: rgb(240, 231, 219);
+    --adv-option-hover-background: rgb(134, 126, 107);
+    --graveyard-background: #484441;
+    --graveyard-border: #bdafa4;
+    --counter-background: rgb(255, 186, 103);
+    --counter-color: rgb(104, 91, 69);
+    --selection-border: rgba(255, 164, 79, 0.7);
+    --selection-background: rgba(255, 183, 88, 0.2);
+    --selected-border: rgb(255, 145, 0);
+}
+
+
 * {
     margin: 0;
     padding: 0;
 }
 
 html, body {
-    background: rgb(27, 27, 27) !important;
     user-select: none;
     overflow-y: scroll;
 }
@@ -39,7 +202,7 @@ html, body {
 #dots {
     background-color: #eeeeee00;
     background-repeat: repeat;
-    background-image: radial-gradient(circle, rgb(255, 223, 186) 30%, rgb(235, 235, 235) 31%);
+    background-image: radial-gradient(circle, var(--dots-one) 30%, var(--dots-two) 31%);
     background-size: 0.5em 0.5em;
     background-position: 50% 50%;
     width: 100vw;
@@ -52,10 +215,11 @@ html, body {
     position: absolute;
     width: 100vw;
     bottom: 0;
-    background: rgb(185, 156, 123);
+    background: var(--quick-start-label);
     z-index: 13;
     margin: 0;
-    border-top: solid 3px rgb(252, 214, 188);
+    border-top: solid 3px var(--quick-start-label-border);
+    color: var(--how-to-color)
 }
 
 .quick-start h1 {
@@ -75,7 +239,6 @@ html, body {
     background: #222;
     color: white;
     border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     list-style: none;
     padding: 5px 0;
     z-index: 1000;
@@ -100,7 +263,6 @@ html, body {
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
-    border-bottom: solid 8px rgb(255, 0, 0);
     z-index: 20;
 }
 
@@ -137,13 +299,13 @@ html, body {
 
 .purch-nav {
     width: 100vw;
-    background: rgb(244, 232, 225);
+    background: var(--nav-background);
     padding: 10px 0;
     position: fixed;
     display: flex;
     align-items: center;
     font-family: "Exo 2", serif;
-    border-bottom: solid 2px rgb(240, 151, 43);
+    border-bottom: solid 2px var(--nav-border);
     top : 0;
     z-index: 100;
 }
@@ -161,25 +323,24 @@ html, body {
     margin: 0 5px;
     padding: 10px 15px;
     text-decoration: none;
-    border: solid 2px rgb(234, 181, 118);
+    border: solid 2px var(--btn-border);
     /* border-radius: 10px; */
-    box-shadow: 0 3px rgb(112, 77, 47);
-    color: rgb(150, 124, 87);
-    background: rgb(227, 227, 227);
+    box-shadow: 0 3px var(--btn-shadow);
+    color: var(--btn-color);
+    background: var(--btn-background);
 }
 
 .purch-btn:hover {
-    background: rgb(248, 227, 197);
+    background: var(--btn-hover);
 }
 
 /* header stylings */
 
 .purch-header {
-    color: rgb(78, 63, 50);
+    color: var(--home-header);
 }
 
 .purch-header h1 {
-    /* background: rgb(226, 184, 151); */
     padding: 2px 5px;
     border-radius: 3px;
     font-size: 55px;
@@ -190,164 +351,12 @@ html, body {
     margin: 0 2px;
 }
 
-#purch-add-color {
-    color: rgb(171, 238, 255);
-}
-
 .save-btn {
     top: 5px;
     right: 0px;
     position: absolute;
 }
 
-
-.hand {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px; /* Ensures the hand container does not exceed the viewport width */
-    padding: 20px;
-    background: rgb(0, 0, 0);
-    border-radius: 10px;
-    border: 2px solid rgb(54, 81, 97);
-    z-index: 10;
-    box-shadow: 3px 3px 7px rgb(29, 52, 71);
-    overflow-x: auto; /* Enable horizontal scrolling within this container */
-    /* Optional: Prevent vertical scrollbar if not needed */
-    overflow-y: hidden;
-}
-  
-
-.hand img {
-    width: 200px;
-}
-
-.hand .card {
-    z-index: 11;
-}
-
-.played-card {
-    position: absolute;
-    will-change: transform, top, left;
-}
-
-.played-card img {
-    width: 200px;
-}
-
-.graveyard {
-    position: fixed;           /* Fixed position so it stays in one place */
-    top: 50%;                  /* Center vertically */
-    left: 50%;                 /* Center horizontally */
-    transform: translate(-50%, -50%);  /* Adjust centering */
-    width: 1200px;
-    height: 800px;
-    background: #000000;          /* White background (or choose a color) */
-    border: 2px solid #bffdff;    /* Light border */
-    padding: 20px;
-    overflow: auto;            /* Scroll if content overflows */
-    z-index: 1000;             /* Ensure it appears above other content */
-    border-radius: 10px;
-    box-shadow: 0 5px rgb(23, 46, 59);
-  }
-  
-  /* Override any existing flex styles on the .cards container */
-  .graveyard .cards {
-    display: grid !important;  /* Use grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  
-    /* Creates as many columns as will fit, with each card at least 150px wide */
-    gap: 10px;                 /* Gap between cards */
-    justify-items: center;     /* Center cards in their grid cell */
-  }
-  
-  /* Optional: Style individual cards if needed */
-  .graveyard .card {
-    width: 100%;
-    /* You can set a fixed height or allow it to scale naturally */
-    /* Optionally add a border or box-shadow for a card look */
-  }
-
-.banner select {
-    background: black;
-    border: solid 2px rgb(172, 255, 255);
-    margin-right: 10px;
-    color: white;
-}
-
-.token-selection {
-    margin: 30px 0 0 0;
-}
-
-.card-selection {
-    margin: 30px 0 0 0;
-}
-
-.card-selection label {
-    color: white;
-    margin-right: 10px;
-}
-
-.token-selection label {
-    color: white;
-    margin-right: 10px;
-}
-
-.counter-circle {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 25px;
-    height: 25px;
-    background: rgb(159, 225, 255);
-    color: rgb(35, 67, 80);
-    font-weight: bold;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    user-select: none;
-}
-
-.selection-box {
-    position: absolute;
-    background: rgba(0, 100, 255, 0.2);
-    border: 2px solid rgba(0, 100, 255, 0.7);
-    pointer-events: none;
-    z-index: 20;
-}
-
-.selected {
-    outline: 3px solid rgb(38, 0, 255);
-    border-radius: 7px;
-}
-
-/* Zoom Overlay */
-.zoom-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8); 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 5vh;
-    z-index: 1000;
-    cursor: pointer;
-}
-
-.zoomed-card {
-    width: 24vw;
-    max-width: 500px;
-    height: auto;
-    border-radius: 10px;
-    border: solid 5px white;
-    box-shadow: 0 0 20px rgba(193, 226, 231, 0.5);
-}
 
 .settings-container {
     position: relative;
@@ -359,7 +368,7 @@ html, body {
 
 .settings-icon {
     font-size: var(--play-options-font-size, 30px); /* Sync with buttons */
-    color: rgb(100, 100, 100);
+    color: var(--settings-icon);
     transition: color 0.3s ease;
     cursor: pointer;
 }
@@ -372,7 +381,7 @@ html, body {
     display: block;
     padding: 5px;
     text-align: left;
-    color: rgb(124, 98, 77);
+    color: var(--settings-option-color);
     text-decoration: none;
     transition: background 0.3s ease;
     cursor: pointer;
@@ -381,20 +390,20 @@ html, body {
 }
 
 .settings-option:hover {
-    background: #fbfbfb;
+    background: var(--settings-option-hover);
 }
 
 .version {
     padding: 3px 0px 3px 0px;
     text-align: center;
     margin-top: 5px;
-    border-top: solid 2px rgb(185, 175, 167);
-    color: rgb(225, 201, 173);
-    background: rgb(152, 137, 115);
+    border-top: solid 2px var(--version-border);
+    color: var(--version-color);
+    background: var(--version-background);
 }
 
 .version:hover {
-    background: rgb(152, 137, 115);
+    background: var(--version-hover);
     cursor:inherit;
 }
 
@@ -441,11 +450,11 @@ html, body {
     right: 0;
     padding: 5px;
     border-top-left-radius: 10px;
-    background: black;
-    border: solid 2px white;
+    background: var(--hand-tab-background);
+    border: solid 2px var(--hand-tab-border);
     border-bottom: none;
     border-right: none;
-    color: rgb(166, 237, 255);
+    color: var(--hand-tab-color);
     cursor: pointer;
 }
 
@@ -454,10 +463,10 @@ html, body {
     position: fixed;
     right: 0;
     top: 48px;
-    background: rgb(228, 212, 195);
-    box-shadow: 0 3px rgb(97, 75, 43);
-    border-left: solid 2px rgb(188, 143, 103);
-    border-bottom: solid 2px rgb(188, 143, 103);
+    background: var(--setting-drpdwn-background);
+    box-shadow: 0 3px var(--setting-drpdwn-shadow);
+    border-left: solid 2px var(--setting-drpdwn-border);
+    border-bottom: solid 2px var(--setting-drpdwn-border);
     width: 120px;
     z-index: 50;
 }
@@ -504,180 +513,6 @@ html, body {
     margin-bottom: 20px;
     -webkit-appearance: none;
     padding: 0 0 0 10px;
-}
-
-/* Create styles */
-
-.card-container {
-    position: relative;
-    margin: auto;
-    width: 400px;
-    top: 120px;
-}
-
-#card {
-    width: 400px;
-}
-
-.card-container img {
-    z-index: 10;
-    position: relative;
-    margin: auto;
-}
-
-.card-text {
-    position: absolute;
-    width: 323px;
-    height: 170px;
-    bottom: 60px;
-    left: 35px;
-    z-index: 12;
-}
-
-.card-text p {
-    box-sizing: border-box;
-    margin: 7px;
-    font-weight: 200;
-    line-height: 17px;
-}
-
-.quote {
-    bottom: 65px;
-    height: auto;
-    margin: 0px;
-}
-
-.type {
-    height: 20px;
-    top: 315px;
-    color: rgb(205, 205, 205);
-    text-shadow: 2px 2px black;
-}
-
-.type p {
-    margin-left: 0;
-}
-
-.mana {
-    top: 18px;
-    width: 150px;
-    left: 233px;
-    height: 40px;
-    text-align: right;
-    color: rgb(205, 205, 205);
-}
-
-.power-toughness {
-    bottom: 37px;
-    width: 50px;
-    left: 325px;
-    height: auto;
-    background: rgb(204, 196, 208);
-    text-align: center;
-    border-radius: 10px;
-    border: solid 3px rgb(36, 36, 36);
-    box-sizing: border-box;
-}
-
-.name {
-    top: 20px;
-    color: rgb(205, 205, 205);
-    text-shadow: 2px 2px black;
-    margin-left: -7px;
-}
-
-.name p {
-    font-size: 1.1rem;
-}
-
-.text-options {
-    position: absolute;
-    background: rgb(0, 0, 0);
-    border: solid 2px rgb(175, 243, 255);
-    padding: 20px;
-    top: 120px;
-    right: 20px;
-    z-index: 12;
-    border-radius: 5px;
-    box-shadow: 0 5px rgb(47, 87, 105);
-}
-
-.text-options p {
-    text-align: center;
-    cursor: pointer;
-    margin: 0px 5px 20px 5px;
-}
-
-.save-card {
-    position: absolute;
-    top: 120px;
-}
-
-.image-input {
-    position: absolute;
-    top: 200px;
-    left: 20px;
-    padding: 20px;
-    background: black;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 5px rgb(60, 105, 135);
-    border: solid 3px rgb(166, 240, 255);
-}
-
-.card-art {
-    position: absolute;
-    top: 54px;
-    left: 40px;
-    width: 315px;
-    height: 260px;
-    overflow: hidden; /* Hide overflowing parts of the image */
-    z-index: 12;
-}
-
-.card-art img {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    /* Force the image to be at least as large as the container */
-    min-width: 100%;
-    min-height: 100%;
-
-    /* Allow the image to expand beyond its container if needed */
-    max-width: none;
-    max-height: none;
-}
-  
-
-.inline-symbol {
-    display: inline-block; /* Ensures the span only wraps around the image */
-    align-items: center;
-    vertical-align: middle;
-    margin: 0 2px;
-    width: fit-content; /* Ensures no extra width is added */
-}
-
-.mtg-symbol {
-    width: 1rem;
-    height: 1rem;
-    z-index: 100;
-    vertical-align: middle;
-}
-
-.mana .inline-symbol {
-    margin: 0 2px;
-}
-
-.mana .mtg-symbol {
-    width: 1.1rem;
-    height: 1.1rem;
-}
-
-
-.symbol-dropdown {
-    width: 100px;
 }
 
 

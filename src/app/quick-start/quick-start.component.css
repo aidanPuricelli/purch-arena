@@ -1,21 +1,24 @@
+
+
 .quick-start-container {
+    color: var(--how-to-color);
     width: 100vw;
     padding-bottom: 20px;
     position: relative;
     z-index: 10;
-    background: rgb(225, 210, 195);
-    border-top: solid 3px rgb(116, 101, 88);
+    background: var(--quick-start-background);
+    border-top: solid 3px var(--quick-start-border);
 }
 
 .quick-start-header {
     padding: 30px 10px 0 10px;
     margin: 0 20px 10px 20px;
-    border-bottom: solid 2px rgb(137, 129, 116);
+    border-bottom: solid 2px var(--quick-start-header-border);
 }
 
 .how-to {
     margin: 0 20px 10px 20px;
-    background: rgb(208, 185, 172);
+    background: var(--how-to-background);
     padding-bottom: 10px;
 }
 
@@ -26,14 +29,15 @@
 
 .how-to-content {
     padding: 10px;
-    background: rgb(224, 211, 196);
+    background: var(--how-to-content-background);
     margin: 10px;
-    border: solid 2px rgb(175, 154, 134);
+    border: solid 2px var(--how-to-content-border);
     box-sizing: border-box;
 }
 
 .notice {
-    background: rgb(218, 143, 143);
+    background: var(--notice-background);
     padding: 5px;
-    border-left: solid 5px rgb(141, 62, 62);
+    border-left: solid 5px var(--notice-border);
+    color: var(--notice-color);
 }

@@ -4,12 +4,12 @@
     margin: auto;
     z-index: 10;
     margin-top: 70px;
-    background: rgb(236, 224, 212);
+    background: var(--banner-background);
     padding: 15px;
-    border-left: solid 3px rgb(224, 195, 155);
-    border-right: solid 3px rgb(224, 195, 155);
-    border-bottom: solid 3px rgb(224, 195, 155);
-    box-shadow: 0 3px rgb(118, 96, 81);
+    border-left: solid 3px var(--banner-border);
+    border-right: solid 3px var(--banner-border);
+    border-bottom: solid 3px var(--banner-border);
+    box-shadow: 0 3px var(--banner-shadow);
 }
 
 .search-container input {
@@ -27,7 +27,7 @@
 }
 
 .search-container .form-control {
-    border: solid 2px rgb(190, 161, 123);
+    border: solid 2px var(--search-bar-border);
 }
 
 .card-results {
@@ -50,7 +50,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     z-index: 5;
-    /* border: solid 2px rgb(160, 255, 133); */
+    border: solid 2px var(--deck-card-border);
 }
 
 .card-img:hover {

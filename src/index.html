@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>PURCH</title>
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') || 'light-theme';
+      document.documentElement.className = theme;
+    })();
+  </script>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">

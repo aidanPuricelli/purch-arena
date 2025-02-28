@@ -4,7 +4,6 @@
     border: 1px solid #ccc;
     z-index: 1000;
     padding: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   }
   
   
@@ -29,19 +28,11 @@
   right: 0px;
 }
 
-.settings-icon {
-    margin: 0;
-    border: solid 2px rgb(171, 240, 255);
-    padding: 5px;
-    border-radius: 10px;
-    box-shadow: 0 5px rgb(38, 87, 101);
-}
-
 .settings-dropdown {
   top: 64px;
   width: 200px;
-  border: solid 2px rgb(224, 195, 155);
-  box-shadow: 0 3px rgb(115, 88, 70);
+  border: solid 2px var(--setting-drpdwn-border);
+  box-shadow: 0 3px var(--setting-drpdwn-shadow);
   border-top: none;
   right: 0px;
   padding: 0;
@@ -61,24 +52,24 @@
   z-index: 10;
   position: relative;
   width: 100%;
-  background: rgb(236, 224, 212);
+  background: var(--banner-background);
   margin: 30px 0;
   padding: 10px;
-  border: solid 3px rgb(224, 195, 155);
-  box-shadow: 0 2px rgb(118, 96, 81);
+  border: solid 3px var(--banner-border);
+  box-shadow: 0 2px var(--banner-shadow);
 }
 
 .no-cards {
   position: relative;
   z-index: 5;
-  background: rgb(243, 198, 198);
+  background: var(--error-background);
   width: 50%;
   margin: auto;
   text-align: center;
   padding: 10px;
-  border: solid 2px rgb(255, 127, 127);
-  color: rgb(125, 82, 82);
-  box-shadow: 0 3px rgb(180, 47, 47);
+  border: solid 2px var(--error-border);
+  color: var(--error-color);
+  box-shadow: 0 3px var(--error-shadow);
 }
 
 .error {
@@ -93,9 +84,9 @@
 
 .deck-name {
   padding: 5px 5px 5px 10px;
-  border: solid 2px rgb(223, 182, 128);
-  background: rgb(227, 227, 227);
-  color: rgb(71, 65, 60);
+  border: solid 2px var(--deck-name-input-border);
+  background: var(--deck-name-input-background);
+  color: var(--deck-name-input-color);
 }
 
 .settings-icon {
@@ -114,9 +105,9 @@
   -webkit-appearance: none;
   padding: 3px 30px;
   border-radius: 0;
-  background: rgb(227, 227, 227);
-  border-color: rgb(223, 182, 128);
-  color: rgb(71, 65, 60);
+  background: var(--btn-background);
+  border-color: var(--setting-drpdwn-border);
+  color: var(--settings-option-color);
 }
 
 li {
@@ -136,7 +127,7 @@ li {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   z-index: 5;
-  /* border: solid 2px rgb(160, 255, 133); */
+  border: solid 2px var(--deck-card-border);
 }
 
 .card-img:hover {
@@ -155,5 +146,5 @@ li {
   top: 30px;
   font-size: 20px;
   font-weight: bolder;
-  color: rgb(105, 96, 89);
+  color: var(--card-num-color);
 }
