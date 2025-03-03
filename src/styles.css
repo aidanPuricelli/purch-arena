@@ -562,6 +562,13 @@ html, body {
   .timer {
     z-index: 20 !important;
   }
+
+.notice {
+    background: var(--notice-background);
+    padding: 5px;
+    border-left: solid 5px var(--notice-border);
+    color: var(--notice-color);
+}
   
 
 

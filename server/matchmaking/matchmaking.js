@@ -15,10 +15,10 @@ router.post('/create-room', async (req, res) => {
         console.log("Received request to create room...");
 
         if (!ngrokUrl) {
-            // 🔥 Authenticate and start Ngrok without CAPTCHA
+            // Authenticate and start Ngrok without CAPTCHA
             ngrokUrl = await ngrok.connect({
                 addr: 3001,
-                authtoken: "your-token", 
+                authtoken: "", 
                 region: "eu",
                 proto: "http"
             });
@@ -50,7 +50,7 @@ router.post('/join-room', (req, res) => {
     console.log(`📡 Player ${playerId} attempting to join room ${roomId}`);
 
     if (!playerId) {
-        console.error("❌ Received request with undefined playerId!");
+        console.error("Received request with undefined playerId!");
         return res.status(400).json({ message: "Player ID is required." });
     }
 
@@ -62,7 +62,7 @@ router.post('/join-room', (req, res) => {
         gameRooms[roomId].players.push(playerId);
     }
 
-    console.log(`✅ Players in room ${roomId}:`, gameRooms[roomId].players);
+    console.log(`Players in room ${roomId}:`, gameRooms[roomId].players);
     res.json({ message: "Joined room successfully", players: gameRooms[roomId].players });
 });
 
