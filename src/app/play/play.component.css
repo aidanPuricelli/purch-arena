@@ -370,3 +370,35 @@ input[type="range"]::-moz-range-thumb {
   border: solid 5px white;
   box-shadow: 0 0 20px rgba(210, 210, 210, 0.5);
 }
+
+.opponent-board {
+  position: absolute;
+  background: red;
+  z-index: 100;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cancel-btn {
+  background: rgb(209, 134, 134);
+}
+
+.cancel-btn:hover {
+  background: rgb(216, 102, 102);
+}
+
+/* .other-btn {
+  background:rgb(132, 132, 235);
+} */
+
+.timer {
+  position: absolute;
+  z-index: 100;
+  top: var(--play-options-position, 80px);
+  left: 80px;
+  font-size: var(--life-font-size, 20px);
+}

@@ -74,6 +74,7 @@
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="toggleTutor(); $event.preventDefault()">TUTOR</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="toggleToken(); $event.preventDefault()">TOKEN</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="undoAction(); $event.preventDefault()">UNDO</a>
+  <a *ngIf="roomId" class="purch-btn" href="#" (click)="syncGameState(roomId); $event.preventDefault()">SYNC</a>
   <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
   <div *ngIf="showSettings" class="settings-dropdown">
     <a (click)="newSeven()" class="settings-option">New Seven</a>
@@ -87,6 +88,10 @@
     <a *ngIf="advancedFlag" (click)="openSaveModal()" class="settings-option advanced-option">Save Game</a>
     <a *ngIf="advancedFlag" (click)="openLoadModal()" class="settings-option advanced-option">Load Game</a>
     <a *ngIf="advancedFlag" (click)="saveSettings()" title="This will save the current card width and font size" class="settings-option advanced-option">Save Settings</a>
+    <a *ngIf="advancedFlag" (click)="createRoom()" class="settings-option advanced-option">Create Room</a>
+    <a *ngIf="advancedFlag" (click)="openRoomModal()" class="settings-option advanced-option">Join Room</a>
+    <a *ngIf="advancedFlag" (click)="openPlayerIdModal()" class="settings-option advanced-option">Set ID</a>
+    <a *ngIf="advancedFlag" (click)="openUrlModal()" class="settings-option advanced-option">Set URL</a>
 
 
     <div class="font-size-container">
@@ -202,6 +207,44 @@
   </div>
 </div>
 
+<!-- Modal for Joining Room -->
+<div class="save-modal" *ngIf="showRoomModal">
+  <div class="modal-content">
+    <input type="text" [(ngModel)]="roomId" placeholder="Enter the room code..." />
+    <div class="modal-actions">
+      <button class="purch-btn" (click)="joinRoom(roomId)">Join Room</button>
+      <button class="purch-btn cancel-btn" (click)="closeRoomModal()">Cancel</button>
+      <button class="purch-btn other-btn" (click)="copyRoomIdToClipboard()">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Setting Player Id -->
+<div class="save-modal" *ngIf="showPlayerIdModal">
+  <div class="modal-content">
+    <input type="text" [(ngModel)]="playerId" placeholder="Enter your player ID..." />
+    <div class="modal-actions">
+      <button class="purch-btn" (click)="setPlayerId(playerId)">Set ID</button>
+      <button class="purch-btn" (click)="closePlayerIdModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Setting URL -->
+<div class="save-modal" *ngIf="showUrlModal">
+  <div class="modal-content">
+    <div class="input-container">
+      <input type="text" [(ngModel)]="serverPort" placeholder="Enter base url to connect to..." />
+    </div>
+    <div class="modal-actions">
+      <button class="purch-btn other-btn" (click)="setUrl(serverPort)">Set ID</button>
+      <button class="purch-btn cancel-btn" (click)="closeUrlModal()">Cancel</button>
+      <button class="purch-btn other-btn" (click)="copyUrlToClipboard()">Copy</button>
+    </div>
+  </div>
+</div>
+
+
 <!-- Modal for Loading Game -->
 <div class="save-modal" *ngIf="showLoadModal">
   <div class="modal-content">
@@ -218,7 +261,30 @@
   </div>
 </div>
 
+<div *ngIf="showTimer && myTimer" (click)="toggleTimer()" class="timer animate__animated animate__fadeInLeft">
+  <p *ngIf="timeLeft> 0" class="purch-btn">{{ formatTime(timeLeft) }}</p>
+</div>
+<div *ngIf="!showTimer && myTimer" (click)="toggleTimer()" class="timer">
+  <span class="material-symbols-outlined purch-btn">
+    timer
+    </span>
+</div>
+
 <!-- HAND TAB -->
 <h1 class="hand-tab" *ngIf="!handFlag" (click)="toggleHand()">SHOW HAND</h1>
+
+<div class="opponent-board">
+  <h3>Opponent Boards</h3>
+  <div *ngFor="let opponent of opponentBoards">
+    <h4>Opponent {{ opponent.playerId }}</h4>
+    <ul>
+      <li *ngFor="let card of opponent.playCards">
+        {{ card.card.name }} ({{ card.x }}, {{ card.y }})
+        <img [src]="card.card.image_uri" width="100" height="140" />
+      </li>
+    </ul>
+  </div>
+</div>
+
 
 

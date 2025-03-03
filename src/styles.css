@@ -484,19 +484,19 @@ html, body {
     justify-content: center;
     align-items: center;
     z-index: 200;
-    color: white;
+    color: var(--home-header);
     caret-color: black;
 }
   
 .modal-content {
-    background: rgb(0, 0, 0) !important;
+    background: var(--banner-background) !important;
     width: 50% !important;
     padding: 20px 30px;
     border-radius: 10px;
     text-align: center;
     border-radius: 10px !important;
-    border: solid 2px rgb(193, 250, 255) !important;
-    box-shadow: 0 5px rgb(30, 62, 66);
+    border: solid 2px var(--banner-border) !important;
+    box-shadow: 0 5px var(--banner-shadow);
 }
   
 .modal-content input {

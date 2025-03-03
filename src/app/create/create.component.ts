@@ -88,8 +88,8 @@ export class CreateComponent implements OnInit{
     imgElement.src = symbolUrl;
     imgElement.classList.add('mtg-symbol');
     imgElement.alt = 'Symbol';
-    imgElement.style.width = "20px";
-    imgElement.style.height = "20px";
+    imgElement.style.width = "22px";
+    imgElement.style.height = "22px";
     imgElement.crossOrigin = "anonymous"; // Ensures CORS compatibility for html2canvas
   
     imgElement.onload = () => {

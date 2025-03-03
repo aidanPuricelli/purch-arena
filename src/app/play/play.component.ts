@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component, HostListener, input, NgZone, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { io } from 'socket.io-client';
+import { timer } from 'rxjs';
 
 interface PlayedCard {
   card: any;
@@ -35,6 +37,7 @@ interface Card {
   styleUrls: ['./play.component.css']
 })
 export class PlayComponent implements OnInit {
+  serverPort = 'http://localhost:3001';
 
   actionHistory: GameAction[] = [];
 
@@ -45,6 +48,21 @@ export class PlayComponent implements OnInit {
 
   lifeFontSize = 30;
 
+  // MATCHMAKING
+  roomId: string = '';
+  opponentPlayCards: PlayedCard[] = []; 
+  showRoomModal = false;
+  playerId = '';
+  opponentBoards: { playerId: string, playCards: any[] }[] = [];
+  showPlayerIdModal = false;
+  showUrlModal = false;
+
+  // webrtc (possible replacement for polling)
+  socket: any;
+  peerConnection!: RTCPeerConnection;
+  dataChannel!: RTCDataChannel;
+
+
   resizeFlag = false;
   advancedFlag = false;
   deckSelectFlag = false;
@@ -52,6 +70,8 @@ export class PlayComponent implements OnInit {
   handFlag = true;
   minimizedOptions = true;
   showNav = true;
+  showTimer = false;
+  myTimer = false;
 
   selectedDeckCard: any = null;
   showTutor: boolean = false;
@@ -110,6 +130,10 @@ export class PlayComponent implements OnInit {
   selectedSavedState: string = '';
   saveGameName = '';
 
+
+  // timer
+  timeLeft: number = 7200; // 2 hours in seconds
+  timerInterval: any;
 
   // update card width
   updateCardWidth(newWidth: number): void {
@@ -177,7 +201,7 @@ export class PlayComponent implements OnInit {
     document.documentElement.style.setProperty('--deck-selection-position', `${this.playOptionsPosition + 120}px`);
   }
 
-  constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
+  constructor(private http: HttpClient, private cdRef: ChangeDetectorRef, private zone: NgZone) {}
 
   // on init of page
   ngOnInit(): void {
@@ -185,6 +209,30 @@ export class PlayComponent implements OnInit {
     this.loadDeckNames();
     this.fetchTokens();
     this.updateFontSize();
+
+    this.initializeWebRTC();
+
+    this.playerId = localStorage.getItem("playerId") || this.generatePlayerId();
+    console.log("🔹 Assigned playerId:", this.playerId);
+
+    // ✅ Listen for real-time game state updates
+    this.socket.on('update-game-state', ({ playerId, playCards }: { playerId: string; playCards: any[] }) => {
+      console.log(`📡 Received updated game state from ${playerId}`, playCards);
+      
+      // ✅ Update only the opponent's board
+      this.opponentBoards = this.opponentBoards.map(board =>
+          board.playerId === playerId ? { playerId, playCards } : board
+      );
+
+      // ✅ If no board exists for this player, add a new entry
+      if (!this.opponentBoards.some(board => board.playerId === playerId)) {
+          this.opponentBoards.push({ playerId, playCards });
+      }
+    });
+  }
+
+  generatePlayerId(): string {
+    return `player_${Math.random().toString(36).substr(2, 9)}`; // Generates a unique ID
   }
 
   // update font size of play options
@@ -242,6 +290,7 @@ export class PlayComponent implements OnInit {
 
       this.playCards.push({ card: tokenCard, x: 150, y: 150, counters: 0 });
       console.log(`Token placed in play area:`, tokenCard);
+      this.sendGameState();
     } else {
       console.warn('No token selected!');
     }
@@ -249,7 +298,11 @@ export class PlayComponent implements OnInit {
 
   // Load all available deck names
   loadDeckNames(): void {
-    this.http.get<{ deckNames: string[] }>('/api/decks').subscribe(
+    const headers = new HttpHeaders({
+      "ngrok-skip-browser-warning": "true"
+    });
+  
+    this.http.get<{ deckNames: string[] }>(`${this.serverPort}/api/decks`, {headers}).subscribe(
       (response) => {
         this.deckNames = response.deckNames;
         console.log('Available Decks:', this.deckNames);
@@ -329,33 +382,41 @@ export class PlayComponent implements OnInit {
   }
   
 
-  // Load deck after user selects it
   onDeckSelected(): void {
     if (!this.selectedDeck) return;
-    
+  
     console.log(`Loading deck: '${this.selectedDeck}'`);
-
-    this.http.get<{ deck: any[] }>(`/api/deck/${this.selectedDeck}`).subscribe(
-      (response) => {
-        this.deck = response.deck;
-        console.log(`Loaded deck '${this.selectedDeck}':`, this.deck);
-
-        this.playCards = [];
-        this.graveyard = [];
-        this.exile = [];
-        
-        this.toggleDeckSelect();
-        this.loadCommander();
-        this.shuffleDeck();
-        this.drawHand();
-      },
-      (error) => console.error('Error loading deck', error)
-    );
+  
+    // Add the required header to bypass Ngrok's browser warning
+    const headers = new HttpHeaders({
+      "ngrok-skip-browser-warning": "true"
+    });
+  
+    this.http.get<{ deck: any[] }>(`${this.serverPort}/api/deck/${this.selectedDeck}`, { headers })
+      .subscribe(
+        (response) => {
+          this.deck = response.deck;
+          console.log(`Loaded deck '${this.selectedDeck}':`, this.deck);
+  
+          this.playCards = [];
+          this.graveyard = [];
+          this.exile = [];
+  
+          this.toggleDeckSelect();
+          this.loadCommander();
+          this.shuffleDeck();
+          this.drawHand();
+        },
+        (error) => console.error('Error loading deck', error)
+      );
   }
 
   // Load commander for the selected deck
   loadCommander(): void {
-    this.http.get<{ commander: any }>(`/api/deck/${this.selectedDeck}/commander`).subscribe(
+    const headers = new HttpHeaders({
+      "ngrok-skip-browser-warning": "true"
+    });
+    this.http.get<{ commander: any }>(`${this.serverPort}/api/deck/${this.selectedDeck}/commander`, { headers }).subscribe(
       (response) => {
         if (response.commander) {
           this.commander = response.commander;
@@ -743,7 +804,7 @@ export class PlayComponent implements OnInit {
         playedCard.y = dropY;
       }
     }
-
+    this.sendGameState();
     this.draggedCard = null;
     this.draggedSource = null;
   }
@@ -1135,7 +1196,7 @@ export class PlayComponent implements OnInit {
 
   // Fetch saved states from server and remove .json extensions
   fetchSavedStates() {
-    fetch('/api/saved-states')
+    fetch('/saved-states')
       .then(response => response.json())
       .then(data => {
         if (data.savedStates) {
@@ -1158,8 +1219,12 @@ export class PlayComponent implements OnInit {
 
     const fileName = `${this.selectedSavedState}.json`;
 
+    const headers = {
+      "ngrok-skip-browser-warning": "true"
+    };
+
     // Fetch the game state from the server
-    fetch(`/api/load-game/${fileName}`)
+    fetch(`${this.serverPort}/api/load-game/${fileName}`, {headers})
       .then(response => {
         if (!response.ok) {
           throw new Error(`Failed to load game state: ${response.status}`);
@@ -1253,13 +1318,16 @@ export class PlayComponent implements OnInit {
     };
 
     // Send the game state to the server
-    fetch('/api/save-game', {
+    fetch(`${this.serverPort}/api/save-game`,  {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         gameName: this.saveGameName,
         gameState: gameState
-      })
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true"
+      },
     })
       .then(response => response.json())
       .then(data => {
@@ -1284,10 +1352,11 @@ export class PlayComponent implements OnInit {
       playOptionsFontSize: this.playOptionsFontSize
     };
 
-    fetch('/api/save-settings', {
+    fetch(`${this.serverPort}/api/save-settings`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(settings)
+      headers: { 'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "true" },
+      body: JSON.stringify(settings),
     })
       .then(response => response.json())
       .then(data => {
@@ -1305,7 +1374,10 @@ export class PlayComponent implements OnInit {
 
   // load card width and font size
   loadSettings() {
-    fetch('/api/load-settings')
+    const headers = {
+      "ngrok-skip-browser-warning": "true"
+    };
+    fetch(`${this.serverPort}/api/load-settings`, {headers})
       .then(response => response.json())
       .then(settings => {
         if (settings.cardWidth !== undefined) this.cardWidth = settings.cardWidth;
@@ -1318,4 +1390,280 @@ export class PlayComponent implements OnInit {
         console.error('Failed to load settings:', error);
       });
   }
+
+
+  // ************************************
+  // MATCHMAKING 
+  // ************************************
+  createRoom() {
+    this.http.post<{ roomId: string, serverUrl: string }>('http://localhost:3001/api/matchmaking/create-room', {})
+      .subscribe(response => {
+        console.log('Room created (from backend):', response.roomId);
+        
+        this.serverPort = response.serverUrl;
+        console.log('✅ Updated serverPort:', this.serverPort);
+        
+        // Store the correct room ID before joining
+        this.roomId = response.roomId;
+        console.log('🔹 Stored roomId:', this.roomId);
+  
+        this.joinRoom(this.roomId);
+        this.myTimer = true;
+        this.startTimer();
+      }, error => {
+        console.error('❌ Error creating room:', error);
+      });
+  }
+  
+  
+  
+  joinRoom(roomId: string) {
+    if (!this.playerId) {
+      console.error("❌ Player ID is missing!");
+      return;
+    }
+  
+    console.log(`Joining room with ID: ${roomId} as player: ${this.playerId}`);
+  
+    this.http.post(`${this.serverPort}/api/matchmaking/join-room`, {
+        roomId,
+        playerId: this.playerId  // ✅ Ensure this is sent properly
+      })
+      .subscribe(response => {
+        console.log("✅ Joined room:", response);
+        this.roomId = roomId; // ✅ Store the correct roomId
+        console.log("🔹 Current roomId stored:", this.roomId);
+      }, error => {
+        console.error("❌ Error joining room:", error);
+      });
+    }
+  
+
+
+  syncGameState(roomId: string) {
+    if (!this.playerId) {
+        console.error("❌ Player ID is missing!");
+        return;
+    }
+
+    console.log("🔄 Sending playCards to server:", this.playCards);
+
+    this.http.post(`${this.serverPort}/api/game/sync-state`, { 
+        roomId, 
+        playerId: this.playerId, 
+        playCards: this.playCards 
+    }).subscribe(() => {
+        console.log('✅ Game state synced');
+
+        // ✅ Instead of polling, update opponent boards in real-time
+        this.fetchOpponentBoards(roomId);
+        this.sendGameState();
+    }, error => {
+        console.error('❌ Error syncing game state', error);
+    });
+  }
+
+  fetchOpponentBoards(roomId: string) {
+    console.log("📡 Fetching opponent boards...");
+  
+    this.http.get<{ opponentBoards: any[] }>(
+        `${this.serverPort}/api/game/game-state/${roomId}/${this.playerId}`,
+        { headers: new HttpHeaders({ "ngrok-skip-browser-warning": "true" }) }
+    ).subscribe(
+        response => {
+            console.log("📡 Raw Response:", response);
+            console.log("📡 Opponent Boards Data:", response.opponentBoards);
+
+            if (response.opponentBoards.length === 0) {
+                console.warn("⚠️ No opponents found in the room.");
+                this.opponentBoards = [];
+            } else {
+                this.opponentBoards = response.opponentBoards;
+            }
+
+            console.log("📡 Parsed Opponent Boards (Final State):", this.opponentBoards);
+        },
+        error => {
+            console.error('❌ Error fetching opponent game state', error);
+        }
+    );
+}
+
+  
+  
+  
+  
+
+
+
+  setPlayerId(inputId: string) {
+    this.playerId = inputId;
+    this.showPlayerIdModal = false;
+  }
+
+  // Open the join room modal
+  openPlayerIdModal() {
+    this.showPlayerIdModal = true;
+  }
+
+  // Close the modal
+  closePlayerIdModal() {
+    this.showPlayerIdModal = false;
+  }
+
+  // Open the join room modal
+  openUrlModal() {
+    this.showUrlModal = true;
+  }
+
+  // Close the modal
+  closeUrlModal() {
+    this.showUrlModal = false;
+  }
+  
+
+
+  // Open the join room modal
+  openRoomModal() {
+    this.showRoomModal = true;
+  }
+
+  // Close the modal
+  closeRoomModal() {
+    this.showRoomModal = false;
+  }
+
+
+  initializeWebRTC() {
+    this.socket = io('http://localhost:3001');
+
+    this.socket.on('connect', () => {
+      console.log('✅ Connected to WebRTC signaling server');
+    });
+
+    // Join room
+    this.socket.emit('join-room', { roomId: this.roomId, playerId: this.playerId });
+
+    // Listen for player connection
+    this.socket.on('player-joined', ({ playerId }: { playerId: string }) => {
+      console.log(`👥 Player ${playerId} joined!`);
+      this.startWebRTC();
+    });
+
+    // Handle SDP offer
+    this.socket.on('receive-offer', async ({ sdp, sender }: { sdp: RTCSessionDescriptionInit; sender: string }) => {
+      console.log(`📩 Received offer from ${sender}`);
+      await this.peerConnection.setRemoteDescription(new RTCSessionDescription(sdp));
+      const answer = await this.peerConnection.createAnswer();
+      await this.peerConnection.setLocalDescription(answer);
+      this.socket.emit('send-answer', { target: sender, sdp: answer });
+    });
+
+    // Handle SDP answer
+    this.socket.on('receive-answer', async ({ sdp }: { sdp: RTCSessionDescriptionInit }) => {
+      console.log('📩 Received answer');
+      await this.peerConnection.setRemoteDescription(new RTCSessionDescription(sdp));
+    });
+
+    // Handle ICE candidate
+    this.socket.on('receive-ice-candidate', ({ candidate, sender }: { candidate: RTCIceCandidateInit; sender: string }) => {
+      console.log('📩 Received ICE candidate from', sender);
+      this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+    });
+  }
+
+  startWebRTC() {
+    this.peerConnection = new RTCPeerConnection();
+    this.dataChannel = this.peerConnection.createDataChannel('gameState');
+
+    // Send game state when DataChannel is open
+    this.dataChannel.onopen = () => {
+      console.log('📡 DataChannel open!');
+      this.sendGameState();
+    };
+
+    // Receive opponent's game state
+    this.dataChannel.onmessage = (event) => {
+      console.log('📩 Received game state:', event.data);
+      this.opponentBoards = JSON.parse(event.data);
+    };
+
+    // ICE candidate handling
+    this.peerConnection.onicecandidate = (event) => {
+      if (event.candidate) {
+        this.socket.emit('send-ice-candidate', { target: this.peerConnection, candidate: event.candidate });
+      }
+    };
+
+    // Create SDP offer
+    this.peerConnection.createOffer().then((offer) => {
+      this.peerConnection.setLocalDescription(offer);
+      this.socket.emit('send-offer', { target: this.peerConnection, sdp: offer as RTCSessionDescriptionInit });
+    });
+  }
+
+  sendGameState() {
+    if (this.roomId) {
+        
+        // Emit the updated game state to the server
+        this.socket.emit('sync-game-state', { 
+            roomId: this.roomId, 
+            playerId: this.playerId, 
+            playCards: this.playCards 
+        });
+    }
+  }
+
+  setUrl(url: string) {
+    this.serverPort = url;
+    this.closeUrlModal();
+  }
+
+  copyUrlToClipboard() {
+    navigator.clipboard.writeText(this.serverPort).then(() => {
+      console.log('URL copied to clipboard');
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
+  }
+
+  copyRoomIdToClipboard() {
+    navigator.clipboard.writeText(this.roomId).then(() => {
+      console.log('URL copied to clipboard');
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
+  }
+
+  // Function to start the timer
+  startTimer() {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+    }
+
+    this.timerInterval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(this.timerInterval);
+      }
+    }, 1000);
+  }
+
+  // Function to format time into HH:MM:SS format
+  formatTime(seconds: number): string {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(secs)}`;
+  }
+
+  padZero(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
+  }
+
+  toggleTimer() {
+    this.showTimer = !this.showTimer;
+  }
+
 }

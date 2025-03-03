@@ -1,13 +1,42 @@
 const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const { createCanvas, loadImage } = require('canvas');
+const matchmakingRoutes = require('./matchmaking/matchmaking');
+const gameStateRoutes = require('./matchmaking/gameState');
+const cors = require('cors');
+
 
 const app = express();
 app.use(bodyParser.json({ limit: '50mb' }));
+app.use(cors());
 app.use('/custom_images', express.static(path.join(__dirname, 'custom_images')));
+app.use('/api/matchmaking', matchmakingRoutes);
+app.use('/api/game', gameStateRoutes);
+// app.use((req, res, next) => {
+//   console.log(`📡 Incoming request: ${req.method} ${req.originalUrl}`);
+//   console.log(`🔍 Request Body:`, req.body);
+//   next();
+// });
+
+const server = http.createServer(app);  // Create HTTP server
+const io = new Server(server, {  // Attach io to server
+  cors: {
+      origin: "*",
+      methods: ["GET", "POST"]
+  }
+});
+
+// Export both `io` and `server`
+module.exports = { io, server };
+
+const webrtcRoutes = require('./matchmaking/webrtc'); // require after exports...
+app.use('/api/webrtc', webrtcRoutes);
+
 
 const filePath = path.join(__dirname, 'decks.json');
 const commandersFilePath = path.join(__dirname, 'commander.json');
@@ -37,6 +66,7 @@ const loadCommanders = () => {
     return {};
   }
 };
+
 
 // Save commanders
 const saveCommanders = (commanders) => {
@@ -519,7 +549,7 @@ app.get('/api/custom-cards', (req, res) => {
 
 
 // Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
