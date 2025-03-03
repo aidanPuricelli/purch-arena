@@ -18,7 +18,7 @@ router.post('/create-room', async (req, res) => {
             // 🔥 Authenticate and start Ngrok without CAPTCHA
             ngrokUrl = await ngrok.connect({
                 addr: 3001,
-                authtoken: "2tmXbJ0lLbYwFKxyNNIMuiZw1zA_656Lumt4P6iTNuWFRvNdu",  // 🔹 Replace with your Ngrok token
+                authtoken: "your-token", 
                 region: "eu",
                 proto: "http"
             });
