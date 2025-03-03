@@ -34,13 +34,14 @@ export class SearchComponent {
           if (response.data) {
               // Filter and map the response to only include the necessary fields
               scryfallCards = response.data
-                  .filter((card: any) => card.image_uris?.normal)
-                  .map((card: any) => ({
-                      name: card.name,
-                      mana_cost: card.mana_cost,
-                      type_line: card.type_line,
-                      image_uri: card.image_uris.normal
-                  }));
+              .filter((card: any) => card.image_uris?.normal)
+              .map((card: any) => ({
+                  id: card.id, // Ensure ID is included
+                  name: card.name,
+                  mana_cost: card.mana_cost,
+                  type_line: card.type_line,
+                  image_uri: card.image_uris.normal
+              }));          
               console.log('Filtered Scryfall Cards:', scryfallCards);
           }
           // Set the cardImages to Scryfall results and then fetch custom cards
@@ -59,8 +60,15 @@ export class SearchComponent {
       this.http.get<any[]>(`/api/custom-cards`).subscribe(customCards => {
           // Filter custom cards based on the search query (ignoring case)
           const filteredCustomCards = customCards.filter((card: any) =>
-              card.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-          );
+                card.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+            ).map((card: any) => ({
+                id: card.id || this.generateCustomCardId(card), // Ensure an ID exists
+                name: card.name,
+                mana_cost: card.mana_cost,
+                type_line: card.type_line,
+                image_uri: card.image_uri
+            }));
+        
           console.log('Filtered Custom Cards:', filteredCustomCards);
           // Append the custom cards to the existing cardImages array
           this.cardImages = [...this.cardImages, ...filteredCustomCards];
@@ -68,6 +76,11 @@ export class SearchComponent {
           console.error('Error fetching custom cards:', error);
       });
   }
+
+  generateCustomCardId(card: any): string {
+    return `${card.name}-${Date.now()}`;
+  }
+
 
   onRightClick(event: MouseEvent, card?: any) {
     event.preventDefault();
@@ -90,11 +103,13 @@ export class SearchComponent {
       if (this.selectedCard) {
           // Ensure only the necessary fields are sent when saving
           const cardToSave = {
-              name: this.selectedCard.name,
-              mana_cost: this.selectedCard.mana_cost,
-              type_line: this.selectedCard.type_line,
-              image_uri: this.selectedCard.image_uri
-          };
+            id: this.selectedCard.id || this.generateCustomCardId(this.selectedCard),
+            name: this.selectedCard.name,
+            mana_cost: this.selectedCard.mana_cost,
+            type_line: this.selectedCard.type_line,
+            image_uri: this.selectedCard.image_uri
+        };
+        
 
           console.log(`Saving card to deck '${this.selectedDeck}':`, cardToSave);
 

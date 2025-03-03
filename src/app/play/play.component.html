@@ -43,9 +43,19 @@
       [class.tapped]="played.tapped"
       [class.selected]="selectedPlayCards.includes(played)">
 
-      <!-- Card Image -->
-      <img [src]="played.card.image_uri" alt="card image"
-          [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
+      <!-- Display for Normal Cards -->
+      <img *ngIf="played.card.image_uri" 
+      [src]="played.card.image_uri" 
+      alt="card image"
+      [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
+
+      <!-- Display for Tokens -->
+      <img *ngIf="!played.card.image_uri && played.card.image_uris?.normal" 
+      [src]="played.card.image_uris.normal" 
+      alt="token image"
+      [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
+
+
 
       <!-- Counter Circle -->
       <div class="counter-circle"

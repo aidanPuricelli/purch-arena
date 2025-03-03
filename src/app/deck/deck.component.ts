@@ -197,34 +197,39 @@ export class DeckComponent implements OnInit {
   // Remove a card 
   removeCard(): void {
     if (!this.selectedCard) return;
-
+  
     console.log(`Removing card from '${this.selectedDeck}':`, this.selectedCard);
-    
+  
     const index = this.deck.findIndex(card => card.id === this.selectedCard.id);
+    
     if (index !== -1) {
-      this.deck.splice(index, 1);
+      const removedCard = this.deck.splice(index, 1)[0]; // Ensure correct card is removed
       
-      this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [], removedCards: [this.selectedCard] }).subscribe(
+      this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [], removedCards: [removedCard] }).subscribe(
         (response) => {
           console.log(`Card removed from deck '${this.selectedDeck}':`, response);
         },
         (error) => console.error('Error removing card from deck', error)
       );
+  
+      this.deckCount = this.deck.length;
+    } else {
+      console.warn('Selected card not found in deck.');
     }
-
-    this.deckCount = this.deck.length;
+  
     this.contextMenuVisible = false;
     this.selectedCard = null;
   }
+  
 
-  // Right-click context menu for card removal
   onRightClick(event: MouseEvent, card: any): void {
     event.preventDefault();
-    this.selectedCard = card;
+    this.selectedCard = { ...card }; // Clone the object to avoid reference issues
     this.contextMenuX = event.clientX;
     this.contextMenuY = event.clientY;
     this.contextMenuVisible = true;
   }
+  
 
   // Delete a deck
   deleteDeck(): void {
