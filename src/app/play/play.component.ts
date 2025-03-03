@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, HostListener, input, NgZone, OnInit } fro
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { io } from 'socket.io-client';
 import { timer } from 'rxjs';
+import { environment } from '../../environments/environments';
 
 interface PlayedCard {
   card: any;
@@ -27,6 +28,15 @@ interface Card {
   image_uris?: {
     normal: string;
   };
+}
+
+interface GameStateResponse {
+  opponentBoards: OpponentBoard[];
+}
+
+interface OpponentBoard {
+  playerId: string;
+  playCards: PlayedCard[];
 }
 
 
@@ -61,6 +71,58 @@ export class PlayComponent implements OnInit {
   socket: any;
   peerConnection!: RTCPeerConnection;
   dataChannel!: RTCDataChannel;
+
+  opponentTestData = [
+      {
+          playerId: "player_stue39t44",
+          playCards: [
+              {
+                  card: {
+                      name: "Hashaton, Scarab's Fist",
+                      mana_cost: "{W}{B}",
+                      type_line: "Legendary Creature — Zombie Wizard",
+                      image_uri: "https://cards.scryfall.io/normal/front/0/2/02645651-cd55-4bd0-8a4d-fa257270a0e0.jpg?1739303903"
+                  },
+                  x: 193,
+                  y: 209,
+                  counters: 5
+              },
+              {
+                  card: {
+                      name: "Irrigated Farmland",
+                      mana_cost: "",
+                      type_line: "Land — Plains Island",
+                      image_uri: "https://cards.scryfall.io/normal/front/7/3/7352e874-d332-4a98-ab3f-513f8cb3a76a.jpg?1706241172"
+                  },
+                  x: 563.5,
+                  y: 365.8125,
+                  tapped: true
+              },
+              {
+                  card: {
+                      name: "Desert of the Mindful",
+                      mana_cost: "",
+                      type_line: "Land — Desert",
+                      image_uri: "https://cards.scryfall.io/normal/front/5/1/517f71a7-ec5b-46a6-b5ff-8c06abf0a630.jpg?1625980016"
+                  },
+                  x: 595,
+                  y: 392.8125,
+                  tapped: true
+              },
+              {
+                  card: {
+                      name: "Avacyn, Angel of Hope",
+                      mana_cost: "{5}{W}{W}{W}",
+                      type_line: "Legendary Creature — Angel",
+                      image_uri: "https://cards.scryfall.io/normal/front/3/1/317f1133-7cf8-4b7a-919e-88c45f8c2c3a.jpg?1689995555"
+                  },
+                  x: 643.5,
+                  y: 116.8125
+              }
+          ]
+      }
+  ];
+
 
 
   resizeFlag = false;
@@ -313,7 +375,7 @@ export class PlayComponent implements OnInit {
       "ngrok-skip-browser-warning": "true"
     });
   
-    this.http.get<{ deckNames: string[] }>(`${this.serverPort}/api/decks`, {headers}).subscribe(
+    this.http.get<{ deckNames: string[] }>(`http://localhost:3001/api/decks`, {headers}).subscribe(
       (response) => {
         this.deckNames = response.deckNames;
         console.log('Available Decks:', this.deckNames);
@@ -403,7 +465,7 @@ export class PlayComponent implements OnInit {
       "ngrok-skip-browser-warning": "true"
     });
   
-    this.http.get<{ deck: any[] }>(`${this.serverPort}/api/deck/${this.selectedDeck}`, { headers })
+    this.http.get<{ deck: any[] }>(`http://localhost:3001/api/deck/${this.selectedDeck}`, { headers })
       .subscribe(
         (response) => {
           this.deck = response.deck;
@@ -427,7 +489,7 @@ export class PlayComponent implements OnInit {
     const headers = new HttpHeaders({
       "ngrok-skip-browser-warning": "true"
     });
-    this.http.get<{ commander: any }>(`${this.serverPort}/api/deck/${this.selectedDeck}/commander`, { headers }).subscribe(
+    this.http.get<{ commander: any }>(`http://localhost:3001/api/deck/${this.selectedDeck}/commander`, { headers }).subscribe(
       (response) => {
         if (response.commander) {
           this.commander = response.commander;
@@ -1235,7 +1297,7 @@ export class PlayComponent implements OnInit {
     };
 
     // Fetch the game state from the server
-    fetch(`${this.serverPort}/api/load-game/${fileName}`, {headers})
+    fetch(`http://localhost:3001/api/load-game/${fileName}`, {headers})
       .then(response => {
         if (!response.ok) {
           throw new Error(`Failed to load game state: ${response.status}`);
@@ -1329,7 +1391,7 @@ export class PlayComponent implements OnInit {
     };
 
     // Send the game state to the server
-    fetch(`${this.serverPort}/api/save-game`,  {
+    fetch(`http://localhost:3001/api/save-game`,  {
       method: 'POST',
       body: JSON.stringify({
         gameName: this.saveGameName,
@@ -1363,7 +1425,7 @@ export class PlayComponent implements OnInit {
       playOptionsFontSize: this.playOptionsFontSize
     };
 
-    fetch(`${this.serverPort}/api/save-settings`, {
+    fetch(`http://localhost:3001/api/save-settings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
       "ngrok-skip-browser-warning": "true" },
@@ -1388,7 +1450,7 @@ export class PlayComponent implements OnInit {
     const headers = {
       "ngrok-skip-browser-warning": "true"
     };
-    fetch(`${this.serverPort}/api/load-settings`, {headers})
+    fetch(`http://localhost:3001/api/load-settings`, {headers})
       .then(response => response.json())
       .then(settings => {
         if (settings.cardWidth !== undefined) this.cardWidth = settings.cardWidth;
@@ -1450,54 +1512,76 @@ export class PlayComponent implements OnInit {
   
 
 
-  syncGameState(roomId: string) {
-    if (!this.playerId) {
+    syncGameState(roomId: string) {
+      if (!this.playerId) {
         console.error("❌ Player ID is missing!");
         return;
-    }
-
-    console.log("🔄 Sending playCards to server:", this.playCards);
-
-    this.http.post(`${this.serverPort}/api/game/sync-state`, { 
+      }
+    
+      console.log("🔄 Sending playCards to server:", this.playCards);
+    
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+    
+      // Convert absolute x, y positions to percentages
+      const playCardsWithPercentage = this.playCards.map(card => ({
+        ...card,
+        x: card.x / screenWidth,  // Convert to percentage
+        y: card.y / screenHeight, // Convert to percentage
+      }));
+    
+      this.http.post(`${this.serverPort}/api/game/sync-state`, { 
         roomId, 
         playerId: this.playerId, 
-        playCards: this.playCards 
-    }).subscribe(() => {
-        console.log('✅ Game state synced');
-
-        // ✅ Instead of polling, update opponent boards in real-time
-        this.fetchOpponentBoards(roomId);
-        this.sendGameState();
-    }, error => {
-        console.error('❌ Error syncing game state', error);
-    });
-  }
-
-  fetchOpponentBoards(roomId: string) {
-    console.log("📡 Fetching opponent boards...");
-  
-    this.http.get<{ opponentBoards: any[] }>(
-        `${this.serverPort}/api/game/game-state/${roomId}/${this.playerId}`,
-        { headers: new HttpHeaders({ "ngrok-skip-browser-warning": "true" }) }
-    ).subscribe(
-        response => {
-            console.log("📡 Raw Response:", response);
-            console.log("📡 Opponent Boards Data:", response.opponentBoards);
-
-            if (response.opponentBoards.length === 0) {
-                console.warn("⚠️ No opponents found in the room.");
-                this.opponentBoards = [];
-            } else {
-                this.opponentBoards = response.opponentBoards;
-            }
-
-            console.log("📡 Parsed Opponent Boards (Final State):", this.opponentBoards);
+        playCards: playCardsWithPercentage,
+        screenWidth,
+        screenHeight
+      }).subscribe(
+        () => {
+          console.log('✅ Game state synced');
+          this.fetchOpponentBoards(roomId);
+          this.sendGameState();
         },
         error => {
-            console.error('❌ Error fetching opponent game state', error);
+          console.error('❌ Error syncing game state', error);
         }
-    );
-}
+      );
+    }
+
+    fetchOpponentBoards(roomId: string) {
+      console.log("📡 Fetching opponent boards...");
+    
+      if (environment.nodeEnv === 'test') {
+        this.opponentBoards = this.opponentTestData;
+      } else {
+        this.http.get<GameStateResponse>(
+          `${this.serverPort}/api/game/game-state/${roomId}/${this.playerId}`,
+          { headers: new HttpHeaders({ "ngrok-skip-browser-warning": "true" }) }
+        ).subscribe(
+          (response: GameStateResponse) => { // Explicitly typing response
+            console.log("📡 Raw Response:", response);
+    
+            const userScreenWidth = window.innerWidth;
+            const userScreenHeight = window.innerHeight;
+    
+            response.opponentBoards.forEach((opponent: OpponentBoard) => {
+              opponent.playCards.forEach((card: PlayedCard) => { // Explicitly type card
+                // Convert percentage-based x and y back to pixel values
+                card.x = card.x * userScreenWidth;
+                card.y = card.y * userScreenHeight;
+              });
+            });
+    
+            this.opponentBoards = response.opponentBoards;
+            console.log("📡 Parsed Opponent Boards (Final State):", this.opponentBoards);
+          },
+          error => {
+            console.error('❌ Error fetching opponent game state', error);
+          }
+        );
+      }
+    }
+    
 
   
   

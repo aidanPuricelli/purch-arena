@@ -171,13 +171,13 @@
 <div class="context-menu play-context-menu" *ngIf="playContextMenuVisible" 
      [ngStyle]="{'top.px': playContextMenuY, 'left.px': playContextMenuX}">
   <ul>
-    <li (click)="tapSelectedCard()">Tap</li>
-    <li (click)="untapSelectedCard()">Untap</li>
-    <li (click)="sendToGraveyardSelectedCard()">Graveyard</li>
-    <li (click)="exileSelectedCard()">Exile</li>
-    <li (click)="backToHand()">Back to Hand</li>
-    <li (click)="increaseCounterOnSelectedCards($event)">Add Counter</li>
-    <li (click)="decreaseCounterOnSelectedCards($event)">Remove Counter</li>
+    <li *ngIf="!showOpponentsBoard" (click)="tapSelectedCard()">Tap</li>
+    <li *ngIf="!showOpponentsBoard" (click)="untapSelectedCard()">Untap</li>
+    <li *ngIf="!showOpponentsBoard" (click)="sendToGraveyardSelectedCard()">Graveyard</li>
+    <li *ngIf="!showOpponentsBoard" (click)="exileSelectedCard()">Exile</li>
+    <li *ngIf="!showOpponentsBoard" (click)="backToHand()">Back to Hand</li>
+    <li *ngIf="!showOpponentsBoard" (click)="increaseCounterOnSelectedCards($event)">Add Counter</li>
+    <li *ngIf="!showOpponentsBoard" (click)="decreaseCounterOnSelectedCards($event)">Remove Counter</li>
     <li (click)="zoomSelectedCard()" *ngIf="selectedPlayCards.length === 1">Zoom</li>
   </ul>
 </div>
@@ -287,11 +287,14 @@
     <div *ngFor="let opponentCard of opponent.playCards"
       class="played-card"
       draggable="true"
+      (dragstart)="onDragStart($event, opponentCard, 'play')"
+      (contextmenu)="onPlayRightClick($event, opponentCard)"
       [ngStyle]="{
         'position': 'absolute',
         'left.px': opponentCard.x,
         'top.px': opponentCard.y
-      }">
+      }"
+      [class.tapped]="opponentCard.tapped">
   
         <!-- Display for Normal Cards -->
         <img *ngIf="opponentCard.card.image_uri" 
@@ -308,12 +311,15 @@
   
   
         <!-- Counter Circle -->
-        <!-- <div class="counter-circle"
-            (click)="increaseCounter(played, $event)"
-            (contextmenu)="decreaseCounter(played, $event)"
-            *ngIf="played.counters !== undefined && played.counters > 0">
-          {{ played.counters }}
-        </div> -->
+        <div class="counter-circle"
+            *ngIf="opponentCard.counters !== undefined && opponentCard.counters > 0">
+          {{ opponentCard.counters }}
+        </div>
+
+        <!-- Tapped Icon -->
+        <span *ngIf="opponentCard.tapped" class="tap-icon material-symbols-outlined">
+          refresh
+        </span>
     </div>
   </div>
 </div>
