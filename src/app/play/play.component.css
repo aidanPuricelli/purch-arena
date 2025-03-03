@@ -400,9 +400,9 @@ input[type="range"]::-moz-range-thumb {
 .opponent-board {
   position: absolute !important;
   background: var(--release-background);
-  z-index: 30;
-  top: 100px;
+  z-index: 21 !important;
+  top: var(--opponents-position, 70px) !important;
   width: 100%;
-  height: calc(100vh - 70px);
+  height: calc(100vh - var(--opponent-height, 70));
 }
 

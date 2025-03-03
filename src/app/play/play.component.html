@@ -101,8 +101,8 @@
     <a *ngIf="advancedFlag" (click)="saveSettings()" title="This will save the current card width and font size" class="settings-option advanced-option">Save Settings</a>
     <a *ngIf="advancedFlag" (click)="createRoom()" class="settings-option advanced-option">Create Room</a>
     <a *ngIf="advancedFlag" (click)="openRoomModal()" class="settings-option advanced-option">Join Room</a>
-    <a *ngIf="advancedFlag" (click)="openPlayerIdModal()" class="settings-option advanced-option">Set ID</a>
-    <a *ngIf="advancedFlag" (click)="openUrlModal()" class="settings-option advanced-option">Set URL</a>
+    <a *ngIf="advancedFlag" (click)="openPlayerIdModal()" class="settings-option advanced-option">Set Player ID</a>
+    <a *ngIf="advancedFlag" (click)="openUrlModal()" class="settings-option advanced-option">Set Base URL</a>
 
 
     <div class="font-size-container">
@@ -248,7 +248,7 @@
       <input type="text" [(ngModel)]="serverPort" placeholder="Enter base url to connect to..." />
     </div>
     <div class="modal-actions">
-      <button class="purch-btn other-btn" (click)="setUrl(serverPort)">Set ID</button>
+      <button class="purch-btn other-btn" (click)="setUrl(serverPort)">Set URL</button>
       <button class="purch-btn cancel-btn" (click)="closeUrlModal()">Cancel</button>
       <button class="purch-btn other-btn" (click)="copyUrlToClipboard()">Copy</button>
     </div>

@@ -115,6 +115,8 @@ export class PlayComponent implements OnInit {
 
   playOptionsFontSize = 18;
   playOptionsPosition = 80;
+  opponentsPosition = 70;
+  opponentHeight = 70;
 
   life = 20;
 
@@ -194,13 +196,19 @@ export class PlayComponent implements OnInit {
     this.showSettings = false;
 
     if (this.showNav) {
+      this.opponentHeight = 70;
       this.playOptionsPosition = 80;
+      this.opponentsPosition = 70;
     } else {
+      this.opponentHeight = 0;
+      this.opponentsPosition = 0;
       this.playOptionsPosition = 20;
 
     }
     document.documentElement.style.setProperty('--play-options-position', `${this.playOptionsPosition}px`);
     document.documentElement.style.setProperty('--deck-selection-position', `${this.playOptionsPosition + 120}px`);
+    document.documentElement.style.setProperty('--opponents-position', `${this.opponentsPosition}px`);
+    document.documentElement.style.setProperty('--opponent-height', `${this.opponentHeight}px`);
   }
 
   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef, private zone: NgZone) {}
@@ -1433,12 +1441,11 @@ export class PlayComponent implements OnInit {
         playerId: this.playerId  // ✅ Ensure this is sent properly
       })
       .subscribe(response => {
-        console.log("✅ Joined room:", response);
         this.roomId = roomId; // ✅ Store the correct roomId
-        console.log("🔹 Current roomId stored:", this.roomId);
       }, error => {
         console.error("❌ Error joining room:", error);
       });
+      this.closeRoomModal();
     }
   
 

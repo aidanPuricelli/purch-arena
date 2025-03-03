@@ -571,6 +571,15 @@ html, body {
 }
   
 
+.opponent-board {
+    position: absolute !important;
+    background: var(--release-background);
+    z-index: 21 !important;
+    top: var(--opponents-position, 70px) !important;
+    width: 100%;
+    height: 100vh !important;
+  }
+
 
   
   
