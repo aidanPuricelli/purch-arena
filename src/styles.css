@@ -529,7 +529,39 @@ html, body {
 .beleren-bold {
     font-family: 'Beleren Bold';
 }
-  
+
+.opponent-board {
+    position: absolute !important;
+    background: var(--release-background);
+    z-index: 21 !important;
+    top: 70px !important;
+    width: 100%;
+    height: calc(100vh - 70px);
+  }
+
+.opponent-board h2 {
+    color: var(--home-header);
+    font-family: 'Beleren Bold';
+    font-size: 25px;
+    padding: 10px;
+    border-bottom: solid 2px var(--nav-border);
+    border-right: solid 2px var(--nav-border);
+    width: fit-content;
+    box-shadow: 0 3px var(--btn-shadow);
+    background: var(--nav-background);
+}
+
+  .hand {
+    z-index: 30 !important;
+  }
+
+  .play-container {
+    z-index: 20 !important;
+  }
+
+  .timer {
+    z-index: 20 !important;
+  }
   
 
 

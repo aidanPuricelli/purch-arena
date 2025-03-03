@@ -130,6 +130,8 @@ export class PlayComponent implements OnInit {
   selectedSavedState: string = '';
   saveGameName = '';
 
+  showOpponentsBoard = false;
+
 
   // timer
   timeLeft: number = 7200; // 2 hours in seconds
@@ -1666,5 +1668,12 @@ export class PlayComponent implements OnInit {
   toggleTimer() {
     this.showTimer = !this.showTimer;
   }
+
+  toggleOppBoards() {
+    this.showOpponentsBoard = !this.showOpponentsBoard;
+    this.handFlag = !this.handFlag;
+  }
+
+
 
 }

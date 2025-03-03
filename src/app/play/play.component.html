@@ -85,6 +85,7 @@
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="toggleToken(); $event.preventDefault()">TOKEN</a>
   <a *ngIf="!minimizedOptions" class="purch-btn" href="#" (click)="undoAction(); $event.preventDefault()">UNDO</a>
   <a *ngIf="roomId" class="purch-btn" href="#" (click)="syncGameState(roomId); $event.preventDefault()">SYNC</a>
+  <a *ngIf="roomId" class="purch-btn" href="#" (click)="toggleOppBoards(); $event.preventDefault()">OPP</a>
   <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
   <div *ngIf="showSettings" class="settings-dropdown">
     <a (click)="newSeven()" class="settings-option">New Seven</a>
@@ -280,21 +281,44 @@
     </span>
 </div>
 
-<!-- HAND TAB -->
-<h1 class="hand-tab" *ngIf="!handFlag" (click)="toggleHand()">SHOW HAND</h1>
-
-<div class="opponent-board">
-  <h3>Opponent Boards</h3>
-  <div *ngFor="let opponent of opponentBoards">
-    <h4>Opponent {{ opponent.playerId }}</h4>
-    <ul>
-      <li *ngFor="let card of opponent.playCards">
-        {{ card.card.name }} ({{ card.x }}, {{ card.y }})
-        <img [src]="card.card.image_uri" width="100" height="140" />
-      </li>
-    </ul>
+<div *ngIf="showOpponentsBoard" class="opp-container opponent-board">
+  <div *ngFor="let opponent of opponentBoards" class="">
+    <h2>{{ opponent.playerId }}</h2>
+    <div *ngFor="let opponentCard of opponent.playCards"
+      class="played-card"
+      draggable="true"
+      [ngStyle]="{
+        'position': 'absolute',
+        'left.px': opponentCard.x,
+        'top.px': opponentCard.y
+      }">
+  
+        <!-- Display for Normal Cards -->
+        <img *ngIf="opponentCard.card.image_uri" 
+        [src]="opponentCard.card.image_uri" 
+        alt="card image"
+        [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
+  
+        <!-- Display for Tokens -->
+        <img *ngIf="!opponentCard.card.image_uri && opponentCard.card.image_uris?.normal" 
+        [src]="opponentCard.card.image_uris.normal" 
+        alt="token image"
+        [ngStyle]="{'width.px': cardWidth, 'height.px': cardWidth * 1.4}">
+  
+  
+  
+        <!-- Counter Circle -->
+        <!-- <div class="counter-circle"
+            (click)="increaseCounter(played, $event)"
+            (contextmenu)="decreaseCounter(played, $event)"
+            *ngIf="played.counters !== undefined && played.counters > 0">
+          {{ played.counters }}
+        </div> -->
+    </div>
   </div>
 </div>
+
+
 
 
 
