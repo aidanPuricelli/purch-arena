@@ -17,3 +17,7 @@
     color: var(--release-text-color);
     padding-bottom: 100px;
 }
+
+.release-content h1 {
+    border-bottom: solid 2px rgb(232, 170, 112);
+}

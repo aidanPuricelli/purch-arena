@@ -387,7 +387,7 @@ app.get('/api/saved-states', (req, res) => {
     // Filter only JSON files excluding decks.json, commander.json, and settings.json
     const savedStates = files.filter(file => 
       file.endsWith('.json') && 
-      !['decks.json', 'commander.json', 'settings.json'].includes(file)
+      !['decks.json', 'commander.json', 'settings.json', 'custom_cards.json'].includes(file)
     );
 
     res.json({ savedStates });

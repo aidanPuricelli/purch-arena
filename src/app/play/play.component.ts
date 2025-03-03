@@ -1269,7 +1269,7 @@ export class PlayComponent implements OnInit {
 
   // Fetch saved states from server and remove .json extensions
   fetchSavedStates() {
-    fetch('/saved-states')
+    fetch('http://localhost:3001/api/saved-states')
       .then(response => response.json())
       .then(data => {
         if (data.savedStates) {
