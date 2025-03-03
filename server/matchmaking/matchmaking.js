@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 const ngrok = require('ngrok');
+require('dotenv').config();
 
 
 let ngrokUrl = null; // store ngrok url globally
@@ -18,7 +19,7 @@ router.post('/create-room', async (req, res) => {
             // Authenticate and start Ngrok without CAPTCHA
             ngrokUrl = await ngrok.connect({
                 addr: 3001,
-                authtoken: "", 
+                authtoken: process.env.NGROK_AUTH_TOKEN, 
                 region: "eu",
                 proto: "http"
             });
