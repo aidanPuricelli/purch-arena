@@ -1,0 +1,15 @@
+{
+  "Hashaton": {
+    "name": "Hashaton, Scarab's Fist",
+    "mana_cost": "{W}{B}",
+    "type_line": "Legendary Creature — Zombie Wizard",
+    "image_uri": "https://cards.scryfall.io/normal/front/0/2/02645651-cd55-4bd0-8a4d-fa257270a0e0.jpg?1739303903"
+  },
+  "Atraxa": {
+    "name": "Atraxa, Grand Unifier",
+    "mana_cost": "{3}{G}{W}{U}{B}",
+    "type_line": "Legendary Creature — Phyrexian Angel",
+    "image_uri": "https://cards.scryfall.io/normal/front/4/a/4a1f905f-1d55-4d02-9d24-e58070793d3f.jpg?1717951088",
+    "category": "Uncategorized"
+  }
+}

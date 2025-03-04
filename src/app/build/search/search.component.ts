@@ -57,7 +57,7 @@ export class SearchComponent {
 
   // New function to fetch and filter custom cards
   searchCustomCards() {
-      this.http.get<any[]>(`/api/custom-cards`).subscribe(customCards => {
+      this.http.get<any[]>(`http://localhost:3001/api/custom-cards`).subscribe(customCards => {
           // Filter custom cards based on the search query (ignoring case)
           const filteredCustomCards = customCards.filter((card: any) =>
                 card.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -115,7 +115,7 @@ export class SearchComponent {
 
           window.dispatchEvent(new CustomEvent('addCardToDeck', { detail: cardToSave }));
 
-          this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [cardToSave], removedCards: [] }).subscribe(
+          this.http.post(`http://localhost:3001/api/deck/${this.selectedDeck}`, { newCards: [cardToSave], removedCards: [] }).subscribe(
               (response) => {
                   console.log(`Card added to deck '${this.selectedDeck}':`, response);
               },

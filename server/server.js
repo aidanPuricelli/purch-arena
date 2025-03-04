@@ -14,7 +14,7 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cors());
-app.use('/custom_images', express.static(path.join(__dirname, 'custom_images')));
+app.use('/custom_images', express.static(path.join(__dirname, 'custom-cards/custom_images')));
 app.use('/api/matchmaking', matchmakingRoutes);
 app.use('/api/game', gameStateRoutes);
 // app.use((req, res, next) => {
@@ -38,9 +38,9 @@ const webrtcRoutes = require('./matchmaking/webrtc'); // require after exports..
 app.use('/api/webrtc', webrtcRoutes);
 
 
-const filePath = path.join(__dirname, 'decks.json');
-const commandersFilePath = path.join(__dirname, 'commander.json');
-const customCardsPath = path.join(__dirname, 'custom_cards.json');
+const filePath = path.join(__dirname, 'deck/decks.json');
+const commandersFilePath = path.join(__dirname, 'deck/commander.json');
+const customCardsPath = path.join(__dirname, 'custom-cards/custom_cards.json');
 
 // Load all decks
 const loadDecks = () => {
@@ -421,7 +421,7 @@ app.get('/api/load-game/:fileName', (req, res) => {
 // Save settings to settings.json
 app.post('/api/save-settings', (req, res) => {
   const { cardWidth, playOptionsFontSize } = req.body;
-  const settingsPath = path.join(__dirname, 'settings.json');
+  const settingsPath = path.join(__dirname, 'user-config/settings.json');
 
   // Validate input
   if (typeof cardWidth !== 'number' || typeof playOptionsFontSize !== 'number') {
@@ -443,7 +443,7 @@ app.post('/api/save-settings', (req, res) => {
 
 // Load settings from settings.json
 app.get('/api/load-settings', (req, res) => {
-  const settingsPath = path.join(__dirname, 'settings.json');
+  const settingsPath = path.join(__dirname, 'user-config/settings.json');
 
   try {
     if (!fs.existsSync(settingsPath)) {
@@ -530,15 +530,15 @@ app.post('/api/save-custom-card', async (req, res) => {
 
   const imageBuffer = Buffer.from(image.replace(/^data:image\/png;base64,/, ''), 'base64');
   const fileName = `${name.replace(/\s+/g, '_')}.png`;
-  const filePath = path.join(__dirname, 'custom_images', fileName);
+  const filePath = path.join(__dirname, '../src/assets/custom_images', fileName);
 
   fs.writeFileSync(filePath, imageBuffer);
 
   const customCards = loadCustomCards();
-  customCards.push({ name, image_uri: `/custom_images/${fileName}` });
+  customCards.push({ name, image_uri: `assets/custom_images/${fileName}` });
   saveCustomCards(customCards);
 
-  res.json({ message: 'Custom card saved successfully', image_uri: `/custom_images/${fileName}` });
+  res.json({ message: 'Custom card saved successfully', image_uri: `../src/assets/custom_images/${fileName}` });
 });
 
 // GET custom cards

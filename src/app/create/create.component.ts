@@ -161,7 +161,7 @@ export class CreateComponent implements OnInit{
   
         const cardName = (document.querySelector('.card-text.name p')?.textContent || 'custom_card').trim();
         
-        this.http.post('/api/save-custom-card', { 
+        this.http.post('http://localhost:3001/api/save-custom-card', { 
           name: cardName, 
           image: imageData 
         }).subscribe(
