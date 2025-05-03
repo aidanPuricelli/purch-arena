@@ -1,15 +1,15 @@
 :root.light-theme {
     --nav-background: rgb(244, 232, 225);
-    --nav-border: rgb(240, 151, 43);
+    --nav-border: rgb(255, 160, 43);
     --dots-one: rgb(255, 223, 186);
     --dots-two: rgb(235, 235, 235);
     --quick-start-label: rgb(185, 156, 123);
     --quick-start-label-border: rgb(252, 214, 188);
     --btn-border: rgb(234, 181, 118);
-    --btn-shadow: rgb(112, 77, 47);
-    --btn-background: rgb(227, 227, 227);
-    --btn-color: rgb(150, 124, 87);
-    --btn-hover: rgb(248, 227, 197);
+    --btn-shadow: rgb(0, 0, 0);
+    --btn-background: rgb(255, 139, 50);
+    --btn-color: rgb(0, 0, 0);
+    --btn-hover: rgb(255, 192, 105);
     --home-header: rgb(78, 63, 50);
 
     --hand-background: rgb(213, 195, 173);
@@ -48,6 +48,8 @@
     --release-text-color: rgb(49, 47, 46);
     --release-background: rgb(190, 202, 189);
     --release-border: rgb(255, 210, 180);
+    --release-tab-background: rgb(255, 154, 71);
+    --release-tab-color: rgb(0, 0, 0);
 
     --quick-start-background: rgb(225, 210, 195);
     --quick-start-border: rgb(116, 101, 88);
@@ -78,7 +80,7 @@
     --selected-border: rgb(255, 145, 0);
 }
 
-:root.dark-theme {
+/* :root.dark-theme {
     --nav-background: rgb(71, 66, 63);
     --nav-border: rgb(255, 220, 177);
     --dots-one: rgb(44, 43, 40);
@@ -129,6 +131,8 @@
     --release-text-color: rgb(198, 183, 175);
     --release-background: rgb(43, 42, 39);
     --release-border: rgb(218, 187, 168);
+    --release-tab-background: rgb(23, 23, 23);
+    --release-tab-color: rgb(135, 123, 116);
 
     --quick-start-background: rgb(62, 59, 55);
     --quick-start-border: rgb(192, 170, 151);
@@ -159,6 +163,99 @@
     --selection-border: rgba(255, 164, 79, 0.7);
     --selection-background: rgba(255, 183, 88, 0.2);
     --selected-border: rgb(255, 145, 0);
+} */
+
+:root.dark-theme {
+    --nav-background: rgb(0, 0, 0);
+    --nav-border: rgb(21, 21, 21);
+    --dots-one: rgb(9, 9, 9);
+    --dots-two: rgb(0, 0, 0);
+    --quick-start-label: rgb(10, 10, 10);
+    --quick-start-label-border: rgba(50, 39, 24, 0);
+    --btn-border: rgb(104, 196, 128);
+    --btn-shadow: rgb(81, 131, 78);
+    --btn-background: rgb(66, 98, 69);
+    --btn-color: rgb(21, 40, 21);
+    --btn-hover: rgb(9, 9, 9);
+    --btn-hover-color: rgb(39, 194, 0);
+    --home-header: rgb(185, 185, 185);
+
+    --hand-background: rgb(0, 0, 0);
+    --hand-border: rgb(56, 38, 20);
+    --hand-shadow: rgb(17, 17, 17);
+
+    --settings-icon: rgb(90, 90, 90);
+    --settings-option-color: rgb(58, 58, 58);
+    --settings-option-hover: rgb(9, 9, 9);
+    --settings-option-hover-color: rgb(169, 110, 2);
+    --version-border: rgb(72, 47, 26);
+    --version-color: rgb(171, 96, 42);
+    --version-background: rgb(0, 0, 0);
+    --version-hover: rgb(0, 0, 0);
+
+    --hand-tab-background: black;
+    --hand-tab-border: white;
+    --hand-tab-color: rgb(166, 237, 255);
+
+    --setting-drpdwn-background: rgb(0, 0, 0);
+    --setting-drpdwn-shadow: rgba(97, 75, 43, 0);
+    --setting-drpdwn-border: rgb(0, 0, 0);
+
+    --banner-background:rgb(0, 0, 0);
+    --banner-border: rgb(0, 0, 0);
+    --banner-shadow: rgb(0, 0, 0);
+    --error-background: rgb(168, 98, 98);
+    --error-border: rgb(255, 127, 127);
+    --error-shadow: rgb(180, 47, 47);
+    --error-color: rgb(226, 191, 191);
+    --deck-name-input-border: rgb(44, 40, 35);
+    --deck-name-input-background: rgb(0, 0, 0);
+    --deck-name-input-color: rgb(71, 65, 60);
+    --deck-card-border: rgb(62, 62, 92);
+    --card-num-color: rgb(105, 96, 89);
+    --search-bar-border: rgb(70, 51, 28);
+    --card-filter: 70%;
+
+    --release-text-color: rgb(80, 80, 80);
+    --release-background: rgba(0, 0, 0, 0);
+    --release-border: rgba(40, 41, 62, 0);
+    --release-header-border: rgb(23, 23, 24);
+    --release-tab-background: rgb(36, 14, 14);
+    --release-tab-color: rgb(132, 71, 71);
+    --release-tab-size: 17px;
+
+    --quick-start-background: rgb(10, 9, 15);
+    --quick-start-border: rgb(10, 9, 15);
+    --quick-start-header-border: rgb(104, 98, 88);
+    --how-to-background: rgb(9, 9, 15);
+    --how-to-content-background: rgb(10, 9, 15);
+    --how-to-content-border: rgb(9, 9, 15);
+    --how-to-color: rgb(79, 79, 79);
+    --notice-background: rgb(65, 39, 39);
+    --notice-border: rgb(143, 61, 61);
+    --notice-color: rgb(142, 73, 73);
+
+    --play-set-icon: rgb(82, 82, 82);
+    --play-options-background: rgb(0, 0, 0);
+    --play-options-border: rgb(48, 35, 16);
+    --play-options-shadow: rgba(134, 117, 91, 0);
+    --play-options-color: rgb(65, 65, 65);
+    --font-size-color: rgb(207, 192, 172);
+    --font-size-border: rgb(188, 168, 141);
+    --adv-option-color: rgb(223, 213, 188);
+    --adv-option-background: rgb(134, 126, 107);
+    --adv-option-hover-color: rgb(240, 231, 219);
+    --adv-option-hover-background: rgb(134, 126, 107);
+    --graveyard-background: #484441;
+    --graveyard-border: #bdafa4;
+    --counter-background: rgb(255, 186, 103);
+    --counter-color: rgb(104, 91, 69);
+    --selection-border: rgba(255, 164, 79, 0.7);
+    --selection-background: rgba(255, 183, 88, 0.2);
+    --selected-border: rgb(255, 145, 0);
+
+    --header-filter: 60%;
+    --html-background: black;
 }
 
 
@@ -170,6 +267,7 @@
 html, body {
     user-select: none;
     overflow-y: scroll;
+    background: var(--html-background);
 }
 
 ::-webkit-scrollbar {
@@ -219,7 +317,7 @@ html, body {
     z-index: 13;
     margin: 0;
     border-top: solid 3px var(--quick-start-label-border);
-    color: var(--how-to-color)
+    color: var(--how-to-color);
 }
 
 .quick-start h1 {
@@ -332,12 +430,14 @@ html, body {
 
 .purch-btn:hover {
     background: var(--btn-hover);
+    color: var(--btn-hover-color);
 }
 
 /* header stylings */
 
 .purch-header {
     color: var(--home-header);
+    filter: brightness(var(--header-filter));
 }
 
 .purch-header h1 {
@@ -391,6 +491,7 @@ html, body {
 
 .settings-option:hover {
     background: var(--settings-option-hover);
+    color: var(--settings-option-hover-color)
 }
 
 .version {
@@ -467,6 +568,7 @@ html, body {
     box-shadow: 0 3px var(--setting-drpdwn-shadow);
     border-left: solid 2px var(--setting-drpdwn-border);
     border-bottom: solid 2px var(--setting-drpdwn-border);
+    color: var(--btn-color);
     width: 120px;
     z-index: 50;
 }

@@ -48,6 +48,7 @@
 .played-card {
   border: solid 3px rgb(206, 206, 206);
   border-radius: 10px;
+  filter: brightness(var(--card-filter)) !important;
 }
 
 .tap-icon {
@@ -248,6 +249,7 @@ input[type="range"]::-moz-range-thumb {
 
 .hand .card {
   z-index: 11;
+  filter: brightness(var(--card-filter)) !important;
 }
 
 .played-card {

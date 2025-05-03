@@ -3,8 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 const ngrok = require('ngrok');
-require('dotenv').config();
-
 
 let ngrokUrl = null; // store ngrok url globally
 
@@ -14,16 +12,26 @@ const gameRooms = {};
 router.post('/create-room', async (req, res) => {
     try {
         console.log("Received request to create room...");
+        console.log("Environment variables in matchmaking:");
+        console.log("NGROK_AUTH_TOKEN:", process.env.NGROK_AUTH_TOKEN ? '***' : 'not set');
+        console.log("NODE_ENV:", process.env.NODE_ENV);
+
+        if (!process.env.NGROK_AUTH_TOKEN) {
+            throw new Error("NGROK_AUTH_TOKEN is not set in environment variables");
+        }
 
         if (!ngrokUrl) {
-            // Authenticate and start Ngrok without CAPTCHA
-            ngrokUrl = await ngrok.connect({
-                addr: 3001,
-                authtoken: process.env.NGROK_AUTH_TOKEN, 
-                region: "eu",
-                proto: "http"
-            });
-            console.log(`ngrok tunnel started: ${ngrokUrl}`);
+            try {
+                // Simplified ngrok configuration to match working command line version
+                ngrokUrl = await ngrok.connect({
+                    addr: 3001,
+                    authtoken: process.env.NGROK_AUTH_TOKEN
+                });
+                console.log(`ngrok tunnel started successfully: ${ngrokUrl}`);
+            } catch (ngrokError) {
+                console.error("Detailed ngrok error:", ngrokError);
+                throw new Error(`Failed to start ngrok tunnel: ${ngrokError.message}`);
+            }
         }
 
         const roomId = uuidv4();
@@ -38,11 +46,13 @@ router.post('/create-room', async (req, res) => {
         res.json({ roomId, serverUrl: ngrokUrl });
     } catch (error) {
         console.error("Error in create-room endpoint:", error);
-        res.status(500).json({ message: 'Failed to create room', error: error.message });
+        res.status(500).json({ 
+            message: 'Failed to create room', 
+            error: error.message,
+            details: error.stack
+        });
     }
 });
-
-
 
 // Join an existing room
 router.post('/join-room', (req, res) => {
@@ -66,8 +76,6 @@ router.post('/join-room', (req, res) => {
     console.log(`Players in room ${roomId}:`, gameRooms[roomId].players);
     res.json({ message: "Joined room successfully", players: gameRooms[roomId].players });
 });
-
-
 
 // Get room details
 router.get('/room/:roomId', (req, res) => {

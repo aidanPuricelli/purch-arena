@@ -10,6 +10,26 @@ const matchmakingRoutes = require('./matchmaking/matchmaking');
 const gameStateRoutes = require('./matchmaking/gameState');
 const cors = require('cors');
 
+// Try to load .env file
+try {
+    require('dotenv').config({ path: path.join(__dirname, '../.env') });
+} catch (error) {
+    console.warn('Failed to load .env file:', error.message);
+}
+
+// Fallback: Set environment variables directly if not loaded from .env
+if (!process.env.NGROK_AUTH_TOKEN) {
+    process.env.NGROK_AUTH_TOKEN = '2tmXbJ0lLbYwFKxyNNIMuiZw1zA_656Lumt4P6iTNuWFRvNdu';
+    process.env.NODE_ENV = 'test';
+    console.log('Using fallback environment variables');
+}
+
+// Log environment variables for debugging
+console.log('Environment variables loaded:');
+console.log('NGROK_AUTH_TOKEN:', process.env.NGROK_AUTH_TOKEN ? '***' : 'not set');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('Current directory:', __dirname);
+console.log('Env file path:', path.join(__dirname, '../.env'));
 
 const app = express();
 app.use(bodyParser.json({ limit: '50mb' }));

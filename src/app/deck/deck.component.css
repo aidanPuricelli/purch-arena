@@ -128,6 +128,7 @@ li {
   transition: transform 0.2s;
   z-index: 5;
   border: solid 2px var(--deck-card-border);
+  filter: brightness(var(--card-filter)) !important;
 }
 
 .card-img:hover {
