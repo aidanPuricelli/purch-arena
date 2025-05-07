@@ -1990,5 +1990,2181 @@
       "image_uri": "https://cards.scryfall.io/normal/front/b/c/bc7cbe9b-324e-42b8-94e2-36e91cb32163.jpg?1644853048",
       "category": "Uncategorized"
     }
+  ],
+  "warrior queen": [
+    {
+      "name": "Ad Nauseam",
+      "mana_cost": "{3}{B}{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/9/a9f2c53e-ff58-4aa8-89a6-4f45628cc571.jpg?1598306470",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ancient Tomb",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/d/bd3d4b4b-cf31-4f89-8140-9650edb03c7b.jpg?1582753000",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Arcane Signet",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/3/935644d4-a140-4f24-b8ab-d5e79a682a9b.jpg?1743206090",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Arid Mesa",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/5/25ac5405-df7b-4097-914a-022cb18e20d4.jpg?1738703645",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Badlands",
+      "mana_cost": "",
+      "type_line": "Land — Swamp Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/3/73403d04-fe97-4830-8b80-16dd1a1a6cc1.jpg?1562918068",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Bayou",
+      "mana_cost": "",
+      "type_line": "Land — Swamp Forest",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/d/bd7567df-b4d8-41a8-8eac-c05afa784bfe.jpg?1562933075",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Birds of Paradise",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Bird",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/d/3d69a3e0-6a2e-475a-964e-0affed1c017d.jpg?1722384747",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Bloodstained Mire",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/7/579743fe-f71e-4cb2-8629-d6b02ed1591d.jpg?1717012950",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Brain Freeze",
+      "mana_cost": "{1}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/a/3a2d7cf9-dddb-4de3-b4f2-c52e3ec8fb4b.jpg?1562906772",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Carpet of Flowers",
+      "mana_cost": "{G}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/3/93abb48a-85f2-432d-8602-0a1d17fbb409.jpg?1562926232",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Chain of Vapor",
+      "mana_cost": "{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/8/38f741bf-13ee-4384-98ab-27833ebb9f6d.jpg?1562395835",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Chrome Mox",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f340cbf7-5bbe-45b9-a4bf-d1caa500ff93.jpg?1739403657",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "City of Brass",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/e/bed4a63d-632a-4a3a-b35f-f8e155237d27.jpg?1673149483",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Command Tower",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/f/5fc770b6-03ac-45c3-a2ca-bd508096384e.jpg?1743206097",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Culling Ritual",
+      "mana_cost": "{2}{B}{G}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/c/bccb063c-6bd5-411f-86ce-9a7c054e34d3.jpg?1743350802",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Culling the Weak",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/0/50c33f18-0a5c-4e46-ab0d-6e450915594f.jpg?1562087832",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Dark Ritual",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/5/95f27eeb-6f14-4db3-adb9-9be5ed76b34b.jpg?1628801678",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Deathrite Shaman",
+      "mana_cost": "{B/G}",
+      "type_line": "Creature — Elf Shaman",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/f/cfdb1c47-14be-491f-88b3-bed03489dbc5.jpg?1702429617",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Deflecting Swat",
+      "mana_cost": "{2}{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/4/b4b36435-55b3-4615-8812-af41d4fc64d9.jpg?1745319946",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Delighted Halfling",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Halfling Citizen",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/1/71384418-173a-4f77-adab-56e52fa23692.jpg?1686969281",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Demonic Consultation",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/d/1d779f19-3068-4976-b96b-8f93d156900b.jpg?1610146869",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Demonic Tutor",
+      "mana_cost": "{1}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/2/a24b4cb6-cebb-428b-8654-74347a6a8d63.jpg?1701989302",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Derevi, Empyrial Tactician",
+      "mana_cost": "{G}{W}{U}",
+      "type_line": "Legendary Creature — Bird Wizard",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/a/3a1d0dad-18a8-489e-ac11-08f64b72fda4.jpg?1592673365",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Diabolic Intent",
+      "mana_cost": "{1}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/7/d72ab698-de67-4ca8-8e42-b05346bf52fa.jpg?1674420800",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Eladamri's Call",
+      "mana_cost": "{G}{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/a/ea751fe2-b64a-4265-8885-a9016b29b5b3.jpg?1562202300",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Elvish Spirit Guide",
+      "mana_cost": "{2}{G}",
+      "type_line": "Creature — Elf Spirit",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/0/50aded92-f934-441f-8e48-d68d471e70d8.jpg?1675200375",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Enlightened Tutor",
+      "mana_cost": "{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/c/1c9675fb-1a89-420f-aea8-50e0642f549c.jpg?1675198797",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Esper Sentinel",
+      "mana_cost": "{W}",
+      "type_line": "Artifact Creature — Human Soldier",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f3537373-ef54-4578-9d05-6216420ee349.jpg?1626093502",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Exotic Orchard",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/2/c2ea2395-4518-4683-8eed-59c43fb3328a.jpg?1743207546",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Fellwar Stone",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/e/ce55e00c-cd95-48eb-986e-edf5125f3534.jpg?1743207310",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Fierce Guardianship",
+      "mana_cost": "{2}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/7/f7f3dd95-bd14-4e0f-a388-444f9cf1b0dc.jpg?1689996370",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Final Fortune",
+      "mana_cost": "{R}{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/b/fb80afc3-4887-42a0-afb2-7fa997981fb2.jpg?1562251808",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Flooded Strand",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/f/8f85e12c-196b-4459-b81f-0c9c854e9f57.jpg?1717012985",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Flusterstorm",
+      "mana_cost": "{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/9/f900eeb7-7c45-44bc-ad3a-0bbe594ecf50.jpg?1562856071",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Forbidden Orchard",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/7/17db644c-1acf-477d-9c20-f72221f1108a.jpg?1673149497",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Force of Will",
+      "mana_cost": "{3}{U}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/9/89f612d6-7c59-4a7b-a87d-45f789e88ba5.jpg?1675199280",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gamble",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/e/8e37fae5-ddd0-4e16-8581-71579f89d9c5.jpg?1745319947",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gemstone Caverns",
+      "mana_cost": "",
+      "type_line": "Legendary Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/f/7f273641-c5f3-48bc-b89e-3cff52d26a0b.jpg?1619399338",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gifts Ungiven",
+      "mana_cost": "{3}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/c/cc950b6c-0346-4939-b36b-9f10a75f7a32.jpg?1745319959",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gitaxian Probe",
+      "mana_cost": "{U/P}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/9/995486ce-58bb-4753-a812-0ca73ef1a235.jpg?1562880052",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Grand Abolisher",
+      "mana_cost": "{W}{W}",
+      "type_line": "Creature — Human Cleric",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/e/ee793ed2-7d59-4640-8868-ad486600df2c.jpg?1739804149",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ignoble Hierarch",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Goblin Shaman",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/b/aba51852-af8f-49d8-8fb6-22d52a1742b8.jpg?1626097603",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Imperial Seal",
+      "mana_cost": "{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/7/e71a6bd3-7478-4c3a-8ae0-98352ce28492.jpg?1673147544",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Intuition",
+      "mana_cost": "{2}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/1/b13e73a5-067d-4dbd-9c98-34a0db6140de.jpg?1562431264",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lion's Eye Diamond",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/5/758f95f8-bcb0-43ae-b474-56ebd855951e.jpg?1590511899",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lotus Petal",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/8/f85ab5f9-508e-45de-8fa1-ce1f16552ffc.jpg?1701537448",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mana Confluence",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/0/504a69eb-3c2d-4bb1-b117-252b15acf0c2.jpg?1593096534",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mana Vault",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/1/c1a31d52-a407-4ded-bfca-cc812f11afa0.jpg?1673149384",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Marsh Flats",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9db3ba6d-eb7f-4f5b-9a3b-c6239c3baa42.jpg?1738703598",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mental Misstep",
+      "mana_cost": "{U/P}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/1/61e9c6df-1c84-4eab-9076-a4feb6347c10.jpg?1566819829",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mindbreak Trap",
+      "mana_cost": "{2}{U}{U}",
+      "type_line": "Instant — Trap",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/f/4f51140b-6254-431a-8810-94307bfdfbbe.jpg?1562612097",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Misty Rainforest",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/8/88231c0d-0cc8-44ec-bf95-81d1710ac141.jpg?1738703648",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mnemonic Betrayal",
+      "mana_cost": "{1}{U}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/5/a5cf45aa-ed34-4add-a2ec-fc11f8c15ffa.jpg?1572893747",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mockingbird",
+      "mana_cost": "{X}{U}",
+      "type_line": "Creature — Bird Bard",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/d/ade32396-8841-4ba4-8852-d11146607f21.jpg?1722388218",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Diamond",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/f/bf9fecfd-d122-422f-bd0a-5bf69b434dfe.jpg?1562431287",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Opal",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/6/56001a36-126b-4c08-af98-a6cc4d84210e.jpg?1734350253",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mystic Remora",
+      "mana_cost": "{U}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/0/40140991-cffa-4b52-9a25-37e9a8aa9ddd.jpg?1675199366",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mystical Tutor",
+      "mana_cost": "{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/6/36fa9a0b-b0c9-43ea-ba11-99d7982f974e.jpg?1675199375",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Noble Hierarch",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Human Druid",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/0/400382a4-aea2-4827-b06a-1b0b3745908b.jpg?1599707413",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Opposition Agent",
+      "mana_cost": "{2}{B}",
+      "type_line": "Creature — Human Rogue",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/8/086f97e9-8b62-44f3-b467-149c2ac5ca78.jpg?1608909875",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Pact of Negation",
+      "mana_cost": "{0}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/e/1ed4c0bb-b710-44a1-b8bc-6bd11c27b8b8.jpg?1697121218",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Plateau",
+      "mana_cost": "",
+      "type_line": "Land — Mountain Plains",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/b/bb979a96-a57d-4fb5-8ebe-0bd398272abe.jpg?1562932720",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Polluted Delta",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/e/6e288374-2b71-4ace-b1d2-a19fee6cb4af.jpg?1717013017",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ragavan, Nimble Pilferer",
+      "mana_cost": "{R}",
+      "type_line": "Legendary Creature — Monkey Pirate",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/9/a9738cda-adb1-47fb-9f4c-ecd930228c4d.jpg?1681963138",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ranger-Captain of Eos",
+      "mana_cost": "{1}{W}{W}",
+      "type_line": "Creature — Human Soldier Ranger",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/f/af3928b4-813a-4120-8799-de34235d60ac.jpg?1710406366",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Red Elemental Blast",
+      "mana_cost": "{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/0/70a45e9b-699e-425a-9f3d-267274830d3e.jpg?1562436618",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Rhystic Study",
+      "mana_cost": "{2}{U}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/6/d6914dba-0d27-4055-ac34-b3ebf5802221.jpg?1600698439",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Rite of Flame",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/0/c062caf7-f0eb-44db-9f74-e6711a13fada.jpg?1593275318",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Samut, Vizier of Naktamun",
+      "mana_cost": "{1}{R}{G}",
+      "type_line": "Legendary Creature — Human Warrior Cleric",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/0/a0f3fdb0-47ad-4df6-a95c-a2c81aaf7af5.jpg?1684340837",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Savannah",
+      "mana_cost": "",
+      "type_line": "Land — Forest Plains",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/0/b0d161fc-4a2a-4f1d-82b4-a746552552df.jpg?1562930574",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Scalding Tarn",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/1/71e491c5-8c07-449b-b2f1-ffa052e6d311.jpg?1738703652",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Scrubland",
+      "mana_cost": "",
+      "type_line": "Land — Plains Swamp",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9d471e36-a3ab-4a96-ba4b-8eca921ea37a.jpg?1562926691",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sevinne's Reclamation",
+      "mana_cost": "{2}{W}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/f/0f055754-58cf-474a-a3a9-59490dbf9dce.jpg?1717013567",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Silence",
+      "mana_cost": "{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/c/1c2b13b1-31f0-4676-88a7-53f3a190e9a2.jpg?1562826686",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Simian Spirit Guide",
+      "mana_cost": "{2}{R}",
+      "type_line": "Creature — Ape Spirit",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/e/0e57335d-4066-4d73-83cd-67a215e01a4e.jpg?1619397622",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Smothering Tithe",
+      "mana_cost": "{3}{W}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/6/861b5889-0183-4bee-afeb-a4b2aa700a8e.jpg?1689996018",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Snap",
+      "mana_cost": "{1}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/1/f13406c6-f208-402a-94d3-a94a24f03563.jpg?1675199430",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sol Ring",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/b/7b0ccfd4-f118-4497-9c5a-54cf12000e16.jpg?1743206094",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Summoner's Pact",
+      "mana_cost": "{0}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/e/ee0f88ac-8a90-4057-b0e6-c15fbd02da38.jpg?1619398774",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Swan Song",
+      "mana_cost": "{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9d968dde-c406-48ef-a1ab-373aebc24693.jpg?1562412350",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Swords to Plowshares",
+      "mana_cost": "{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/8/f87cf997-14b5-4a2c-a7d1-34b7de6561a2.jpg?1743206210",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Taiga",
+      "mana_cost": "",
+      "type_line": "Land — Mountain Forest",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/c/0c2c39fc-b564-4ab5-833c-ff029760b7a7.jpg?1562897467",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tainted Pact",
+      "mana_cost": "{1}{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/5/c513f51b-a0db-4c08-8acc-1e91060b93b7.jpg?1628801908",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tarnished Citadel",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/0/30375d24-ccfe-47a2-babd-1bda0a6298fe.jpg?1562903894",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Thassa's Oracle",
+      "mana_cost": "{U}{U}",
+      "type_line": "Creature — Merfolk Wizard",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/2/726e8b29-13e9-4138-b6a9-d2a0d8188d1c.jpg?1680582212",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tinder Wall",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Plant Wall",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/e/1e62598f-0a91-4cfd-9a28-c3bda61c9ead.jpg?1562867846",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tropical Island",
+      "mana_cost": "",
+      "type_line": "Land — Forest Island",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/7/47033ba4-8f26-4a6b-97bd-5b366327325e.jpg?1632873386",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tundra",
+      "mana_cost": "",
+      "type_line": "Land — Plains Island",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/f/efd35cb4-862d-4699-a197-b744989b3ceb.jpg?1562943174",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Underground Sea",
+      "mana_cost": "",
+      "type_line": "Land — Island Swamp",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/6/26cee543-6eab-494e-a803-33a5d48d7d74.jpg?1562902883",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Underworld Breach",
+      "mana_cost": "{1}{R}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/e/0e51d796-7279-4c06-87f0-37adbdaa41df.jpg?1743418992",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Vampiric Tutor",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/4/34a0203f-9cce-43a4-9cb7-8ce6647895cd.jpg?1675199860",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Verdant Catacombs",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/4/94c229ea-90da-4aa0-bfda-b162fb3b5b8b.jpg?1738703665",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Voice of Victory",
+      "mana_cost": "{1}{W}",
+      "type_line": "Creature — Human Bard",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/c/ec3de5f4-bb55-4ab9-995f-f3e0dc22c1bb.jpg?1743204090",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Volcanic Island",
+      "mana_cost": "",
+      "type_line": "Land — Island Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/f/2f607e7e-30c0-45e9-8f61-bf6e9fe63f2b.jpg?1562904669",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Warrior's Oath",
+      "mana_cost": "{R}{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/5/65e10759-e862-4b69-8b58-474df2cdae29.jpg?1673147960",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Windswept Heath",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/d/bd1d13f7-fd38-4f0b-a8e0-1eac78668117.jpg?1717013102",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wishclaw Talisman",
+      "mana_cost": "{1}{B}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/9/69d0f5bd-ccea-49b2-bd79-ad5e4d850cf5.jpg?1730490937",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wooded Foothills",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/e/4e11ea8a-f895-438d-a3b7-f070238e4161.jpg?1717013111",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Worldly Tutor",
+      "mana_cost": "{G}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f39aa2e9-e294-4ce6-bf5e-e1f579101a7a.jpg?1745319949",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Borne Upon a Wind",
+      "mana_cost": "{1}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/9/a9379675-1a32-4e2b-8aaf-5f908c595f31.jpg?1686968037",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Crop Rotation",
+      "mana_cost": "{G}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/2/523414cb-f8db-407a-808a-01454e03d8b9.jpg?1745319951",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gaea's Cradle",
+      "mana_cost": "",
+      "type_line": "Legendary Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/5/25b0b816-0583-44aa-9dc5-f3ff48993a51.jpg?1562902898",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Last Chance",
+      "mana_cost": "{R}{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/0/c0efb595-d407-4389-a99d-d97c4d6bdcd0.jpg?1675200054",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lotho, Corrupt Shirriff",
+      "mana_cost": "{W}{B}",
+      "type_line": "Legendary Creature — Halfling Rogue",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/e/ce01ff8f-a037-484f-9148-c847ffaabc5a.jpg?1686969873",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Manamorphose",
+      "mana_cost": "{1}{R/G}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/a/faf9070e-14be-4ce5-a19a-6addc79359c1.jpg?1599708170",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Amber",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/6/66024e69-ad60-4c9a-a0ca-da138d33ad80.jpg?1685554120",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Necropotence",
+      "mana_cost": "{B}{B}{B}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/8/c89c6895-b0f8-444a-9c89-c6b4fd027b3e.jpg?1745319943",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Professional Face-Breaker",
+      "mana_cost": "{2}{R}",
+      "type_line": "Creature — Human Warrior",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/2/42acbf52-b137-44f0-a815-2817fe8d2da2.jpg?1664411677",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Pyroblast",
+      "mana_cost": "{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/0/b029eb9a-dd7a-40c2-96c4-0063d9cc002c.jpg?1580014621",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Najeela, the Blade-Blossom",
+      "mana_cost": "{2}{R}",
+      "type_line": "Legendary Creature — Human Warrior",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/c/2cb1d1da-6077-46b5-8c63-39882b8016f2.jpg?1567181270",
+      "category": "Uncategorized"
+    }
+  ],
+  "flubs": [
+    {
+      "name": "Arid Mesa",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/5/25ac5405-df7b-4097-914a-022cb18e20d4.jpg?1738703645",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Artist's Talent",
+      "mana_cost": "{1}{R}",
+      "type_line": "Enchantment — Class",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/b/8b9e51d9-189b-4dd6-87cb-628ea6373e81.jpg?1721426571",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Birds of Paradise",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Bird",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/d/3d69a3e0-6a2e-475a-964e-0affed1c017d.jpg?1722384747",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Bloodstained Mire",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/7/579743fe-f71e-4cb2-8629-d6b02ed1591d.jpg?1717012950",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Brain Freeze",
+      "mana_cost": "{1}{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/a/3a2d7cf9-dddb-4de3-b4f2-c52e3ec8fb4b.jpg?1562906772",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Breakthrough",
+      "mana_cost": "{X}{U}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/2/22075f41-3aeb-406d-99b6-88ddae992d0b.jpg?1673147224",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Breeding Pool",
+      "mana_cost": "",
+      "type_line": "Land — Forest Island",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/b/9b35c030-029d-4286-ab79-0165c8688c6c.jpg?1702429800",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Chord of Calling",
+      "mana_cost": "{X}{G}{G}{G}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/1/b18fe7e0-8344-40cc-b242-83f01c6be7a6.jpg?1702429548",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Chrome Mox",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f340cbf7-5bbe-45b9-a4bf-d1caa500ff93.jpg?1739403657",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "City of Brass",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/e/bed4a63d-632a-4a3a-b35f-f8e155237d27.jpg?1673149483",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Claws of Gix",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/0/d02b645e-ba2c-44a0-889e-c1b46d2cd925.jpg?1562784182",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Cloud of Faeries",
+      "mana_cost": "{1}{U}",
+      "type_line": "Creature — Faerie",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/3/03aff125-8962-4a0a-a2b4-e5d693b75400.jpg?1682208732",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Cloudstone Curio",
+      "mana_cost": "{3}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/1/6146bf98-3cab-4044-a1a2-cf2203f617aa.jpg?1702431663",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Command Tower",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/f/5fc770b6-03ac-45c3-a2ca-bd508096384e.jpg?1743206097",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Commercial District",
+      "mana_cost": "",
+      "type_line": "Land — Mountain Forest",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/f/bf220c06-3cce-4bdd-aa58-83940c223e9c.jpg?1706242338",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Crimson Kobolds",
+      "mana_cost": "{0}",
+      "type_line": "Creature — Kobold",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/8/889f4908-42c0-46e2-a83f-394d9fcd58ba.jpg?1562923812",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Crookshank Kobolds",
+      "mana_cost": "{0}",
+      "type_line": "Creature — Kobold",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/5/f51d9dde-536b-4314-8de1-2c05a9bf3dbc.jpg?1559592379",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Crop Rotation",
+      "mana_cost": "{G}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/2/523414cb-f8db-407a-808a-01454e03d8b9.jpg?1745319951",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Darksteel Relic",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/f/0fd8c918-62d9-41be-a3e1-32ddac71b7e7.jpg?1562875578",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Displacer Kitten",
+      "mana_cost": "{3}{U}",
+      "type_line": "Creature — Cat Beast",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/7/c7a401b8-29fb-46ef-a663-427f66724d5c.jpg?1674135465",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Dragon's Rage Channeler",
+      "mana_cost": "{R}",
+      "type_line": "Creature — Human Shaman",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/c/4ced112a-e775-4f97-97b3-74877e9dce12.jpg?1626096503",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Earthcraft",
+      "mana_cost": "{1}{G}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9dda7531-82a1-4f49-8858-601ddbc6e2bc.jpg?1587857352",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Eldritch Evolution",
+      "mana_cost": "{1}{G}{G}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/0/606caf13-c0d3-4a61-9a1a-32f13b6448ab.jpg?1736468320",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Eruth, Tormented Prophet",
+      "mana_cost": "{1}{U}{R}",
+      "type_line": "Legendary Creature — Human Wizard",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/f/9f764077-df2d-4ac7-b507-2c8e08386d49.jpg?1643594095",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Exploration",
+      "mana_cost": "{G}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/b/5b372045-a4a0-44c8-96ec-1e201d61ed26.jpg?1675200396",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Faithless Looting",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/4/c43aeb5a-8bdc-4aa9-89d1-156f97ac38aa.jpg?1743206665",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Finale of Devastation",
+      "mana_cost": "{X}{G}{G}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/1/b10d99bf-b2ce-4443-b924-ff0eb8be1033.jpg?1689998522",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Flooded Strand",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/f/8f85e12c-196b-4459-b81f-0c9c854e9f57.jpg?1717012985",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Food Chain",
+      "mana_cost": "{2}{G}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/b/eb912458-e016-4ea2-a2ea-40ac1a57f8fb.jpg?1745319954",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Forbidden Orchard",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/7/17db644c-1acf-477d-9c20-f72221f1108a.jpg?1673149497",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Forest",
+      "mana_cost": "",
+      "type_line": "Basic Land — Forest",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/1/8100bceb-ffba-487a-bb45-4fe2a156a8dc.jpg?1743205126",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gaea's Cradle",
+      "mana_cost": "",
+      "type_line": "Legendary Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/5/25b0b816-0583-44aa-9dc5-f3ff48993a51.jpg?1562902898",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gamble",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/e/8e37fae5-ddd0-4e16-8581-71579f89d9c5.jpg?1745319947",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gemstone Caverns",
+      "mana_cost": "",
+      "type_line": "Legendary Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/f/7f273641-c5f3-48bc-b89e-3cff52d26a0b.jpg?1619399338",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gustha's Scepter",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/d/7d4f3248-2b3f-42b3-9a9f-77309bb46c34.jpg?1562869500",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Infernal Plunge",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/3/b3f50e17-c29c-4d2c-b3e7-45d1216b81ea.jpg?1562835822",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Island",
+      "mana_cost": "",
+      "type_line": "Basic Land — Island",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/f/1ff6acc9-581c-468f-894d-41f725da7f33.jpg?1743205101",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Jeska's Will",
+      "mana_cost": "{2}{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/9/99e0c371-1024-4432-9fd9-3bc29c8d38e4.jpg?1706240845",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Jeweled Amulet",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/e/1ec4975d-3ca8-45fd-9e6c-06650c6ac2e2.jpg?1562867848",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Kobolds of Kher Keep",
+      "mana_cost": "{0}",
+      "type_line": "Creature — Kobold",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/6/a6797542-0781-43d6-aa8e-b55e5c1e08c0.jpg?1562930079",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Land Grant",
+      "mana_cost": "{1}{G}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/6/d6862005-32d1-473e-a28b-5dfc4b7782cd.jpg?1562383050",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lion's Eye Diamond",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/5/758f95f8-bcb0-43ae-b474-56ebd855951e.jpg?1590511899",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lotus Cobra",
+      "mana_cost": "{1}{G}",
+      "type_line": "Creature — Snake",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/4/a4b759f0-901f-4be3-93fa-224609b08d48.jpg?1604199124",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lotus Petal",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/8/f85ab5f9-508e-45de-8fa1-ce1f16552ffc.jpg?1701537448",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mana Confluence",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/0/504a69eb-3c2d-4bb1-b117-252b15acf0c2.jpg?1593096534",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mana Vault",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/1/c1a31d52-a407-4ded-bfca-cc812f11afa0.jpg?1673149384",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Manabond",
+      "mana_cost": "{G}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/f/6f94ab94-5a8f-4422-8927-0b7da85c3119.jpg?1562429856",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Memnite",
+      "mana_cost": "{0}",
+      "type_line": "Artifact Creature — Construct",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/7/975459ba-e1c2-4800-a3fa-5c0cf8ce728f.jpg?1562925499",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mishra's Bauble",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/5/45bbbf9b-8fee-4c32-a513-02dac6ac8a39.jpg?1669300401",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Misty Rainforest",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/8/88231c0d-0cc8-44ec-bf95-81d1710ac141.jpg?1738703648",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mountain",
+      "mana_cost": "",
+      "type_line": "Basic Land — Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/f/bfa10a88-12e0-4b79-80bb-6f4620277e20.jpg?1743205117",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Amber",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/6/66024e69-ad60-4c9a-a0ca-da138d33ad80.jpg?1685554120",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Diamond",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/f/bf9fecfd-d122-422f-bd0a-5bf69b434dfe.jpg?1562431287",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Jasper",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/8/a851d2d3-7e93-4887-bee5-4d6c9aaf9419.jpg?1743204975",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Opal",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/6/56001a36-126b-4c08-af98-a6cc4d84210e.jpg?1734350253",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mystical Tutor",
+      "mana_cost": "{U}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/6/36fa9a0b-b0c9-43ea-ba11-99d7982f974e.jpg?1675199375",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Nature's Rhythm",
+      "mana_cost": "{X}{G}{G}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/3/1397d904-c51d-451e-8505-7f3118acc1f6.jpg?1743204565",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Noxious Revival",
+      "mana_cost": "{G/P}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/b/1bdd1243-1d14-496a-9b7a-0c5b34461361.jpg?1562875840",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ornithopter",
+      "mana_cost": "{0}",
+      "type_line": "Artifact Creature — Thopter",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/0/305078a5-ac18-4721-bba2-3434eba5b1cf.jpg?1691675959",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Paradise Mantle",
+      "mana_cost": "{0}",
+      "type_line": "Artifact — Equipment",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/9/19cd6bcc-ca47-47cc-9fe4-c29e9c176485.jpg?1561966400",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Phyrexian Walker",
+      "mana_cost": "{0}",
+      "type_line": "Artifact Creature — Phyrexian Construct",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/f/9f8a3979-2947-4692-8b2f-d4c07c534777.jpg?1562278159",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Polluted Delta",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/e/6e288374-2b71-4ace-b1d2-a19fee6cb4af.jpg?1717013017",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Rite of Flame",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/0/c062caf7-f0eb-44db-9f74-e6711a13fada.jpg?1593275318",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Rograkh, Son of Rohgahh",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Creature — Kobold Warrior",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/4/a4fab67f-00c2-4125-9262-d21a29411797.jpg?1644853041",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Scalding Tarn",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/1/71e491c5-8c07-449b-b2f1-ffa052e6d311.jpg?1738703652",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sensei's Divining Top",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/5/e5142b7a-e580-4737-a4aa-2590f6610ceb.jpg?1673149430",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Shield Sphere",
+      "mana_cost": "{0}",
+      "type_line": "Artifact Creature — Wall",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/a/7a76a97e-a857-4593-ae7c-e393d8a868ac.jpg?1559592340",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Shifting Woodland",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/5/059164e1-894d-4586-9800-e60d6fbd6eb6.jpg?1717013047",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Shrieking Drake",
+      "mana_cost": "{U}",
+      "type_line": "Creature — Drake",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/f/9f1cc39f-898c-4e92-82a0-a17606b60574.jpg?1717047439",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Six",
+      "mana_cost": "{2}{G}",
+      "type_line": "Legendary Creature — Treefolk",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/9/f9246b68-580f-4f53-883d-7900880e4b0d.jpg?1717012579",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sol Ring",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/b/7b0ccfd4-f118-4497-9c5a-54cf12000e16.jpg?1743206094",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Song of Creation",
+      "mana_cost": "{1}{G}{U}{R}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/7/b7320233-1c83-4f61-8c08-cc8361867256.jpg?1591228265",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Spellbook",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/6/26f4d2b1-31d7-40d8-bd4e-cdd128076d0f.jpg?1561974160",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Springleaf Drum",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f3b3869b-6da1-4b01-a2e7-2018d478b6e5.jpg?1599709959",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Squee, the Immortal",
+      "mana_cost": "{1}{R}{R}",
+      "type_line": "Legendary Creature — Goblin",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/8/a8232acd-4645-489c-8cf1-4efdc75d9322.jpg?1673484412",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Steam Vents",
+      "mana_cost": "",
+      "type_line": "Land — Island Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/6/66d618f4-443c-4a6c-8cbd-5d4ea96b2cd4.jpg?1702429824",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Step Through",
+      "mana_cost": "{3}{U}{U}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/1/716534cb-aa89-4de7-9aa5-8d8aa4422a6a.jpg?1626095032",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Stomping Ground",
+      "mana_cost": "",
+      "type_line": "Land — Mountain Forest",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/7/872301b2-b6e7-4972-a479-66a7e304c1d3.jpg?1702429826",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Strike It Rich",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/c/1c7c2814-a617-4123-acdf-1b01b2768210.jpg?1626097050",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Survival of the Fittest",
+      "mana_cost": "{1}{G}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/e/4ef0d7f9-ddb9-4e83-a9bf-09bec22fc80d.jpg?1562429365",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sylvan Library",
+      "mana_cost": "{1}{G}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/a/6ada256f-2e55-4c1f-b4d3-d7b10b498956.jpg?1675200566",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sylvan Tutor",
+      "mana_cost": "{G}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9dcad208-cbea-458f-af8d-6f5e9ec32df7.jpg?1562932279",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Taiga",
+      "mana_cost": "",
+      "type_line": "Land — Mountain Forest",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/c/0c2c39fc-b564-4ab5-833c-ff029760b7a7.jpg?1562897467",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Timeless Witness",
+      "mana_cost": "{2}{G}{G}",
+      "type_line": "Creature — Human Shaman",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/b/8b63ec86-670b-4acd-b14c-3d90acbde087.jpg?1743207040",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tinder Wall",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Plant Wall",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/e/1e62598f-0a91-4cfd-9a28-c3bda61c9ead.jpg?1562867846",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tropical Island",
+      "mana_cost": "",
+      "type_line": "Land — Forest Island",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/7/47033ba4-8f26-4a6b-97bd-5b366327325e.jpg?1632873386",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Underworld Breach",
+      "mana_cost": "{1}{R}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/e/0e51d796-7279-4c06-87f0-37adbdaa41df.jpg?1743418992",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Urza's Bauble",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/9/29175e6b-a2ab-4373-8093-cb372aa8c7d0.jpg?1559592523",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Utopia Sprawl",
+      "mana_cost": "{G}",
+      "type_line": "Enchantment — Aura",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/e/5ea568df-04a1-4012-98ec-ba75e189e0ca.jpg?1702429591",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Verdant Catacombs",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/4/94c229ea-90da-4aa0-bfda-b162fb3b5b8b.jpg?1738703665",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Volcanic Island",
+      "mana_cost": "",
+      "type_line": "Land — Island Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/f/2f607e7e-30c0-45e9-8f61-bf6e9fe63f2b.jpg?1562904669",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Walking Ballista",
+      "mana_cost": "{X}{X}",
+      "type_line": "Artifact Creature — Construct",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/2/5272436e-74f0-44c4-a291-ea8ebc3f1525.jpg?1599710252",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wheel of Fortune",
+      "mana_cost": "{2}{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/5/2597050f-6b1b-474e-aa16-33fd154628ca.jpg?1562902580",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wild Cantor",
+      "mana_cost": "{R/G}",
+      "type_line": "Creature — Human Druid",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/6/e6b56946-a368-4cd7-9d35-be14afca935b.jpg?1702429739",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wild Growth",
+      "mana_cost": "{G}",
+      "type_line": "Enchantment — Aura",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/7/47260e7c-29bf-46f1-a029-9da7bbb418b5.jpg?1711803863",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Windswept Heath",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/d/bd1d13f7-fd38-4f0b-a8e0-1eac78668117.jpg?1717013102",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Worldly Tutor",
+      "mana_cost": "{G}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f39aa2e9-e294-4ce6-bf5e-e1f579101a7a.jpg?1745319949",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Zuran Orb",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/1/618c8ecc-686d-41de-b9b1-1a7ee9cc7c14.jpg?1631302940",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Flubs, the Fool",
+      "mana_cost": "{G}{U}{R}",
+      "type_line": "Legendary Creature — Frog Scout",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/1/41e58eb8-e5b9-4ef6-be1f-00e28cebb998.jpg?1722441006",
+      "category": "Uncategorized"
+    },
+    {
+      "id": "bfa10a88-12e0-4b79-80bb-6f4620277e20",
+      "name": "Mountain",
+      "mana_cost": "",
+      "type_line": "Basic Land — Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/f/bfa10a88-12e0-4b79-80bb-6f4620277e20.jpg?1743205117"
+    }
+  ],
+  "B.A.D. Kaalia": [
+    {
+      "name": "Ad Nauseam",
+      "mana_cost": "{3}{B}{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/9/a9f2c53e-ff58-4aa8-89a6-4f45628cc571.jpg?1598306470",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ancient Tomb",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/d/bd3d4b4b-cf31-4f89-8140-9650edb03c7b.jpg?1582753000",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Animate Dead",
+      "mana_cost": "{1}{B}",
+      "type_line": "Enchantment — Aura",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/4/1489943b-c010-488e-9c9d-87f4af67a4e4.jpg?1706240754",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Arcane Signet",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/3/935644d4-a140-4f24-b8ab-d5e79a682a9b.jpg?1743206090",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Arena of Glory",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/d/dd148edc-9e43-41aa-bb50-f912115d3e72.jpg?1717047864",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Arid Mesa",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/5/25ac5405-df7b-4097-914a-022cb18e20d4.jpg?1738703645",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Badlands",
+      "mana_cost": "",
+      "type_line": "Land — Swamp Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/3/73403d04-fe97-4830-8b80-16dd1a1a6cc1.jpg?1562918068",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Beseech the Mirror",
+      "mana_cost": "{1}{B}{B}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/8/18c59776-e1f1-4197-a128-db1d603f56b7.jpg?1692937498",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Blood Crypt",
+      "mana_cost": "",
+      "type_line": "Land — Swamp Mountain",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/9/0994aef4-b341-45f4-8881-523565a5956e.jpg?1702429795",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Bloodstained Mire",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/7/579743fe-f71e-4cb2-8629-d6b02ed1591d.jpg?1717012950",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Burnt Offering",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/d/1dae52a2-3af7-4b97-9d2e-2448b7c413fb.jpg?1587911693",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Cabal Ritual",
+      "mana_cost": "{1}{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/5/a5d85875-22da-4054-ae42-e85b472a6d5d.jpg?1562928510",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Cavern of Souls",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/a/3aad15a2-8a1b-4460-9b06-e85863081878.jpg?1706884128",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Children of Korlis",
+      "mana_cost": "{W}",
+      "type_line": "Creature — Human Rebel Cleric",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/a/1a6cbece-f9d8-4c40-b72b-dfdb86430ff2.jpg?1619392791",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Chrome Mox",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f340cbf7-5bbe-45b9-a4bf-d1caa500ff93.jpg?1739403657",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "City of Brass",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/e/bed4a63d-632a-4a3a-b35f-f8e155237d27.jpg?1673149483",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "City of Traitors",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/1/71624139-a255-48be-93ca-594a4beba487.jpg?1562429861",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Command Tower",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/f/5fc770b6-03ac-45c3-a2ca-bd508096384e.jpg?1743206097",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Culling the Weak",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/0/50c33f18-0a5c-4e46-ab0d-6e450915594f.jpg?1562087832",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Dark Ritual",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/5/95f27eeb-6f14-4db3-adb9-9be5ed76b34b.jpg?1628801678",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Deflecting Swat",
+      "mana_cost": "{2}{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/4/b4b36435-55b3-4615-8812-af41d4fc64d9.jpg?1745319946",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Demonic Counsel",
+      "mana_cost": "{1}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/f/ff79c845-4115-4fbf-b20f-37470f2bf7fb.jpg?1726286193",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Demonic Tutor",
+      "mana_cost": "{1}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/2/a24b4cb6-cebb-428b-8654-74347a6a8d63.jpg?1701989302",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Diabolic Intent",
+      "mana_cost": "{1}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/7/d72ab698-de67-4ca8-8e42-b05346bf52fa.jpg?1674420800",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Doom Whisperer",
+      "mana_cost": "{3}{B}{B}",
+      "type_line": "Creature — Nightmare Demon",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/8/e8aabcaf-0968-402f-bc9f-289756e4d4b7.jpg?1706240763",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Dualcaster Mage",
+      "mana_cost": "{1}{R}{R}",
+      "type_line": "Creature — Human Wizard",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/e/defcc4a3-40e0-4f5d-b23c-6cd6a614abc1.jpg?1625193684",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Emergence Zone",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/b/ab95f6e7-b806-47fe-a071-6c38b3176d94.jpg?1557577458",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Enlightened Tutor",
+      "mana_cost": "{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/c/1c9675fb-1a89-420f-aea8-50e0642f549c.jpg?1675198797",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Entomb",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/c/3caa9c55-5e3b-436b-84a9-b7ccebf63799.jpg?1675199594",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Esper Sentinel",
+      "mana_cost": "{W}",
+      "type_line": "Artifact Creature — Human Soldier",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/3/f3537373-ef54-4578-9d05-6216420ee349.jpg?1626093502",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Faithless Looting",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/4/c43aeb5a-8bdc-4aa9-89d1-156f97ac38aa.jpg?1743206665",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Fellwar Stone",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/e/ce55e00c-cd95-48eb-986e-edf5125f3534.jpg?1743207310",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Final Fortune",
+      "mana_cost": "{R}{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/b/fb80afc3-4887-42a0-afb2-7fa997981fb2.jpg?1562251808",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Final Showdown",
+      "mana_cost": "{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/5/358968f9-45bd-4022-b6bc-f1f7e0adf0e7.jpg?1712860587",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Flooded Strand",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/f/8f85e12c-196b-4459-b81f-0c9c854e9f57.jpg?1717012985",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Forbidden Orchard",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/7/17db644c-1acf-477d-9c20-f72221f1108a.jpg?1673149497",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gamble",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/e/8e37fae5-ddd0-4e16-8581-71579f89d9c5.jpg?1745319947",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gemstone Caverns",
+      "mana_cost": "",
+      "type_line": "Legendary Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/f/7f273641-c5f3-48bc-b89e-3cff52d26a0b.jpg?1619399338",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Gleeful Demolition",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/3/a3e4efa6-5783-4a51-99c6-116d1a8f01cf.jpg?1675957089",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Godless Shrine",
+      "mana_cost": "",
+      "type_line": "Land — Plains Swamp",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/e/9e26f6ad-c1b8-4ec6-a179-e86ce09824c1.jpg?1702429803",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Grand Abolisher",
+      "mana_cost": "{W}{W}",
+      "type_line": "Creature — Human Cleric",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/e/ee793ed2-7d59-4640-8868-ad486600df2c.jpg?1739804149",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Grim Monolith",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9ddc9fe1-17c8-4e1d-aeb8-c4214e881280.jpg?1562863767",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Grim Tutor",
+      "mana_cost": "{1}{B}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/2/928558ab-e29a-44cb-ac2f-88443571f41a.jpg?1594736179",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Hoarding Broodlord",
+      "mana_cost": "{5}{B}{B}{B}",
+      "type_line": "Creature — Dragon",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/8/386ce3c9-869d-461c-a3de-c8add3786f73.jpg?1682203767",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Imperial Seal",
+      "mana_cost": "{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/7/e71a6bd3-7478-4c3a-8ae0-98352ce28492.jpg?1673147544",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Invoke Calamity",
+      "mana_cost": "{1}{R}{R}{R}{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/e/fe666c86-6734-4c47-9244-bcd26b54068d.jpg?1654567682",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lion's Eye Diamond",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/5/758f95f8-bcb0-43ae-b474-56ebd855951e.jpg?1590511899",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lotho, Corrupt Shirriff",
+      "mana_cost": "{W}{B}",
+      "type_line": "Legendary Creature — Halfling Rogue",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/e/ce01ff8f-a037-484f-9148-c847ffaabc5a.jpg?1686969873",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Lotus Petal",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/8/f85ab5f9-508e-45de-8fa1-ce1f16552ffc.jpg?1701537448",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Magda, Brazen Outlaw",
+      "mana_cost": "{1}{R}",
+      "type_line": "Legendary Creature — Dwarf Berserker",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/7/079e6263-e54c-4899-a336-5315909b9322.jpg?1631049453",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mana Confluence",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/0/504a69eb-3c2d-4bb1-b117-252b15acf0c2.jpg?1593096534",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mana Vault",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/1/c1a31d52-a407-4ded-bfca-cc812f11afa0.jpg?1673149384",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Marsh Flats",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9db3ba6d-eb7f-4f5b-9a3b-c6239c3baa42.jpg?1738703598",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Amber",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/6/66024e69-ad60-4c9a-a0ca-da138d33ad80.jpg?1685554120",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Diamond",
+      "mana_cost": "{0}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/f/bf9fecfd-d122-422f-bd0a-5bf69b434dfe.jpg?1562431287",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Mox Opal",
+      "mana_cost": "{0}",
+      "type_line": "Legendary Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/5/6/56001a36-126b-4c08-af98-a6cc4d84210e.jpg?1734350253",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Necromancy",
+      "mana_cost": "{2}{B}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/d/3dd34a1a-e76b-46ee-be8d-5f7f4a092648.jpg?1706240772",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Necropotence",
+      "mana_cost": "{B}{B}{B}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/8/c89c6895-b0f8-444a-9c89-c6b4fd027b3e.jpg?1745319943",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "mana_cost": "{1}{B}",
+      "type_line": "Creature — Orc Archer",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/c/7c024bae-5631-4e20-ac69-df392ac9e109.jpg?1745319944",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Plateau",
+      "mana_cost": "",
+      "type_line": "Land — Mountain Plains",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/b/bb979a96-a57d-4fb5-8ebe-0bd398272abe.jpg?1562932720",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Polluted Delta",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/e/6e288374-2b71-4ace-b1d2-a19fee6cb4af.jpg?1717013017",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Praetor's Grasp",
+      "mana_cost": "{1}{B}{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/5/9588be49-d9b5-4491-a5a0-10bcadc9f8b3.jpg?1562879913",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ragavan, Nimble Pilferer",
+      "mana_cost": "{R}",
+      "type_line": "Legendary Creature — Monkey Pirate",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/9/a9738cda-adb1-47fb-9f4c-ecd930228c4d.jpg?1681963138",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Rain of Filth",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/c/1cf07d5a-6618-48e2-a9f0-669b75bb6e85.jpg?1701537455",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Ranger-Captain of Eos",
+      "mana_cost": "{1}{W}{W}",
+      "type_line": "Creature — Human Soldier Ranger",
+      "image_uri": "https://cards.scryfall.io/normal/front/a/f/af3928b4-813a-4120-8799-de34235d60ac.jpg?1710406366",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Razaketh, the Foulblooded",
+      "mana_cost": "{5}{B}{B}{B}",
+      "type_line": "Legendary Creature — Demon",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/6/d6bb956d-0df6-4910-9320-55f2c5674d98.jpg?1689997402",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Reanimate",
+      "mana_cost": "{B}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/6/368b6903-5fc4-43e7-bd44-46b8107c8bb4.jpg?1738000013",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Red Elemental Blast",
+      "mana_cost": "{R}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/0/70a45e9b-699e-425a-9f3d-267274830d3e.jpg?1562436618",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Rite of Flame",
+      "mana_cost": "{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/0/c062caf7-f0eb-44db-9f74-e6711a13fada.jpg?1593275318",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sacred Foundry",
+      "mana_cost": "",
+      "type_line": "Land — Mountain Plains",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/0/8076a8c3-7c6c-4636-b5d8-9b09ee95f92c.jpg?1702429818",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sacrifice",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/5/652bd781-1a48-42c1-9aff-f9050a9285d6.jpg?1559593033",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Saw in Half",
+      "mana_cost": "{2}{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/5/05e6a7bc-a35a-4e68-99a0-be264553b5de.jpg?1673914032",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Scalding Tarn",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/1/71e491c5-8c07-449b-b2f1-ffa052e6d311.jpg?1738703652",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Scrubland",
+      "mana_cost": "",
+      "type_line": "Land — Plains Swamp",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/d/9d471e36-a3ab-4a96-ba4b-8eca921ea37a.jpg?1562926691",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sensei's Divining Top",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/5/e5142b7a-e580-4737-a4aa-2590f6610ceb.jpg?1673149430",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sevinne's Reclamation",
+      "mana_cost": "{2}{W}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/f/0f055754-58cf-474a-a3a9-59490dbf9dce.jpg?1717013567",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Shadowy Backstreet",
+      "mana_cost": "",
+      "type_line": "Land — Plains Swamp",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/9/69c1b656-1d67-499c-bf0f-417682a86c7d.jpg?1706242364",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Shallow Grave",
+      "mana_cost": "{1}{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/5/d5c782cc-c951-4c6f-a93f-774ae6c1c214.jpg?1562721926",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Silence",
+      "mana_cost": "{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/1/c/1c2b13b1-31f0-4676-88a7-53f3a190e9a2.jpg?1562826686",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Simian Spirit Guide",
+      "mana_cost": "{2}{R}",
+      "type_line": "Creature — Ape Spirit",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/e/0e57335d-4066-4d73-83cd-67a215e01a4e.jpg?1619397622",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Smothering Tithe",
+      "mana_cost": "{3}{W}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/8/6/861b5889-0183-4bee-afeb-a4b2aa700a8e.jpg?1689996018",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Sol Ring",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/b/7b0ccfd4-f118-4497-9c5a-54cf12000e16.jpg?1743206094",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Static Prison",
+      "mana_cost": "{W}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/d/dd16222e-349c-4a2b-a7c8-8eb35a8ab332.jpg?1717011554",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Swords to Plowshares",
+      "mana_cost": "{W}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/f/8/f87cf997-14b5-4a2c-a7d1-34b7de6561a2.jpg?1743206210",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Tainted Pact",
+      "mana_cost": "{1}{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/c/5/c513f51b-a0db-4c08-8acc-1e91060b93b7.jpg?1628801908",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Talisman of Hierarchy",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/7/a/7a283444-2cb5-4dd2-8d20-e8cb90ac0ffe.jpg?1743207385",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Talisman of Indulgence",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/d/a/daf69185-96cf-4523-be1d-1fe90fc63ab7.jpg?1726285334",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Trouble in Pairs",
+      "mana_cost": "{2}{W}{W}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/f/0f61e93f-5f97-4c7d-b3d5-0e05242faeb3.jpg?1745319933",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Underworld Breach",
+      "mana_cost": "{1}{R}",
+      "type_line": "Enchantment",
+      "image_uri": "https://cards.scryfall.io/normal/front/0/e/0e51d796-7279-4c06-87f0-37adbdaa41df.jpg?1743418992",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Vampiric Tutor",
+      "mana_cost": "{B}",
+      "type_line": "Instant",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/4/34a0203f-9cce-43a4-9cb7-8ce6647895cd.jpg?1675199860",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Verdant Catacombs",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/9/4/94c229ea-90da-4aa0-bfda-b162fb3b5b8b.jpg?1738703665",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Vexing Bauble",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/9/29f11089-658f-42e6-aeb0-09b512ad2479.jpg?1734350193",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Vilis, Broker of Blood",
+      "mana_cost": "{5}{B}{B}{B}",
+      "type_line": "Legendary Creature — Demon",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/c/ecdf2bd9-87b9-470a-ad2e-0ebf98560f87.jpg?1592516819",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Voice of Victory",
+      "mana_cost": "{1}{W}",
+      "type_line": "Creature — Human Bard",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/c/ec3de5f4-bb55-4ab9-995f-f3e0dc22c1bb.jpg?1743204090",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wheel of Fortune",
+      "mana_cost": "{2}{R}",
+      "type_line": "Sorcery",
+      "image_uri": "https://cards.scryfall.io/normal/front/2/5/2597050f-6b1b-474e-aa16-33fd154628ca.jpg?1562902580",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Windswept Heath",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/b/d/bd1d13f7-fd38-4f0b-a8e0-1eac78668117.jpg?1717013102",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wishclaw Talisman",
+      "mana_cost": "{1}{B}",
+      "type_line": "Artifact",
+      "image_uri": "https://cards.scryfall.io/normal/front/6/9/69d0f5bd-ccea-49b2-bd79-ad5e4d850cf5.jpg?1730490937",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Wooded Foothills",
+      "mana_cost": "",
+      "type_line": "Land",
+      "image_uri": "https://cards.scryfall.io/normal/front/4/e/4e11ea8a-f895-438d-a3b7-f070238e4161.jpg?1717013111",
+      "category": "Uncategorized"
+    },
+    {
+      "name": "Kaalia of the Vast",
+      "mana_cost": "{1}{R}{W}{B}",
+      "type_line": "Legendary Creature — Human Cleric",
+      "image_uri": "https://cards.scryfall.io/normal/front/e/7/e71c8c39-3fbb-4a42-9cf6-b3224f5a56fc.jpg?1717013745",
+      "category": "Uncategorized"
+    },
+    {
+      "id": "3573b9a2-7911-475c-8ae7-25bd0dbb7159",
+      "name": "Dauthi Voidwalker",
+      "mana_cost": "{B}{B}",
+      "type_line": "Creature — Dauthi Rogue",
+      "image_uri": "https://cards.scryfall.io/normal/front/3/5/3573b9a2-7911-475c-8ae7-25bd0dbb7159.jpg?1743206467"
+    }
   ]
 }

@@ -14,6 +14,7 @@ import { PlayComponent } from './play/play.component';
 import { CreateComponent } from './create/create.component';
 import { QuickStartComponent } from './quick-start/quick-start.component';
 import { ReleaseNotesComponent } from './release-notes/release-notes.component';
+import { DeckAnalysisComponent } from './deck-analysis/deck-analysis.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ReleaseNotesComponent } from './release-notes/release-notes.component';
     PlayComponent,
     CreateComponent,
     QuickStartComponent,
-    ReleaseNotesComponent
+    ReleaseNotesComponent,
+    DeckAnalysisComponent
   ],
   imports: [
     BrowserModule,

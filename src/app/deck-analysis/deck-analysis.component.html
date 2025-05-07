@@ -1,0 +1,19 @@
+<div class="filter"></div>
+<div class="deck-analysis-container animate__animated animate__fadeInUp">
+    <div class="content">
+        <select  class="drpdwn" [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
+            <option value="">Select Deck</option>
+            <option *ngFor="let deck of deckNames" [value]="deck">{{ deck }}</option>
+        </select>
+        <span class="insights-text beleren-bold">{{ selectedDeck }} Insights</span>
+        
+    </div>
+    <div class="charts-container">
+        <div class="chart-container">
+            <canvas id="deckPieChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="manaCurveChart"></canvas>
+        </div>
+    </div>
+</div>

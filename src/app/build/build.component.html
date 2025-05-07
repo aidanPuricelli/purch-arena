@@ -1,5 +1,13 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <app-navbar [links]="navLinks"></app-navbar>
-<div class="build-container container mt-5">
+<div class="build-container" style="padding: 20px;">
     <app-search [selectedDeck]="selectedDeck"></app-search>
     <app-deck [selectedDeck]="selectedDeck" (deckSelected)="onDeckSelected($event)"></app-deck>
+    <app-deck-analysis *ngIf="insightsVisible"></app-deck-analysis>
+    <button (click)="toggleInsights()">
+        <span class="material-icons">
+            {{insightsVisible ? 'visibility_off' : 'visibility'}}
+        </span>
+    </button>
 </div>

@@ -1,0 +1,32 @@
+.build-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+app-search {
+    order: 1;
+}
+
+app-deck {
+    order: 2;
+}
+
+app-deck-analysis {
+    order: 3;
+}
+
+button {
+    position: fixed;
+    z-index: 1000;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 10px 5px 10px;
+    background: var(--nav-background);
+    border: 3px solid var(--banner-border);
+    border-radius: 50%;
+    color: var(--banner-border);
+}
+

@@ -29,7 +29,7 @@
 }
 
 .settings-dropdown {
-  top: 64px;
+  top: 62px;
   width: 200px;
   border: solid 2px var(--setting-drpdwn-border);
   box-shadow: 0 3px var(--setting-drpdwn-shadow);
@@ -87,6 +87,14 @@
   border: solid 2px var(--deck-name-input-border);
   background: var(--deck-name-input-background);
   color: var(--deck-name-input-color);
+  border-bottom: solid 3px var(--btn-border);
+}
+
+.create-btn {
+  background: none;
+  border: none;
+  padding: 0px;
+  box-shadow: none;
 }
 
 .settings-icon {
@@ -95,19 +103,13 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  top: -5px;
-  right: -15px;
+  top: 6px;
+  right: -5px;
+  font-size: 35px !important;
 }
 
 .drpdwn {
-  /* appearance: none; */
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  padding: 3px 30px;
-  border-radius: 0;
-  background: var(--btn-background);
-  border-color: var(--setting-drpdwn-border);
-  color: var(--settings-option-color);
+  margin: 0px 5px
 }
 
 li {

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CardInfoService } from '../card-info.service';
 
 @Component({
   selector: 'app-deck',
@@ -39,7 +40,9 @@ export class DeckComponent implements OnInit {
 
   deckCount = this.deck.length;
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+  constructor(private http: HttpClient, 
+              private cdr: ChangeDetectorRef,
+              private cardInfoService: CardInfoService) {}
 
   ngOnInit() {
     this.loadDeckNames();
@@ -113,14 +116,14 @@ export class DeckComponent implements OnInit {
     switch (parameter) {
       case 'type':
         this.deck.sort((a, b) => {
-          const typeA = this.extractMainType(a.type_line);
-          const typeB = this.extractMainType(b.type_line);
+          const typeA = this.cardInfoService.extractMainType(a.type_line);
+          const typeB = this.cardInfoService.extractMainType(b.type_line);
           return typeA.localeCompare(typeB);
         });
         break;
   
       case 'manaCost':
-        this.deck.sort((a, b) => this.extractNumericManaCost(b.mana_cost) - this.extractNumericManaCost(a.mana_cost));
+        this.deck.sort((a, b) => this.cardInfoService.extractNumericManaCost(b.mana_cost) - this.cardInfoService.extractNumericManaCost(a.mana_cost));
         break;
   
       default:
@@ -128,29 +131,6 @@ export class DeckComponent implements OnInit {
     }
   
     this.cdr.detectChanges();
-  }
-  
-  // extract card type (update needed to work for artifact creatures)
-  extractMainType(typeLine: string): string {
-    if (!typeLine) return 'Unknown';
-  
-    const typeParts = typeLine.split('—')[0].trim().split(' ');
-    const mainType = typeParts.find(type => !['Legendary', 'Basic', 'Snow', 'Token'].includes(type));
-  
-    return mainType || 'Unknown';
-  }
-
-  // extract mana cost
-  extractNumericManaCost(manaCost: string): number {
-    if (!manaCost) return 0; 
-  
-    const numericPart = manaCost.match(/\d+/g); // Extract numbers
-    const coloredMana = manaCost.match(/[WUBRGC]/g); // Extract letters
-  
-    const numericValue = numericPart ? numericPart.map(Number).reduce((sum, val) => sum + val, 0) : 0;
-    const coloredCount = coloredMana ? coloredMana.length : 0;
-  
-    return numericValue + coloredCount; 
   }
   
   // Create a new deck

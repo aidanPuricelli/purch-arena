@@ -1,0 +1,68 @@
+.filter {
+    position: fixed;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.deck-analysis-container {
+    position: fixed;
+    z-index: 1000;
+    top: 100px;
+    min-height: 500px;
+    width: 100%;
+    background: var(--banner-background);
+    border: 3px solid var(--banner-border);
+    box-shadow: 0px 5px var(--banner-shadow);
+    margin-left: 4%;
+    margin-top: 20px;
+    padding: 20px;
+    width: 90%;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+h1 {
+    color: var(--home-header);
+    margin: 0;
+    text-align: center;
+}
+
+.insights-text {
+    font-size: 1.2rem;
+    color: var(--btn-color);
+    font-weight: 500;
+    background: var(--nav-background);
+    border: 2px solid var(--banner-border);
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.chart-container {
+    padding: 1rem;
+    background: var(--nav-background);
+    border: 2px solid var(--banner-border);
+    border-radius: 5px;
+    min-width: 300px;
+    max-width: 500px;
+    flex: 1;
+    color: var(--btn-color);
+    color: rgb(107, 90, 82)
+}
+

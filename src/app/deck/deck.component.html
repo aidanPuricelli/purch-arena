@@ -1,17 +1,25 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div class="deck-container">
   <div class="banner-container">
     <div class="banner gitrog">
 
+      <button class="purch-btn create-btn" (click)="createDeck()">
+        <span class="material-icons">add</span>
+      </button>
+
       <input class="deck-option deck-name" type="text" [(ngModel)]="newDeckName" (ngModelChange)="onInputChange()" placeholder={{deckPlaceHolder}}>
 
-      <button class="purch-btn create-btn" (click)="createDeck()">Create Deck</button>
-      <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button>
-      
+
       <!-- make this a custom drop down -->
       <select  class="drpdwn" [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
         <option value="">Select Deck</option>
         <option *ngFor="let deck of deckNames" [value]="deck">{{ deck }}</option>
       </select>
+      
+      <!--add back in menu-->
+      <!-- <button class="purch-btn delete-btn" (click)="deleteDeck()" [disabled]="!selectedDeck">Delete Deck</button> -->
+      
 
       <!-- Sort Dropdown -->
       <select *ngIf="deckSelectedFlag" class="drpdwn" id="sortSelect" [(ngModel)]="sortCriteria" (change)="sortBy(sortCriteria)">

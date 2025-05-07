@@ -3,7 +3,7 @@
     caret-color: black;
     margin: auto;
     z-index: 10;
-    margin-top: 70px;
+    margin-top: 30px;
     background: var(--banner-background);
     padding: 15px;
     border-left: solid 3px var(--banner-border);

@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class BuildComponent {
   selectedDeck: string = ''; // Store selected deck
+  insightsVisible = false;
 
   constructor() {}
 
@@ -16,5 +17,9 @@ export class BuildComponent {
 
   onDeckSelected(deckName: string) {
     this.selectedDeck = deckName;
+  }
+
+  toggleInsights() {
+    this.insightsVisible = !this.insightsVisible;
   }
 }

@@ -4,7 +4,7 @@
 
 .release-notes {
     position: absolute;
-    top: 59px;
+    top: 57px;
     background: var(--release-tab-background);
     z-index: 12;
     right: 0;
@@ -12,6 +12,7 @@
     color: var(--release-tab-color);
     cursor: pointer;
     font-size: var(--release-tab-size);
+    border-bottom-left-radius: 7px;
 }
 
 .release-notes p {
