@@ -1,11 +1,68 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<app-navbar [links]="navLinks"></app-navbar>
+<div class="purch-nav">
+    <a href="/" class="purch-btn">
+        <span class="material-icons">
+            home
+        </span>
+    </a>
+
+    <a class="purch-btn">
+        <span class="material-icons">
+            view_module 
+        </span>
+    </a>
+
+    <a (click)="toggleAddCard()" class="purch-btn">
+        <span class="material-icons">
+            add
+        </span>
+    </a>
+
+    <a (click)="selectedDeck && onDeleteDeck()" class="purch-btn" [class.disabled]="!selectedDeck">
+        <span class="material-icons">
+            delete
+        </span>
+    </a>
+
+    <a (click)="toggleSearch()" class="purch-btn" [class.disabled]="!selectedDeck">
+        <span class="material-icons">
+            search
+        </span>
+    </a>
+
+    <a class="purch-btn" (click)="toggleSettings()" id="settings-btn" [class.disabled]="!selectedDeck">
+        <span class="material-icons">
+            settings
+        </span>
+    </a>
+
+    <div *ngIf="settingsVisible" class="settings-dropdown">
+        <a (click)="downloadDeck()" class="settings-option">Download</a>
+        <label class="settings-option">
+            Import (JSON)<input type="file"(change)="importDeck($event)" accept="application/json" hidden />
+        </label>
+        <label class="settings-option">
+            Import (Text)
+            <input type="file" (change)="importDeckFromText($event)" accept=".txt" hidden />
+        </label>
+    </div>
+
+</div>
+
+<div class="input-group search-container animate__animated animate__fadeIn" *ngIf="addCardFlag">
+    <input type="text" class="form-control" placeholder="Enter a name for you new deck..." [(ngModel)]="deckName">
+    <button class="purch-btn search-btn" type="button" *ngIf="addCardFlag" (click)="onAddDeck()">
+        <span class="material-icons">arrow_forward</span>
+    </button> 
+</div>
+
+
 <div class="build-container" style="padding: 20px;">
-    <app-search [selectedDeck]="selectedDeck"></app-search>
+    <app-search [searchFlag]="searchFlag" [selectedDeck]="selectedDeck"></app-search>
     <app-deck [selectedDeck]="selectedDeck" (deckSelected)="onDeckSelected($event)"></app-deck>
     <app-deck-analysis *ngIf="insightsVisible"></app-deck-analysis>
-    <button (click)="toggleInsights()">
+    <button (click)="toggleInsights()" class="visibility-btn">
         <span class="material-icons">
             {{insightsVisible ? 'visibility_off' : 'visibility'}}
         </span>

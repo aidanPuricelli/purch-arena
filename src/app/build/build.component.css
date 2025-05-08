@@ -18,7 +18,7 @@ app-deck-analysis {
     order: 3;
 }
 
-button {
+.visibility-btn {
     position: fixed;
     z-index: 1000;
     bottom: 20px;
@@ -29,4 +29,79 @@ button {
     border-radius: 50%;
     color: var(--banner-border);
 }
+
+.purch-btn {
+    padding: 5px 8px 3px 8px;
+    cursor: pointer;
+}
+
+.purch-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#settings-btn {
+    position: fixed;
+    right: 10px;
+}
+
+.purch-nav {
+    padding-left: 10px;
+}
+
+.settings-dropdown {
+    position: fixed;
+    right: 0px;
+    top: 62px;
+    width: 200px;
+    border-top: 1px solid var(--setting-drpdwn-border);
+}
+
+/* search */
+.search-container {
+    caret-color: var(--btn-color);
+    margin: 5px;
+    z-index: 1000;
+    margin-top: 50px;
+    background: rgba(0, 0, 0, 0);
+    border-left: solid 3px var(--banner-border);
+    border-right: solid 3px var(--banner-border);
+    border-bottom: solid 3px var(--banner-border);
+    box-shadow: 0 3px var(--banner-shadow);
+    width: 500px;
+    position: fixed;
+    right: 0;
+}
+
+.search-container input {
+    height: 40px;
+    padding: 5px;
+    border-radius: 0;
+    margin-top: 3px;
+}
+
+.search-container input::placeholder {
+    color: var(--nav-border);
+}
+
+.search-btn {
+    padding: 0 5px;
+    font-size: 0px;
+    margin-left: 5px !important;
+    margin-top: 0px;
+    z-index: 100;
+}
+
+.form-control {
+    background: var(--banner-background);
+    color: var(--btn-color);
+    border: solid 2px var(--btn-border);
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+
 

@@ -47,4 +47,16 @@ export class DeckService {
       );
     });
   }
+
+  // todo: complete implementation and replace call in deck.component.ts
+  createDeck(deckName: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post('/api/deck', { deckName: deckName }).subscribe(
+        () => {
+       
+        },
+        (error) => console.error('Error creating deck', error)
+      );
+    });
+  }
 }

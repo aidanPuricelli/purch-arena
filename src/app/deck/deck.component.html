@@ -4,12 +4,6 @@
   <div class="banner-container">
     <div class="banner gitrog">
 
-      <button class="purch-btn create-btn" (click)="createDeck()">
-        <span class="material-icons">add</span>
-      </button>
-
-      <input class="deck-option deck-name" type="text" [(ngModel)]="newDeckName" (ngModelChange)="onInputChange()" placeholder={{deckPlaceHolder}}>
-
 
       <!-- make this a custom drop down -->
       <select  class="drpdwn" [(ngModel)]="selectedDeck" (change)="loadDeck(selectedDeck)">
@@ -22,25 +16,11 @@
       
 
       <!-- Sort Dropdown -->
-      <select *ngIf="deckSelectedFlag" class="drpdwn" id="sortSelect" [(ngModel)]="sortCriteria" (change)="sortBy(sortCriteria)">
+      <select *ngIf="false" class="drpdwn" id="sortSelect" [(ngModel)]="sortCriteria" (change)="sortBy(sortCriteria)">
         <option value="">Sort By</option>
         <option value="type">Card Type</option>
         <option value="manaCost">Mana Cost</option>
       </select>
-
-      <div class="settings-container">
-        <span class="settings-icon material-icons" (click)="toggleSettings()">settings</span>
-        <div *ngIf="showSettings" class="settings-dropdown">
-            <a [class.disabled]="isSettingsDisabled" (click)="!isSettingsDisabled && downloadDeck()" class="settings-option">Download</a>
-            <label class="settings-option" [class.disabled]="isSettingsDisabled">
-                Import (JSON)<input type="file" [disabled]="isSettingsDisabled" (change)="importDeck($event)" accept="application/json" hidden />
-            </label>
-            <label class="settings-option" [class.disabled]="isSettingsDisabled">
-              Import (Text)
-              <input type="file" (change)="importDeckFromText($event)" accept=".txt" hidden />
-            </label>
-        </div>
-      </div>
 
       <p class="cardNum" *ngIf="deckSelectedFlag">{{ deckCount }}</p>
     </div>
@@ -48,9 +28,16 @@
 
   <ul *ngIf="deck.length > 0">
     <div class="d-flex flex-wrap cards justify-content-center">
-      <li *ngFor="let card of deck" class="deck-card-wrapper"
-          (contextmenu)="onRightClick($event, card)">
-        <img [src]="card.image_uri || 'default-card-image.jpg'" class="card-img">
+      <li *ngFor="let card of deck" class="deck-card-wrapper">
+        <div class="card-icons">
+          <span class="material-icons minus-icon" (click)="removeCard(card)">remove_circle</span>
+          <span class="material-icons crown-icon" 
+                [class.is-commander]="currentCommander && currentCommander.name === card.name && currentCommander.image_uri === card.image_uri"
+                (click)="setCommander(card)">stars</span>
+        </div>
+        <img [src]="card.image_uri || 'default-card-image.jpg'" 
+             class="card-img"
+             [class.is-commander]="currentCommander && currentCommander.name === card.name && currentCommander.image_uri === card.image_uri">
       </li>
     </div>
   </ul>
@@ -58,14 +45,6 @@
   <p *ngIf="deck.length === 0 && deckSelectedFlag" class="no-cards animate__animated animate__fadeInDown">No cards in deck, '{{selectedDeck}}'</p>
   <p class="no-cards animate__animated animate__fadeInDown" *ngIf="!deckSelectedFlag">No deck selected.</p>
   <p class="no-cards error animate__animated" [ngClass]="{'animate__fadeInDown': noInputError, 'animate__fadeOutUp': fadeOutError}" *ngIf="showError">Enter a name to create a new deck.</p>
-
-  <div class="context-menu" *ngIf="contextMenuVisible" 
-       [ngStyle]="{'top.px': contextMenuY, 'left.px': contextMenuX}">
-    <ul>
-      <li (click)="removeCard()">Remove Card</li>
-      <li (click)="setCommander()">Set Commander</li>
-    </ul>
-  </div>
 </div>
 
 <!-- Loading Spinner -->

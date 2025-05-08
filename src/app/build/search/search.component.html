@@ -1,13 +1,13 @@
-<div class="click-container" (click)="hideContextMenu()">
-    <div class="input-group search-container">
+<div class="click-container" (click)="hideContextMenu()" *ngIf="searchFlag">
+    <div class="input-group search-container animate__animated animate__fadeIn">
         <input type="text" class="form-control" placeholder="Terror of the..." [(ngModel)]="searchQuery">
         <button class="purch-btn search-btn" type="button" (click)="onSearch()">
-            <span class="material-icons">search</span>
+            <span class="material-icons">arrow_forward</span>
         </button> 
     </div>
     
     
-    <div class="card-results mt-3">
+    <div class="card-results">
         <div *ngIf="cardImages.length > 0">
             <div class="d-flex flex-wrap cards justify-content-center">
                 <div *ngFor="let card of cardImages" class="card-wrapper">

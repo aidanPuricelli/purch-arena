@@ -14,7 +14,7 @@ export class DeckComponent implements OnInit {
   deckNames: string[] = [];
   deck: any[] = [];
   savedDeck: any[] = [];
-  newDeckName: string = '';
+  currentCommander: any = null;
 
   placeIndex = 0;
   deckPlaceHolderList = ['Sen Tr...', 'Edgar Ma...', 'Tergri...', 'Grand Arbit...']
@@ -33,9 +33,6 @@ export class DeckComponent implements OnInit {
 
   deckSelectedFlag = false;
 
-  contextMenuVisible: boolean = false;
-  contextMenuX: number = 0;
-  contextMenuY: number = 0;
   selectedCard: any = null;
 
   deckCount = this.deck.length;
@@ -52,17 +49,6 @@ export class DeckComponent implements OnInit {
     window.addEventListener('addCardToDeck', (event: any) => {
       this.addToDeck(event.detail);
     });
-  }
-
- // Track input changes
-  onInputChange(): void {
-    this.noInputError = false;
-    this.fadeOutError = false;
-
-    if (!this.newDeckName) {
-      this.placeIndex = (this.placeIndex + 1) % this.deckPlaceHolderList.length;
-      this.deckPlaceHolder = this.deckPlaceHolderList[this.placeIndex];
-    }
   }
 
   // Load all deck names
@@ -93,13 +79,23 @@ export class DeckComponent implements OnInit {
         this.http.get<{ commander: any }>(`/api/deck/${deckName}/commander`).subscribe(
           (commanderResponse) => {
             if (commanderResponse.commander) {
+              this.currentCommander = commanderResponse.commander;
+              // Remove any existing commander from the deck
+              this.deck = this.deck.filter(card => 
+                !(card.name === commanderResponse.commander.name && 
+                  card.image_uri === commanderResponse.commander.image_uri)
+              );
+              // Add commander to the front
               this.deck.unshift(commanderResponse.commander);
+            } else {
+              this.currentCommander = null;
             }
             this.deckCount = this.deck.length;
             this.cdr.detectChanges();
           },
           (error) => {
             console.warn('No commander found for this deck.');
+            this.currentCommander = null;
             this.deckCount = this.deck.length;
             this.cdr.detectChanges();
           }
@@ -134,35 +130,15 @@ export class DeckComponent implements OnInit {
   }
   
   // Create a new deck
-  createDeck(): void {
-    if (!this.newDeckName.trim()) {
-      this.noInputError = true;
-      this.showError = true;
-  
-      setTimeout(() => {
-        this.fadeOutError = true;
-      }, 3000);
-  
-      setTimeout(() => {
-        this.showError = false;
-        this.fadeOutError = false;
-        this.noInputError = false;
-      }, 3500);
-  
-      return;
-    }
-
-    this.http.post('/api/deck', { deckName: this.newDeckName }).subscribe(
+  createDeck(deckName: string): void {
+    this.http.post('/api/deck', { deckName: deckName }).subscribe(
       () => {
         this.loadDeckNames();
 
-        this.selectedDeck = this.newDeckName;
+        this.selectedDeck = deckName;
         this.deckSelected.emit(this.selectedDeck);
 
-        this.loadDeck(this.newDeckName);
-        console.log(`Deck "${this.newDeckName}" created and selected`);
-
-        this.newDeckName = '';
+        this.loadDeck(deckName);
       },
       (error) => console.error('Error creating deck', error)
     );
@@ -175,15 +151,33 @@ export class DeckComponent implements OnInit {
   }
 
   // Remove a card 
-  removeCard(): void {
-    if (!this.selectedCard) return;
+  removeCard(card: any): void {
+    if (!card) return;
   
-    console.log(`Removing card from '${this.selectedDeck}':`, this.selectedCard);
+    console.log('Attempting to remove card:', card);
+    console.log('Current deck:', this.deck);
   
-    const index = this.deck.findIndex(card => card.id === this.selectedCard.id);
+    // Find the exact card in the deck
+    const index = this.deck.findIndex(c => {
+      const isMatch = c.name === card.name && 
+                     c.image_uri === card.image_uri &&
+                     c.oracle_id === card.oracle_id;  // Add oracle_id check for more precise matching
+      console.log('Comparing cards:', {
+        deckCard: c,
+        clickedCard: card,
+        isMatch
+      });
+      return isMatch;
+    });
+    
+    console.log('Found index:', index);
     
     if (index !== -1) {
-      const removedCard = this.deck.splice(index, 1)[0]; // Ensure correct card is removed
+      const removedCard = this.deck.splice(index, 1)[0];
+      console.log('Removed card:', removedCard);
+      
+      // Log the exact card being sent to the server
+      console.log('Sending to server for removal:', removedCard);
       
       this.http.post(`/api/deck/${this.selectedDeck}`, { newCards: [], removedCards: [removedCard] }).subscribe(
         (response) => {
@@ -196,18 +190,6 @@ export class DeckComponent implements OnInit {
     } else {
       console.warn('Selected card not found in deck.');
     }
-  
-    this.contextMenuVisible = false;
-    this.selectedCard = null;
-  }
-  
-
-  onRightClick(event: MouseEvent, card: any): void {
-    event.preventDefault();
-    this.selectedCard = { ...card }; // Clone the object to avoid reference issues
-    this.contextMenuX = event.clientX;
-    this.contextMenuY = event.clientY;
-    this.contextMenuVisible = true;
   }
   
 
@@ -232,8 +214,8 @@ export class DeckComponent implements OnInit {
   }
 
   // Set Commander
-  setCommander(): void {
-    if (!this.selectedCard) {
+  setCommander(card: any): void {
+    if (!card) {
       console.warn('No card selected to set as commander.');
       return;
     }
@@ -243,7 +225,7 @@ export class DeckComponent implements OnInit {
       return;
     }
 
-    const cardIndex = this.deck.findIndex(card => card === this.selectedCard);
+    const cardIndex = this.deck.findIndex(c => c.name === card.name && c.image_uri === card.image_uri);
     if (cardIndex === -1) {
       console.warn('Selected card not found in deck.');
       return;
@@ -254,7 +236,7 @@ export class DeckComponent implements OnInit {
       () => {
         this.http.post(`/api/deck/${this.selectedDeck}/commander`, { commander: commanderCard }).subscribe(
           () => {
-            alert(`Commander set to ${commanderCard.name}`);
+            this.currentCommander = commanderCard;
             this.loadDeck(this.selectedDeck);
           },
           (error) => {
@@ -268,9 +250,6 @@ export class DeckComponent implements OnInit {
         alert('Failed to update deck after setting commander.');
       }
     );
-
-    this.contextMenuVisible = false;
-    this.selectedCard = null;
   }
 
   // Method to download a single deck
@@ -353,14 +332,9 @@ export class DeckComponent implements OnInit {
         event.target.value = '';
       }
     );
-  }  
-  
+  }
+
   toggleSettings(): void {
     this.showSettings = !this.showSettings;
-  }
-  
-  @HostListener('document:click')
-  onDocumentClick(): void {
-    this.contextMenuVisible = false;
   }
 }

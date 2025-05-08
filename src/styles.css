@@ -266,9 +266,9 @@
     --quick-start-label: #282834;
     --quick-start-label-border: #646464;
     --btn-border: #b4b7ff;
-    --btn-shadow: #b4b7ff;
+    --btn-shadow: #b4b7ff00;
     --btn-background: #212121;
-    --btn-color: rgb(232, 217, 197);
+    --btn-color: #ffff;
     --btn-hover: #b4b7ff;
     --home-header: #d7d7d7;
 
@@ -277,8 +277,8 @@
     --hand-shadow: rgb(255, 193, 122);
 
     --settings-icon: #948979;
-    --settings-option-color: rgb(206, 190, 176);
-    --settings-option-hover: #DFD0B8;
+    --settings-option-color: #ffff;
+    --settings-option-hover: #b4b7ff;
     --version-border: rgb(185, 175, 167);
     --version-color: rgb(227, 214, 198);
     --version-background: rgb(113, 107, 98);
@@ -288,11 +288,11 @@
     --hand-tab-border: white;
     --hand-tab-color: rgb(166, 237, 255);
 
-    --setting-drpdwn-background: #222831;
+    --setting-drpdwn-background: #0a0a0a;
     --setting-drpdwn-shadow: #393E46;
     --setting-drpdwn-border: #393E46;
 
-    --banner-background:#222831;
+    --banner-background:#0a0a0a;
     --banner-border: #393e4600;
     --banner-shadow: #393e4600;
     --error-background: rgb(168, 98, 98);
@@ -466,6 +466,7 @@ html, body {
     z-index: 10;
     position: relative;
     padding-bottom: 100px;
+    margin-top: 100px;
 }
 
 .left, .right {
@@ -511,7 +512,6 @@ html, body {
     box-shadow: 0 2px var(--btn-shadow);
     color: var(--btn-color);
     background: var(--btn-background);
-    border-radius: 7px;
 }
 
 .purch-btn:hover {
@@ -775,13 +775,13 @@ html, body {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: var(--setting-drpdwn-background);
-    color: var(--settings-option-color);
+    background: var(--btn-border);
+    color: var(--dots-one);
     border: solid 2px var(--setting-drpdwn-border);
     padding: 8px 30px 8px 10px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 7px;
     width: 200px;
     position: relative;
 }

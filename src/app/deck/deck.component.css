@@ -52,11 +52,7 @@
   z-index: 10;
   position: relative;
   width: 100%;
-  background: var(--banner-background);
-  margin: 30px 0;
-  padding: 10px;
-  border: solid 3px var(--banner-border);
-  box-shadow: 0 2px var(--banner-shadow);
+  padding: 0;
 }
 
 .no-cards {
@@ -109,7 +105,10 @@
 }
 
 .drpdwn {
-  margin: 0px 5px
+  margin: 0px;
+  position: fixed;
+  top: 75px;
+  left: 10px
 }
 
 li {
@@ -129,8 +128,12 @@ li {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   z-index: 5;
-  border: solid 2px var(--deck-card-border);
+  border: solid 2px var(--btn-color);
   filter: brightness(var(--card-filter)) !important;
+}
+
+.card-img.is-commander {
+  border: solid 5px var(--btn-color);
 }
 
 .card-img:hover {
@@ -142,12 +145,48 @@ li {
 }
 
 .cardNum {
-  padding: 10px;
+  padding: 7px;
   border-radius: 10px;
-  position: absolute;
-  right: 0px;
-  top: 30px;
+  position: fixed;
+  left: 10px;
+  top: 130px;
   font-size: 20px;
-  font-weight: bolder;
-  color: var(--card-num-color);
+  background: var(--btn-border);
+  color: var(--dots-one);
+}
+
+.card-icons {
+  position: absolute;
+  background: var(--btn-border);
+  top: 8px;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 10px;
+}
+
+.deck-card-wrapper:hover .card-icons {
+  opacity: 1;
+}
+
+.minus-icon, .crown-icon {
+  color: var(--dots-one);
+  padding: 2px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.minus-icon:hover, .crown-icon:hover {
+  transform: scale(1.1);
+}
+
+.crown-icon.is-commander {
+  display: none;
+}
+
+.crown-icon.is-commander:hover {
+  transform: scale(1.2);
 }

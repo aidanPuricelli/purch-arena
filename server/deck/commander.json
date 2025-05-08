@@ -11,5 +11,19 @@
     "type_line": "Legendary Creature — Phyrexian Angel",
     "image_uri": "https://cards.scryfall.io/normal/front/4/a/4a1f905f-1d55-4d02-9d24-e58070793d3f.jpg?1717951088",
     "category": "Uncategorized"
+  },
+  "cede": {
+    "name": "Mystical Tutor",
+    "mana_cost": "{U}",
+    "type_line": "Instant",
+    "image_uri": "https://cards.scryfall.io/normal/front/3/6/36fa9a0b-b0c9-43ea-ba11-99d7982f974e.jpg?1675199375",
+    "category": "Uncategorized"
+  },
+  "flubs": {
+    "name": "Flubs, the Fool",
+    "mana_cost": "{G}{U}{R}",
+    "type_line": "Legendary Creature — Frog Scout",
+    "image_uri": "https://cards.scryfall.io/normal/front/4/1/41e58eb8-e5b9-4ef6-be1f-00e28cebb998.jpg?1722441006",
+    "category": "Uncategorized"
   }
 }

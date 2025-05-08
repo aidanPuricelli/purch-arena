@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
+  @Input() searchFlag: boolean = false;
   searchQuery: string = '';
   cardImages: any[] = [];
   contextMenuVisible: boolean = false;
